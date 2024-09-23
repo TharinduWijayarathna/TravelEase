@@ -1,16 +1,17 @@
 <?php
-
 namespace domain\Services\ImageService;
 
 use App\Models\Image;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Http\UploadedFile;
 
 /**
  * ImageService
  * php version 8.2.15
  *
  * @category Service
- * @author   CyberElysium <contact@cyberelysium.com>
+ * @author   CyberElysium
  * @license  https://cyberelysium.com Config
  * @link     https://cyberelysium.com
  * */
@@ -31,45 +32,79 @@ class ImageService
 
     /**
      * Store
-     * store image data
+     * Store image data with site URL access
      *
-     * @param  mixed $image
-     * @return Image 
+     * @param  UploadedFile $image
+     * @return Image
      */
-    public function store($image): Image
+    public function store(UploadedFile $image): Image
     {
-        if (isset($image)) {
-            $filePath = Storage::disk('do')->putFile(config('filesystems.disks.do.folder'), $image, 'public');
-            $data['name'] = config('filesystems.disks.do.public_url') . '/' . $filePath;
-            return $this->image->create($data);
+        if ($image) {
+            // Store the image in Laravel's 'public' storage disk
+            $filePath = $image->store('images', 'public'); // Ensure 'public' disk is used
+
+            if ($filePath) {
+                // Generate the public URL by concatenating the site URL with the storage URL
+                $data['name'] = URL::to(Storage::url($filePath));
+
+                // Save image data to database
+                return $this->image->create($data);
+            } else {
+                throw new \Exception('Failed to save the image');
+            }
+        } else {
+            throw new \Exception('No image provided');
         }
     }
 
-    public function update($image, $imageId)
-    {         
+    /**
+     * Update
+     * Update existing image data with site URL access
+     *
+     * @param  UploadedFile $image
+     * @param  int $imageId
+     * @return Image
+     */
+    public function update(UploadedFile $image, int $imageId): Image
+    {
         $existingImage = $this->image->findOrFail($imageId);
-        if (isset($image)) {
-            $filePath = Storage::disk('do')->putFile(config('filesystems.disks.do.folder'), $image, 'public');
-            $data['name'] = config('filesystems.disks.do.public_url') . '/' . $filePath;
-            $existingImage->fill($data)->save();
-            return $existingImage;
+
+        if ($image) {
+            // Store the new image in 'public' disk
+            $filePath = $image->store('images', 'public');
+
+            if ($filePath) {
+                // Generate the public URL by concatenating the site URL with the storage URL
+                $data['name'] = URL::to(Storage::url($filePath));
+
+                // Update the existing image record
+                $existingImage->fill($data)->save();
+
+                return $existingImage;
+            } else {
+                throw new \Exception('Failed to update the image');
+            }
+        } else {
+            throw new \Exception('No image provided');
         }
     }
-
-
 
     /**
      * Delete
-     * delete image data
+     * Delete image data
      *
-     * @param  mixed $image
+     * @param  int $imageId
+     * @param  string $filePath
      * @return void
      */
     public function delete($imageId, $filePath)
     {
         $image = $this->image->findOrFail($imageId);
-        Storage::disk('do')->delete($filePath);
+
+        // Delete the image from storage
+        Storage::disk('public')->delete($filePath);
+
+        // Delete the image record from the database
         $image->delete();
     }
-
 }
