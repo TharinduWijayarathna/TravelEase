@@ -157,6 +157,8 @@
                         </div>
                     </div>
                 </section>
+
+
             </main>
         </template>
     </AppLayout>
@@ -165,34 +167,14 @@
 <script setup>
 import AppLayout from "@/Layouts/AppLayout.vue";
 import axios from "axios";
-import Swiper from "swiper";
-import { onMounted, onBeforeUnmount, ref, defineProps, computed } from "vue";
-import { Link, usePage, router } from "@inertiajs/vue3";
-import Swal from "sweetalert2";
+import { onMounted, ref } from "vue";
 import { Carousel, Pagination, Slide } from 'vue3-carousel'
 import 'vue3-carousel/dist/carousel.css'
-import invalidImage from '@/../src/AdminArea/img/product/invalid_image.png';
-import { emitter, CART_REFRESH } from "@/event-bus.js";
-
-const page = ref(1);
-const pageCount = ref(1000);
-const perPage = ref([25, 50, 100]);
-const pagination = ref({});
 
 const navbarComponent = ref(null);
-const { props } = usePage();
-const user = usePage().props.auth.user;
 const maxCharacters = 10;
-const wishList = ref({});
-const checkWishList = ref([]);
-const wishListStatus = ref([]);
 const banners = ref([]);
-const categories = ref([]);
-const products = ref([]);
-const productData = ref({
-    unit_price: '',
-    unit_discount: '',
-});
+
 
 const callGetCartCount = () => {
     navbarComponent.value.getCartCount();

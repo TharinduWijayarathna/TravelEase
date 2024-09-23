@@ -204,9 +204,9 @@
                                 </form>
                                 <!-- </form> -->
 
-                                <div class="text-center my-5">
+                                <!-- <div class="text-center my-5">
                                     <i class="bi bi-three-dots"></i>
-                                </div>
+                                </div> -->
                                 <!-- Divider -->
 
                                 <!-- Update email -->
