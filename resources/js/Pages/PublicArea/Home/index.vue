@@ -2,7 +2,7 @@
     <AppLayout>
         <template #content>
             <main>
-                <div class="pt-xl-6">
+                <div class="">
                     <!-- Banner carousel showing bus journeys or destinations -->
                     <div v-if="banners.length === 0">
                         <Carousel :autoplay="4000" :wrap-around="true" class="w-100px">
