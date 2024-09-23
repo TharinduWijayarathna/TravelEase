@@ -3,7 +3,7 @@
 Footer START -->
     <footer class="bg-dark pt-6 position-relative" data-bs-theme="dark">
         <div class="container position-relative mt-5">
-          
+
             <!-- Widgets -->
             <div class="row g-4 justify-content-between">
                 <!-- Widget 1 START -->
@@ -23,8 +23,7 @@ Footer START -->
                     </a>
 
                     <p class="mt-4 mb-2">
-                        A Bootstrap theme that's both stylish and functional,
-                        perfect for any type of technology or corporate website.
+                        Simplify your online bus ticketing experience with us.
                     </p>
                     <!-- Social icon -->
                     <ul class="list-inline mb-0 mt-4">
@@ -132,7 +131,7 @@ Footer START -->
             >
                 <!-- copyright text -->
                 <div class="text-body">
-                    Copyrights ©2024 E-commerce.
+                    Copyrights ©2024 TravelEase
                 </div>
                 <!-- copyright links-->
                 <div class="nav mt-2 mt-lg-0">
