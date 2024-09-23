@@ -49,26 +49,28 @@
                                                             "><i class="bi bi-person fa-fw me-2"></i>My profile</Link>
                                                     </li>
                                                     <li class="nav-item">
-                                                        <Link class="nav-link" :href="route( 'payments' )">
-                                                            <i class="bi bi-wallet fa-fw me-2"></i>
-                                                            Payment details</Link>
+                                                        <Link class="nav-link" :href="route('payments')">
+                                                        <i class="bi bi-wallet fa-fw me-2"></i>
+                                                        Payment details</Link>
                                                     </li>
                                                     <li class="nav-item">
                                                         <Link class="nav-link active" :href="route('history')">
-                                                            <i class="bi bi-basket fa-fw me-2"></i>
-                                                            Order history</Link>
+                                                        <i class="bi bi-basket fa-fw me-2"></i>
+                                                        Order history</Link>
                                                     </li>
                                                     <li class="nav-item">
-                                                        <Link class="nav-link" :href="route( 'wishList.index')">
-                                                            <i class="bi bi-heart fa-fw me-2">
-                                                            </i>Wishlist</Link>
+                                                        <Link class="nav-link" :href="route('wishList.index')">
+                                                        <i class="bi bi-heart fa-fw me-2">
+                                                        </i>Wishlist</Link>
                                                     </li>
                                                     <li class="nav-item">
-                                                        <Link class="nav-link text-danger" :href="route('customer.delete.index')">
-                                                            <i class="bi bi-trash fa-fw me-2"></i>Delete profile</Link>
+                                                        <Link class="nav-link text-danger"
+                                                            :href="route('customer.delete.index')">
+                                                        <i class="bi bi-trash fa-fw me-2"></i>Delete profile</Link>
                                                     </li>
                                                     <li class="nav-item">
-                                                        <Link class="nav-link text-danger" href="#"><i class="fas fa-sign-out-alt fa-fw me-2">
+                                                        <Link class="nav-link text-danger" href="#"><i
+                                                            class="fas fa-sign-out-alt fa-fw me-2">
                                                         </i>Sign Out</Link>
                                                     </li>
                                                 </ul>
