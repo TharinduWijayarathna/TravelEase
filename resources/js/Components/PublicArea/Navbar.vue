@@ -22,7 +22,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <Link class="nav-link" :href="route('products.index')">Buses</Link>
+                            <Link class="nav-link" :href="route('buses.index')">Buses</Link>
                         </li>
 
                         <!-- <li class="nav-item">

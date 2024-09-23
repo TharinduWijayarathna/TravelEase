@@ -72,7 +72,7 @@ Footer START -->
                                 <li class="nav-item">
                                     <Link
                                         class="nav-link"
-                                        :href="route('products.index')"
+                                        :href="route('buses.index')"
                                         >Products</Link
                                     >
                                 </li>

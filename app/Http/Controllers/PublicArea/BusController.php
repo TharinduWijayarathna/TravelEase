@@ -12,63 +12,63 @@ use Inertia\Inertia;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 
-class ProductController extends Controller
-{    
+class BusController extends Controller
+{
     /**
-     * Products
+     * index
      * load the single product page
      *
      * @return void
      */
-    public function products()
+    public function index()
     {
-        return Inertia::render('PublicArea/Products/index');
+        return Inertia::render('PublicArea/Buses/index');
     }
 
     /**
      * SingleProduct
-     * get the selected product using product_id 
+     * get the selected product using product_id
      *
-     * @param $product_id 
+     * @param $product_id
      *
      * @return void
      */
     public function singleProduct($product_id)
     {
         $response['product'] = ProductFacade::get($product_id);
-        return Inertia::render('PublicArea/Products/singleProduct', $response);
+        return Inertia::render('PublicArea/Buses/singleProduct', $response);
     }
-    
+
     /**
      * All
      * get the all products
      *
      * @return void
      */
-    public function all() 
+    public function all()
     {
         // $response['product'] = ProductFacade::all();
         // return $response;
 
         $query = Product::with('Category', 'ProductImage', 'ProductImage.Image', 'WishList', 'CartItem', 'CartItem.Cart')
                         ->orderBy('products.id', 'desc');
-                          
+
         $payload = QueryBuilder::for($query)
             ->allowedSorts(['id', 'name'])
             ->allowedFilters(
                 AllowedFilter::callback('search', function ($query, $value){
                     $query->orWhere('id', 'like', "%{$value}%");
-                }) 
+                })
             )
             ->paginate(request('per_page', config('basic.pagination_per_page')));
         return $payload;
     }
-    
+
     /**
      * Get
      * Get specific product using product_id
      *
-     * @param $product_id 
+     * @param $product_id
      *
      * @return void
      */
@@ -76,8 +76,8 @@ class ProductController extends Controller
     {
         return ProductFacade::get($product_id);
     }
-     
-    
+
+
     /**
      * Filter
      * filter the item according to customer request
@@ -113,24 +113,24 @@ class ProductController extends Controller
         if (isset ($selected_category) && !empty ($selected_category)) {
             $query->whereIn('category_id', $selected_category);
         }
-                          
+
         $payload = QueryBuilder::for($query)
             ->allowedSorts(['id', 'name'])
             ->allowedFilters(
                 AllowedFilter::callback('search', function ($query, $value){
                     $query->orWhere('id', 'like', "%{$value}%");
-                }) 
+                })
             )
             ->paginate(request('per_page', config('basic.pagination_per_page')));
         return $payload;
 
     }
-    
+
     /**
      * Search
      * search and get item according to customer request
      *
-     * @param SearchProductRequest $request 
+     * @param SearchProductRequest $request
      *
      * @return void
      */
