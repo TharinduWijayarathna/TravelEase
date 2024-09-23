@@ -170,116 +170,9 @@
                                         <hr class="my-5" />
                                         <!-- Divider -->
 
-                                        <!-- Product item START -->
-                                        <div class="row align-items-md-center">
-                                            <!-- Image -->
-                                            <div class="col-5 col-md-2">
-                                                <div class="bg-light p-2 rounded-2">
-                                                    <img src="assets/PublicArea/images/shop/03.png" alt="" />
-                                                </div>
-                                            </div>
 
-                                            <div class="col-7 col-md-10">
-                                                <div class="row g-2 align-items-center">
-                                                    <!-- Content -->
-                                                    <div class="col-md-6 mb-3 mb-md-0">
-                                                        <p class="heading-color fw-normal small mb-2">
-                                                            Order no:
-                                                            <span class="text-primary">#548762</span>
-                                                        </p>
-                                                        <h6 class="mb-2">
-                                                            <a href="#">Men baseball
-                                                                cap</a>
-                                                        </h6>
-                                                        <!-- List -->
-                                                        <ul class="nav nav-divider small align-items-center">
-                                                            <li class="nav-item">
-                                                                Size: <b>S</b>
-                                                            </li>
-                                                            <li class="nav-item">
-                                                                Shipped date:
-                                                                <b>05 Nov,
-                                                                    2023</b>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-
-                                                    <!-- Price and button -->
-                                                    <div class="col-md-4 text-md-end ms-auto">
-                                                        <p class="text-danger fw-semibold mb-1 mb-md-3">
-                                                            <i class="bi bi-x-circle-fill me-1"></i>Cancelled
-                                                        </p>
-                                                        <small>Total amount</small>
-                                                        <h5 class="mt-1 mb-0">
-                                                            $115.00
-                                                        </h5>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
                                         <!-- Product item END -->
 
-                                        <hr class="my-5" />
-                                        <!-- Divider -->
-
-                                        <!-- Product item START -->
-                                        <div class="row align-items-md-center">
-                                            <!-- Image -->
-                                            <div class="col-5 col-md-2">
-                                                <div class="bg-light p-2 rounded-2">
-                                                    <img src="assets/PublicArea/images/shop/01.png" alt="" />
-                                                </div>
-                                            </div>
-
-                                            <div class="col-7 col-md-10">
-                                                <div class="row g-2 align-items-center">
-                                                    <!-- Content -->
-                                                    <div class="col-md-6 mb-3 mb-md-0">
-                                                        <p class="heading-color fw-normal small mb-2">
-                                                            Order no:
-                                                            <span class="text-primary">#248795</span>
-                                                        </p>
-                                                        <h6 class="mb-2">
-                                                            <a href="#">Woman skincare
-                                                                drops</a>
-                                                        </h6>
-                                                        <!-- List -->
-                                                        <ul class="nav nav-divider small align-items-center mt-1">
-                                                            <li class="nav-item">
-                                                                Shipped date:
-                                                                <b>05 Nov,
-                                                                    2023</b>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-
-                                                    <div class="col-md-3 mb-3 mb-md-0">
-                                                        <a href="#" class="btn btn-sm btn-light border mb-3"><i
-                                                                class="bi bi-truck me-2"></i>Track order</a>
-                                                        <p class="text-primary fw-semibold small mb-0">
-                                                            <i class="bi bi-check-circle-fill me-1"></i>In Transit
-                                                        </p>
-                                                        <small class="text-body-secondary">Expected at
-                                                            NY,USA</small>
-                                                    </div>
-
-                                                    <!-- Price and button -->
-                                                    <div class="col-md-3 ms-auto text-md-end">
-                                                        <p class="text-warning fw-semibold mb-1 mb-md-3">
-                                                            <i class="bi bi-check-circle-fill me-1"></i>Processing
-                                                        </p>
-                                                        <small>Total amount</small>
-                                                        <h5 class="mb-3">
-                                                            $98.00
-                                                        </h5>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- Product item END -->
-
-                                        <hr class="my-5" />
-                                        <!-- Divider -->
                                     </div>
 
                                     <!-- Card footer -->
@@ -297,10 +190,7 @@
                                                 <a class="page-link" href="#">2</a>
                                             </li>
                                             <li class="page-item">
-                                                <a class="page-link" href="#">..</a>
-                                            </li>
-                                            <li class="page-item">
-                                                <a class="page-link" href="#">5</a>
+                                                <a class="page-link" href="#">3</a>
                                             </li>
                                             <li class="page-item">
                                                 <a class="page-link" href="#">Next</a>
