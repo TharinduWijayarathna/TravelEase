@@ -10,12 +10,12 @@
                                     <Link :href="route('home')">Home</Link>
                                 </li>
                                 <li class="breadcrumb-item active" aria-current="page">
-                                    Shop
+                                    Buses
                                 </li>
                             </ol>
                         </nav>
                         <h1 class="h3 mb-0 mt-3">
-                            Explore our diverse range of products.
+                            Explore Our Buses
                         </h1>
                     </div>
                 </section>
@@ -152,17 +152,17 @@
 											</h2>
 											<div id="collapseFive" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
 												<form class="accordion-body">
-										
+
 														<div class="color-check-radio">
 															<input class="form-check-input" type="radio" name="flexRadiocolor" id="flexRadiocolor1" style="background-color: #9a0a0a;">
 															<label class="form-check-label" for="flexRadiocolor1"></label>
-										
+
 															<input class="form-check-input" type="radio" name="flexRadiocolor" id="flexRadiocolor2" style="background-color: #32C7F5;">
 															<label class="form-check-label" for="flexRadiocolor2"></label>
-										
+
 															<input class="form-check-input" type="radio" name="flexRadiocolor" id="flexRadiocolor3" style="background-color: #F7C32E;">
 															<label class="form-check-label" for="flexRadiocolor3"></label>
-										
+
 															<input class="form-check-input" type="radio" name="flexRadiocolor" id="flexRadiocolor4" style="background-color: #333369;">
 															<label class="form-check-label" for="flexRadiocolor4"></label>
 														</div>
@@ -180,27 +180,27 @@
 												<div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
 													<form class="accordion-body">
 														<ul class="list-inline mb-0 g-3">
-															
+
 															<li class="list-inline-item mb-0">
 																<input type="checkbox" class="btn-check" id="btn-check-6">
 																<label class="btn btn-sm btn-light btn-primary-soft-check" for="btn-check-6">1<i class="bi bi-star-fill"></i></label>
 															</li>
-															
+
 															<li class="list-inline-item mb-0">
 																<input type="checkbox" class="btn-check" id="btn-check-7">
 																<label class="btn btn-sm btn-light btn-primary-soft-check" for="btn-check-7">2<i class="bi bi-star-fill"></i></label>
 															</li>
-															
+
 															<li class="list-inline-item mb-0">
 																<input type="checkbox" class="btn-check" id="btn-check-8">
 																<label class="btn btn-sm btn-light btn-primary-soft-check" for="btn-check-8">3<i class="bi bi-star-fill"></i></label>
 															</li>
-															
+
 															<li class="list-inline-item mb-0">
 																<input type="checkbox" class="btn-check" id="btn-check-15">
 																<label class="btn btn-sm btn-light btn-primary-soft-check" for="btn-check-15">4<i class="bi bi-star-fill"></i></label>
 															</li>
-															
+
 															<li class="list-inline-item mb-0">
 																<input type="checkbox" class="btn-check" id="btn-check-16">
 																<label class="btn btn-sm btn-light btn-primary-soft-check" for="btn-check-16">5<i class="bi bi-star-fill"></i></label>
