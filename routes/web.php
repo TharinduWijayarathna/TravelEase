@@ -1,4 +1,5 @@
 <?php
+
 use App\Http\Controllers\AdminArea\CustomerController as AdminCustomerController;
 use App\Http\Controllers\AdminArea\HomeController as AdminHomeController;
 use App\Http\Controllers\AdminArea\OrderController as AdminOrderController;
@@ -32,6 +33,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 /*Public*/
+
 Route::get('/', [PublicHomeController::class, 'index'])->name('home');
 Route::get('/categories', [PublicHomeController::class, 'categories'])->name('categories');
 Route::get('/contact', [PublicHomeController::class, 'contact'])->name('contact');
@@ -177,4 +179,3 @@ Route::prefix('admin')->group(function () {
 });
 
 require __DIR__ . '/auth.php';
-

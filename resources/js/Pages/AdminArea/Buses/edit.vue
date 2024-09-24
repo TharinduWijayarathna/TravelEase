@@ -5,18 +5,18 @@
                 <div class="container-fluid">
                     <div class="header-body">
                         <div class="py-4 col align-items-center">
-                            <h6 class="mb-0 h2 d-inline-block">Products</h6>
+                            <h6 class="mb-0 h2 d-inline-block">Bus Management</h6>
                             <nav aria-label="breadcrumb" class="d-none d-md-block">
                                 <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                                     <li class="breadcrumb-item">
-                                       <Link :href="route('admin.dashboard')" class="text-dark">
-                                            <i class="fa-solid fa-house"></i>
+                                        <Link :href="route('admin.dashboard')" class="text-dark">
+                                        <i class="fa-solid fa-house"></i>
                                         </Link>
                                     </li>
-                                    
+
                                     <li class="breadcrumb-item active text-dark" aria-current="page">
                                         <Link :href="route('admin.product.index')" class="text-dark">
-                                            Products
+                                        Bus Management
                                         </Link>
                                         <input type="image" src="" alt="" />
                                     </li>
@@ -64,7 +64,7 @@
                             </div>
                         </div>
                     </div>
-                </div> 
+                </div>
             </div>
         </template>
     </AdminLayout>
@@ -74,8 +74,8 @@
 import AdminLayout from "@/Layouts/AdminLayout.vue";
 import { Link } from "@inertiajs/vue3";
 import { defineProps, onMounted } from "vue";
-import BasicEditForm from "@/Pages/AdminArea/Product/Components/Basic/EditForm.vue";
-import ProductImagesAll from "@/Pages/AdminArea/Product/Components/ProductImages/All.vue";
+import BasicEditForm from "@/Pages/AdminArea/Buses/Components/Basic/EditForm.vue";
+import ProductImagesAll from "@/Pages/AdminArea/Buses/Components/ProductImages/All.vue";
 
 const props = defineProps({
     product: {

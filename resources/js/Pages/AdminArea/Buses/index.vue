@@ -5,7 +5,7 @@
                 <div class="container-fluid">
                     <div class="header-body row">
                         <div class="col-lg-8 align-items-center py-4">
-                            <h6 class="h2 text-maroon d-inline-block mb-0">Product Managements</h6>
+                            <h6 class="h2 text-maroon d-inline-block mb-0">Bus Management</h6>
                             <nav aria-label="breadcrumb" class="d-none d-md-block ">
                                 <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                                     <li class="breadcrumb-item">
@@ -14,7 +14,7 @@
                                         </Link>
                                     </li>
                                     <li class="breadcrumb-item active breadcrumb-yellow" aria-current="page">
-                                        Products
+                                        Bus Management
                                     </li>
                                 </ol>
                             </nav>
@@ -149,7 +149,8 @@
                                             <td class="textClassBody" v-if="value?.product_image.length > 0">
                                                 <div class="" v-for="image in value.product_image">
                                                     <div class="" v-if="image.status == 1">
-                                                        <img v-if="value?.product_image.length > 0" class="img-fluid product-image-setup"
+                                                        <img v-if="value?.product_image.length > 0"
+                                                            class="img-fluid product-image-setup"
                                                             :src="image.image_url" />
                                                     </div>
                                                 </div>
@@ -157,8 +158,8 @@
                                             <td class="textClassBody" v-else>
                                                 <div class="">
                                                     <div class="">
-                                                        <img :src="productImage" alt="no image" class="product-image-setup"
-                                                            height="100px" />
+                                                        <img :src="productImage" alt="no image"
+                                                            class="product-image-setup" height="100px" />
                                                     </div>
                                                 </div>
                                             </td>
@@ -546,15 +547,15 @@ const setPage = async (nextPage) => {
     vertical-align: middle;
 }
 
-.product-image-setup{
-    width: 100px; 
-    height: 100px; 
-    object-fit: cover; 
-    object-position: center; 
+.product-image-setup {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    object-position: center;
     border-radius: 10px;
 }
 
-.cursor-pointer{
+.cursor-pointer {
     cursor: pointer;
 }
 </style>

@@ -59,8 +59,8 @@
                                     <div class="col-md-2 column__right___padding column__left___padding">
                                         <div for="quantity" class="col-form-label">QUANTITY</div>
                                         <input v-if="select_product_data" type="number" step="any"
-                                            class="form-control form-control-sm" v-model="quantity"
-                                            name="quantity" id="quantity" min="1" placeholder="Quantity" />
+                                            class="form-control form-control-sm" v-model="quantity" name="quantity"
+                                            id="quantity" min="1" placeholder="Quantity" />
                                         <input v-else type="number" step="any" class="form-control form-control-sm"
                                             name="quantity" id="quantity" min="1" placeholder="Quantity" />
                                         <small id="msg_quantity"
@@ -295,7 +295,7 @@ const reload = async () => {
         if (itemData.value.length > 0) {
             cartId.value = itemData.value[0].cart_id;
             pagination.value = response;
-            
+
         }
         getOrderData();
     } catch (error) {

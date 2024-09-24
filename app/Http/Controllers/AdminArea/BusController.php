@@ -25,7 +25,7 @@ class BusController extends ParentController
      */
     public function index()
     {
-        return Inertia::render('AdminArea/Product/index');
+        return Inertia::render('AdminArea/Buses/index');
 
     }
 
@@ -107,7 +107,7 @@ class BusController extends ParentController
     public function edit($product_id)
     {
         $response['product'] = ProductFacade::edit($product_id);
-        return inertia::render('AdminArea/Product/edit', $response);
+        return inertia::render('AdminArea/Buses/edit', $response);
     }
 
     /**
