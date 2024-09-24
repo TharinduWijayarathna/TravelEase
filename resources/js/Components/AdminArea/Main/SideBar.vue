@@ -5,7 +5,7 @@
             <div class="mb-4 text-center sidenav-header">
 
                 <Link class="navbar-brand text-primary" :href="route('admin.dashboard')">
-                <img src="/assets/PublicArea/images/logo.svg" alt="E-Commerce" class="home-logo mt-1 ml-1">
+                <img src="/assets/PublicArea/images/logo.svg" alt="" class="home-logo mt-1 ml-1">
                 </Link>
             </div>
             <br>

@@ -3,7 +3,7 @@
         <tr class="row-bg">
             <td>
                 <span class="note" style=" margin-top: 25%; ">Created at
-                    {{ Carbon\Carbon::now()->format('d M, Y h:i A') }} | by <b>E-commerce</b>
+                    {{ Carbon\Carbon::now()->format('d M, Y h:i A') }} | by <b>TravelEase</b>
                 </span>
             </td>
             @if (isset($order) && $order['code'] != null)

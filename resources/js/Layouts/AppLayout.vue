@@ -1,7 +1,7 @@
 <template>
     <div>
 
-        <Head :title="title ? title : 'E-Commerce'">
+        <Head :title="title ? title : 'TravelEase'">
             <link rel="icon" type="image/svg+xml" href="/img/logo/logo_white.png" />
             <slot name="meta_head" />
         </Head>
