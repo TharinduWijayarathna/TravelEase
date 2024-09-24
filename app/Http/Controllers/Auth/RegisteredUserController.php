@@ -21,7 +21,7 @@ class RegisteredUserController extends Controller
      */
     public function create(): Response
     {
-        return Inertia::render('Auth/Register');
+        return Inertia::render('PublicArea/Customer/register');
     }
 
     /**
@@ -63,10 +63,10 @@ class RegisteredUserController extends Controller
         Auth::login($user);
 
         if($request->role == 1 ){
-            return redirect(RouteServiceProvider::ADMIN); 
+            return redirect(RouteServiceProvider::ADMIN);
         }else{
             return redirect(RouteServiceProvider::HOME);
         }
-        
+
     }
 }
