@@ -1,7 +1,7 @@
 <template>
     <div>
 
-        <Head :title="title ? title : 'E-Commerce'">
+        <Head :title="title ? title : 'TravelEase'">
 
             <!-- Favicon and Touch Icons-->
             <link rel="apple-touch-icon" sizes="180x180" href="/img/logo/favicon.png" />
