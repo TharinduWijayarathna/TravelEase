@@ -1,5 +1,5 @@
 <template>
-    <div> 
+    <div>
 
         <Head :title="title ? title : 'E-Commerce'">
 
@@ -101,4 +101,19 @@ body {
         margin-left: 15rem !important;
         width: auto;
     }
-}</style>
+}
+
+@media screen and (min-width: 1200px) {
+    .fixed-content {
+        margin-left: 2rem !important;
+        width: auto;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .fixed-content {
+        margin-left: 0rem !important;
+        width: auto;
+    }
+}
+</style>
