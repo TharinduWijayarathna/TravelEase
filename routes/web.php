@@ -5,7 +5,7 @@ use App\Http\Controllers\AdminArea\OrderController as AdminOrderController;
 use App\Http\Controllers\AdminArea\ProductImageController as AdminProductImageController;
 use App\Http\Controllers\AdminArea\BannerController as AdminBannerController;
 use App\Http\Controllers\AdminArea\CategoryController as AdminCategoryController;
-use App\Http\Controllers\AdminArea\ProductController as AdminProductController;
+use App\Http\Controllers\AdminArea\BusController as AdminBusController;
 use App\Http\Controllers\AdminArea\CartItemController as AdminCartItemController;
 
 use App\Http\Controllers\Auth\RegisteredUserController;
@@ -127,14 +127,14 @@ Route::prefix('admin')->group(function () {
 
     // Admin-product
     Route::prefix('product')->group(function () {
-        Route::get('/', [AdminProductController::class, 'index'])->name('admin.product.index');
-        Route::get('/all', [AdminProductController::class, 'all'])->name('admin.product.all');
-        Route::get('/{product_id}/get', [AdminProductController::class, 'get'])->name('admin.product.get');
-        Route::post('/store', [AdminProductController::class, 'store'])->name('admin.product.store');
-        Route::get('/{product_id}/edit', [AdminProductController::class, 'edit'])->name('admin.product.edit');
-        Route::post('/{product_id}/update', [AdminProductController::class, 'update'])->name('admin.product.update');
-        Route::delete('/{product_id}/delete', [AdminProductController::class, 'delete'])->name('admin.product.delete');
-        Route::post('/filter', [AdminProductController::class, 'filter'])->name('admin.product.filter');
+        Route::get('/', [AdminBusController::class, 'index'])->name('admin.product.index');
+        Route::get('/all', [AdminBusController::class, 'all'])->name('admin.product.all');
+        Route::get('/{product_id}/get', [AdminBusController::class, 'get'])->name('admin.product.get');
+        Route::post('/store', [AdminBusController::class, 'store'])->name('admin.product.store');
+        Route::get('/{product_id}/edit', [AdminBusController::class, 'edit'])->name('admin.product.edit');
+        Route::post('/{product_id}/update', [AdminBusController::class, 'update'])->name('admin.product.update');
+        Route::delete('/{product_id}/delete', [AdminBusController::class, 'delete'])->name('admin.product.delete');
+        Route::post('/filter', [AdminBusController::class, 'filter'])->name('admin.product.filter');
     });
 
     // Admin-product-image
