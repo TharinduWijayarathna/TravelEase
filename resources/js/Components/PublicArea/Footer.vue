@@ -10,16 +10,8 @@ Footer START -->
                 <div class="col-lg-5">
                     <!-- logo -->
                     <a href="index.html">
-                        <img
-                            class="light-mode-item h-40px"
-                            src="/assets/PublicArea/images/logo.svg"
-                            alt="logo"
-                        />
-                        <img
-                            class="dark-mode-item h-40px"
-                            src="/assets/PublicArea/images/logo-light.svg"
-                            alt="logo"
-                        />
+                        <img class="light-mode-item h-40px" src="/assets/PublicArea/images/logo.svg" alt="logo" />
+                        <img class="dark-mode-item h-40px" src="/assets/PublicArea/images/logo-light.svg" alt="logo" />
                     </a>
 
                     <p class="mt-4 mb-2">
@@ -28,29 +20,24 @@ Footer START -->
                     <!-- Social icon -->
                     <ul class="list-inline mb-0 mt-4">
                         <li class="list-inline-item">
-                            <a class="btn btn-xs btn-icon btn-light" href="#"
-                                ><i class="fab fa-fw fa-facebook-f lh-base"></i
-                            ></a>
+                            <a class="btn btn-xs btn-icon btn-light" href="#"><i
+                                    class="fab fa-fw fa-facebook-f lh-base"></i></a>
                         </li>
                         <li class="list-inline-item">
-                            <a class="btn btn-xs btn-icon btn-light" href="#"
-                                ><i class="fab fa-fw fa-instagram lh-base"></i
-                            ></a>
+                            <a class="btn btn-xs btn-icon btn-light" href="#"><i
+                                    class="fab fa-fw fa-instagram lh-base"></i></a>
                         </li>
                         <li class="list-inline-item">
-                            <a class="btn btn-xs btn-icon btn-light" href="#"
-                                ><i class="fab fa-fw fa-twitter lh-base"></i
-                            ></a>
+                            <a class="btn btn-xs btn-icon btn-light" href="#"><i
+                                    class="fab fa-fw fa-twitter lh-base"></i></a>
                         </li>
                         <li class="list-inline-item">
-                            <a class="btn btn-xs btn-icon btn-light" href="#"
-                                ><i class="fab fa-fw fa-linkedin-in lh-base"></i
-                            ></a>
+                            <a class="btn btn-xs btn-icon btn-light" href="#"><i
+                                    class="fab fa-fw fa-linkedin-in lh-base"></i></a>
                         </li>
                         <li class="list-inline-item">
-                            <a class="btn btn-xs btn-icon btn-light" href="#"
-                                ><i class="fab fa-fw fa-youtube lh-base"></i
-                            ></a>
+                            <a class="btn btn-xs btn-icon btn-light" href="#"><i
+                                    class="fab fa-fw fa-youtube lh-base"></i></a>
                         </li>
                     </ul>
                 </div>
@@ -63,33 +50,17 @@ Footer START -->
                         <div class="col-6">
                             <ul class="nav flex-column">
                                 <li class="nav-item">
-                                    <Link
-                                        class="nav-link pt-0"
-                                        :href="route('home')"
-                                        >Home</Link
-                                    >
+                                    <Link class="nav-link pt-0" :href="route('home')">Home</Link>
                                 </li>
                                 <li class="nav-item">
-                                    <Link
-                                        class="nav-link"
-                                        :href="route('buses.index')"
-                                        >Products</Link
-                                    >
+                                    <Link class="nav-link" :href="route('buses.index')">Products</Link>
                                 </li>
                                 <li class="nav-item">
-                                    <Link
-                                        class="nav-link"
-                                        :href="route('categories')"
-                                        >Categories
-                                        <span class="badge text-bg-danger ms-2"
-                                            >2 New</span
-                                        ></Link
-                                    >
+                                    <Link class="nav-link" :href="route('categories')">Categories
+                                    <span class="badge text-bg-danger ms-2">2 New</span></Link>
                                 </li>
                                 <li class="nav-item">
-                                    <Link class="nav-link" :href="route('contact')"
-                                        >Contact</Link
-                                    >
+                                    <Link class="nav-link" :href="route('contact')">Contact</Link>
                                 </li>
                             </ul>
                         </div>
@@ -98,22 +69,14 @@ Footer START -->
                         <div class="col-6">
                             <ul class="nav flex-column">
                                 <li class="nav-item">
-                                    <Link
-                                        class="nav-link pt-0"
-                                        :href="route('customer.index')"
-                                        >Profile</Link
-                                    >
+                                    <Link class="nav-link pt-0" :href="route('customer.index')">Profile</Link>
                                 </li>
                                 <li class="nav-item">
                                     <Link class="nav-link pt-0" :href="route('cart.index')">Cart</Link>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#"
-                                        >Supports
-                                        <i
-                                            class="bi bi-box-arrow-up-right small ms-1"
-                                        ></i
-                                    ></a>
+                                    <a class="nav-link" href="#">Supports
+                                        <i class="bi bi-box-arrow-up-right small ms-1"></i></a>
                                 </li>
                             </ul>
                         </div>
@@ -126,9 +89,7 @@ Footer START -->
             <hr class="mt-4 mb-0" />
 
             <!-- Bottom footer -->
-            <div
-                class="d-md-flex justify-content-between align-items-center text-center text-lg-start py-4"
-            >
+            <div class="d-md-flex justify-content-between align-items-center text-center text-lg-start py-4">
                 <!-- copyright text -->
                 <div class="text-body">
                     Copyrights ©2024 TravelEase
@@ -137,85 +98,91 @@ Footer START -->
                 <div class="nav mt-2 mt-lg-0">
                     <ul class="list-inline mx-auto mb-0">
                         <li class="list-inline-item me-0">
-                            <a class="nav-link py-0" href="#">Privacy policy</a>
+                            <a class="nav-link py-0" href="#" data-bs-toggle="modal"
+                                data-bs-target="#privacyPolicyModal">
+                                Privacy Policy </a>
                         </li>
                         <li class="list-inline-item me-0">
-                            <a class="nav-link py-0 pe-0" href="#"
-                                >Terms &amp; conditions</a
-                            >
+                            <a class="nav-link py-0 pe-0" href="#" data-bs-toggle="modal"
+                                data-bs-target="#termsConditionsModal">
+                                Terms &amp; Conditions </a>
                         </li>
                     </ul>
                 </div>
             </div>
         </div>
     </footer>
-    <!-- =======================
-Footer END -->
 
-    <!-- Offcanvas START -->
-    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasMenu">
-        <!-- Offcanvas header -->
-        <div
-            class="offcanvas-header justify-content-between border-bottom px-3"
-        >
-            <h5 class="mb-0">Your Cart</h5>
-            <button
-                type="button"
-                class="btn-close text-reset"
-                data-bs-dismiss="offcanvas"
-                aria-label="Close"
-            ></button>
-        </div>
-
-        <!-- Offcanvas body -->
-        <div class="offcanvas-body d-flex flex-column px-3">
-            <div class="row g-3">
-                <!-- Image -->
-                <div class="col-4">
-                    <img
-                        class="rounded-2 bg-light p-2"
-                        src="/assets/PublicArea/images/shop/02.png"
-                        alt="avatar"
-                    />
+    <div class="modal fade" id="privacyPolicyModal" tabindex="-1" aria-labelledby="privacyPolicyModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="privacyPolicyModalLabel">
+                        Privacy Policy
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="col-8">
-                    <p class="heading-color fw-semibold mb-1">
-                        Round neck cotton t-shirt
+                <div class="modal-body">
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                        Quisquam, voluptate, voluptatem, voluptatum, voluptates
+                        quae quia quidem quibusdam autem. Quisquam, voluptate,
+                        voluptatem, voluptatum, voluptates quae quia quidem
+                        quibusdam autem.
                     </p>
-                    <div
-                        class="d-flex justify-content-between align-items-center"
-                    >
-                        <!-- Select item -->
-                        <select
-                            class="form-select form-select-sm w-auto"
-                            aria-label="Default select example"
-                        >
-                            <option value="1">01</option>
-                            <option value="2">02</option>
-                            <option value="3">03</option>
-                        </select>
-
-                        <a href="#" class="btn btn-sm btn-link p-0">Remove</a>
-                    </div>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                        Quisquam, voluptate, voluptatem, voluptatum, voluptates
+                        quae quia quidem quibusdam autem. Quisquam, voluptate,
+                        voluptatem, voluptatum, voluptates quae quia quidem
+                        quibusdam autem.
+                    </p>
                 </div>
-            </div>
-
-            <!-- Button and price -->
-            <div class="mt-auto">
-                <div class="d-flex justify-content-between mb-2">
-                    <span class="heading-color fw-semibold">Subtotal</span>
-                    <h6 class="text-success mb-0">$103</h6>
-                </div>
-                <!-- Button -->
-                <div class="d-grid">
-                    <a href="checkout.html" class="btn btn-lg btn-dark mb-0"
-                        >Continue to Checkout</a
-                    >
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Close
+                    </button>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Offcanvas END -->
+
+    <div class="modal fade" id="termsConditionsModal" tabindex="-1" aria-labelledby="termsConditionsModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="termsConditionsModalLabel">
+                        Terms &amp; Conditions
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                        Quisquam, voluptate, voluptatem, voluptatum, voluptates
+                        quae quia quidem quibusdam autem. Quisquam, voluptate,
+                        voluptatem, voluptatum, voluptates quae quia quidem
+                        quibusdam autem.
+                    </p>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                        Quisquam, voluptate, voluptatem, voluptatum, voluptates
+                        quae quia quidem quibusdam autem. Quisquam, voluptate,
+                        voluptatem, voluptatum, voluptates quae quia quidem
+                        quibusdam autem.
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <!-- Back to top -->
     <div class="back-top"></div>

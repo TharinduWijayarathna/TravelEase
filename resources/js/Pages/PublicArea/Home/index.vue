@@ -54,9 +54,11 @@
                                                             <h1 class="text-white display-6 mb-4">{{ banner.main_heading
                                                                 }}</h1>
                                                             <p class="text-white mb-4">{{ banner.sub_heading }}</p>
-                                                            <a class="btn btn-lg btn-outline-white icon-link icon-link-hover mb-0"
-                                                                href="#">View Details<i
-                                                                    class="bi bi-arrow-right"></i></a>
+                                                            <Link
+                                                                class="btn btn-lg btn-outline-white icon-link icon-link-hover mb-0"
+                                                                :href="route('buses.index')">Book Now<i
+                                                                class="bi bi-arrow-right"></i>
+                                                            </Link>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -71,64 +73,6 @@
                             <div class="swiper-pagination swiper-pagination-line position-absolute bottom-0 mb-3"></div>
                         </div>
                     </div>
-                </div>
-
-                <div class="container pb-5">
-                    <!-- Title -->
-                    <div class="inner-container-small text-center mb-4 mb-md-6">
-                        <h2>How to Book Your Ticket in <span class="text-primary">4</span> Easy Steps</h2>
-                    </div>
-
-                    <div class="row step-process">
-                        <!-- Step item -->
-                        <div class="col-sm-6 col-lg-3">
-                            <div class="card card-body bg-transparent text-center">
-                                <!-- Icon -->
-                                <div class="icon-lg bg-dark text-white rounded-circle mb-3 mx-auto">
-                                    <i class="bi bi-search fa-lg"></i>
-                                </div>
-                                <h5>Search for Your Trip</h5>
-                                <p>Enter your destination and preferred travel date to find available buses.</p>
-                            </div>
-                        </div>
-
-                        <!-- Step item -->
-                        <div class="col-sm-6 col-lg-3">
-                            <div class="card card-body bg-transparent text-center">
-                                <!-- Icon -->
-                                <div class="icon-lg bg-dark text-white rounded-circle mb-3 mx-auto">
-                                    <i class="bi bi-ticket fa-lg"></i>
-                                </div>
-                                <h5>Select Your Seat</h5>
-                                <p>Choose your preferred seat from the seating plan displayed for the selected bus.</p>
-                            </div>
-                        </div>
-
-                        <!-- Step item -->
-                        <div class="col-sm-6 col-lg-3">
-                            <div class="card card-body bg-transparent text-center">
-                                <!-- Icon -->
-                                <div class="icon-lg bg-dark text-white rounded-circle mb-3 mx-auto">
-                                    <i class="bi bi-credit-card fa-lg"></i>
-                                </div>
-                                <h5>Make Payment</h5>
-                                <p>Securely complete your booking by paying through our various payment options.</p>
-                            </div>
-                        </div>
-
-                        <!-- Step item -->
-                        <div class="col-sm-6 col-lg-3">
-                            <div class="card card-body bg-transparent text-center">
-                                <!-- Icon -->
-                                <div class="icon-lg bg-dark text-white rounded-circle mb-3 mx-auto">
-                                    <i class="bi bi-envelope-check fa-lg"></i>
-                                </div>
-                                <h5>Receive Confirmation</h5>
-                                <p>Get an instant confirmation with your ticket details via email or SMS.</p>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
 
                 <div class="container pb-5 pt-3">
@@ -219,7 +163,8 @@
                         <div class="col-lg-6 order-lg-2">
                             <!-- Title -->
                             <h2 class="mb-4 mb-lg-5">Your Hassle-Free Bus Ticket Booking Solution</h2>
-                            <p class="mb-4 mb-lg-5">Experience seamless travel with TravelEase. Our platform allows you to
+                            <p class="mb-4 mb-lg-5">Experience seamless travel with TravelEase. Our platform allows you
+                                to
                                 easily find,
                                 compare, and book bus tickets for your journeys. Enjoy comfort and convenience on every
                                 trip!</p>
@@ -298,6 +243,7 @@ import AppLayout from "@/Layouts/AppLayout.vue";
 import axios from "axios";
 import { onMounted, ref } from "vue";
 import { Carousel, Pagination, Slide } from 'vue3-carousel'
+import { Link } from "@inertiajs/vue3";
 import 'vue3-carousel/dist/carousel.css'
 
 const navbarComponent = ref(null);
