@@ -16,7 +16,7 @@
                                 <i class="sidenav-toggler-line"></i>
                                 <i class="sidenav-toggler-line"></i>
                             </div>
-                        </div> 
+                        </div>
                     </li>
                 </ul>
                 <ul class="navbar-nav align-items-center ml-auto ml-md-0">
@@ -26,23 +26,20 @@
                             <div class="media align-items-center">
                                 <i class="fa fa-user me-sm-1 text-white"></i>
                                 <div class="media-body ml-2 d-none d-lg-block">
-                                    <span class="mb-0 text-sm font-weight-bold text-white">{{ $page.props.auth.user.first_name }}</span>
+                                    <span class="mb-0 text-sm font-weight-bold text-white">{{
+                                        $page.props.auth.user.first_name }}</span>
                                 </div>
                             </div>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
                             <a class="dropdown-item border-radius-md" href="#">
-                                <font-awesome-icon icon="fa-solid fa-user" />
+                                <i class="ni ni-single-02"></i>
                                 <span>Profile</span>
                             </a>
-                            <!-- <Link href="/logout" as="button" method="post" class="dropdown-item">
+                            <Link href="/logout" as="button" method="post" class="dropdown-item">
                             <i class="ni ni-user-run"></i>
                             <span>Logout</span>
-                            </Link> -->
-                            <a href="#" as="button" @click.prevent="logout" class="dropdown-item">
-                                <i class="ni ni-user-run"></i>
-                                <span>Logout</span>
-                            </a>
+                            </Link>
                         </div>
                     </li>
                 </ul>
@@ -56,7 +53,7 @@ import { Link, router } from '@inertiajs/vue3';
 import { usePage } from '@inertiajs/vue3';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
-import  axios  from 'axios';
+import axios from 'axios';
 
 const { props } = usePage();
 
@@ -71,12 +68,12 @@ const viewProfile = () => {
 }
 
 const logout = async () => {
-    try{
-        await axios.post('/logout').then(response=>{
+    try {
+        await axios.post('/logout').then(response => {
             window.location.href = '/login';
         })
-    }catch(error){
-        console.log('Error',error);
+    } catch (error) {
+        console.log('Error', error);
     }
 }
 
