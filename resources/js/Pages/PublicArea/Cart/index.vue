@@ -10,11 +10,11 @@
                                     <Link :href="route('home')">Home</Link>
                                 </li>
                                 <li class="breadcrumb-item active" aria-current="page">
-                                    My cart
+                                    My Bookings
                                 </li>
                             </ol>
                         </nav>
-                        <h1 class="h3 mb-0 mt-3">My cart</h1>
+                        <h1 class="h3 mb-0 mt-3">My Bookings</h1>
                     </div>
                 </section>
 
@@ -36,7 +36,7 @@
                                             {{ cartCount }} Products
                                         </h5>
                                         <h5 class="mb-0" v-else>
-                                            Cart is empty
+                                            Empty
                                         </h5>
 
                                         <button class="btn btn-sm btn-danger-soft mb-0" v-if="cartItemData?.length > 0"
@@ -263,12 +263,12 @@ const checkOut = async () => {
                     timerProgressBar: true,
                 });
                 emitter.emit(CART_REFRESH);
-                
+
                 updateCart();
                 getCart();
                 getCartCount();
                 getCartItems();
-                
+
             })
             .catch((error) => {
                 console.log("Error:", error);

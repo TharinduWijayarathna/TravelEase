@@ -50,11 +50,7 @@
                                                     </li>
                                                     <li class="nav-item">
                                                         <Link class="nav-link" :href="route('history')">
-                                                        <i class="bi bi-basket fa-fw me-2"></i>Order history</Link>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                        <Link class="nav-link" :href="route('wishList.index')">
-                                                        <i class="bi bi-heart fa-fw me-2"></i>Wishlist</Link>
+                                                        <i class="bi bi-clock-history fa-fw me-2"></i>Booking History</Link>
                                                     </li>
                                                     <li class="nav-item">
                                                         <Link class="nav-link" :href="route('customer.delete.index')">
@@ -208,9 +204,9 @@
                                 </form>
                                 <!-- </form> -->
 
-                                <div class="text-center my-5">
+                                <!-- <div class="text-center my-5">
                                     <i class="bi bi-three-dots"></i>
-                                </div>
+                                </div> -->
                                 <!-- Divider -->
 
                                 <!-- Update email -->

@@ -26,8 +26,8 @@
                             <Link
                                 :class="{ 'active__sidebar': route().current() == 'admin.product.index' || route().current() == 'admin.product.edit' }"
                                 class="nav-link active-preloader" :href="route('admin.product.index')">
-                            <i class="fa-solid fa-cubes"></i>
-                            <span class="ml-2 nav-link-text font-weight-600">Products</span>
+                            <i class="fa-solid fa-boxes-stacked"></i>
+                            <span class="ml-2 nav-link-text font-weight-600">Buses</span>
                             </Link>
                         </li>
                         <li class="nav-item">
@@ -40,10 +40,18 @@
                         </li>
                         <li class="nav-item">
                             <Link
+                                :class="{ 'active__sidebar': route().current() == 'admin.customer.index' || route().current() == 'admin.customer.edit' }"
+                                class="nav-link active-preloader" :href="route('admin.customer.index')">
+                            <i class="fa-solid fa-money-check"></i>
+                            <span class="ml-2 nav-link-text font-weight-600">Payments</span>
+                            </Link>
+                        </li>
+                        <li class="nav-item">
+                            <Link
                                 :class="{ 'active__sidebar': route().current() == 'admin.order.index' || route().current() == 'admin.order.edit' }"
                                 class="nav-link active-preloader" :href="route('admin.order.index')">
                             <i class="fa-solid fa-scroll"></i>
-                            <span class="ml-2 nav-link-text font-weight-600">Orders</span>
+                            <span class="ml-2 nav-link-text font-weight-600">Bookings</span>
                             </Link>
                         </li>
                         <li class="nav-item">
@@ -158,7 +166,7 @@ library.add(faPersonWalkingDashedLineArrowRight)
 }
 
 .sidenav {
-    width: 12.5rem !important;
+    width: 15rem !important;
 }
 
 .navbar-vertical .navbar-nav .nav-link[data-toggle=collapse][aria-expanded=true]:after {

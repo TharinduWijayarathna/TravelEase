@@ -1,11 +1,12 @@
 <?php
+
 use App\Http\Controllers\AdminArea\CustomerController as AdminCustomerController;
 use App\Http\Controllers\AdminArea\HomeController as AdminHomeController;
 use App\Http\Controllers\AdminArea\OrderController as AdminOrderController;
 use App\Http\Controllers\AdminArea\ProductImageController as AdminProductImageController;
 use App\Http\Controllers\AdminArea\BannerController as AdminBannerController;
 use App\Http\Controllers\AdminArea\CategoryController as AdminCategoryController;
-use App\Http\Controllers\AdminArea\ProductController as AdminProductController;
+use App\Http\Controllers\AdminArea\BusController as AdminBusController;
 use App\Http\Controllers\AdminArea\CartItemController as AdminCartItemController;
 
 use App\Http\Controllers\Auth\RegisteredUserController;
@@ -15,7 +16,7 @@ use App\Http\Controllers\PublicArea\CartItemController as PublicCartItemControll
 use App\Http\Controllers\PublicArea\CategoryController as PublicCategoryController;
 use App\Http\Controllers\PublicArea\HomeController as PublicHomeController;
 use App\Http\Controllers\PublicArea\OrderController as PublicOrderController;
-use App\Http\Controllers\PublicArea\ProductController as PublicProductController;
+use App\Http\Controllers\PublicArea\BusController as PublicBusController;
 use App\Http\Controllers\PublicArea\ProfileController as PublicProfileController;
 use App\Http\Controllers\PublicArea\WishListController as PublicWishListController;
 use Illuminate\Support\Facades\Route;
@@ -24,7 +25,7 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
-| 
+|
 | Here is where you can register web routes for your application. These
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
@@ -32,6 +33,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 /*Public*/
+
 Route::get('/', [PublicHomeController::class, 'index'])->name('home');
 Route::get('/categories', [PublicHomeController::class, 'categories'])->name('categories');
 Route::get('/contact', [PublicHomeController::class, 'contact'])->name('contact');
@@ -58,13 +60,13 @@ Route::prefix('categories')->group(function () {
     Route::get('{category_id}/get', [PublicCategoryController::class, 'get'])->name('category.get');
 });
 
-Route::prefix('products')->group(function () {
-    Route::get('/', [PublicProductController::class, 'products'])->name('products.index');
-    Route::get('/{product_id}/single/product', [PublicProductController::class, 'singleProduct'])->name('product.single');
-    Route::get('/all', [PublicProductController::class, 'all'])->name('product.all');
-    Route::get('/{product_id}/get', [PublicProductController::class, 'get'])->name('product.get');
-    Route::post('/filter', [PublicProductController::class, 'filter'])->name('product.filter');
-    Route::post('/search', [PublicProductController::class, 'search'])->name('product.search');
+Route::prefix('buses')->group(function () {
+    Route::get('/', [PublicBusController::class, 'index'])->name('buses.index');
+    Route::get('/{bus_id}/single/product', [PublicBusController::class, 'singleProduct'])->name('buses.single');
+    Route::get('/all', [PublicBusController::class, 'all'])->name('buses.all');
+    Route::get('/{bus_id}/get', [PublicBusController::class, 'get'])->name('buses.get');
+    Route::post('/filter', [PublicBusController::class, 'filter'])->name('buses.filter');
+    Route::post('/search', [PublicBusController::class, 'search'])->name('buses.search');
 });
 
 Route::prefix('customer')->group(function () {
@@ -75,7 +77,7 @@ Route::prefix('customer')->group(function () {
     Route::get('/delete', [PublicProfileController::class, 'deleteIndex'])->name('customer.delete.index');
 });
 
-Route::prefix('cart')->group(function () { 
+Route::prefix('cart')->group(function () {
     Route::get('/', [PublicCartController::class, 'cart'])->name('cart.index');
     Route::get('/{customer_id}/get', [PublicCartController::class, 'get'])->name('cart.get');
     // Route::delete('/{cart_id}/delete', [PublicCartController::class, 'delete'])->name('cart.delete');
@@ -112,7 +114,7 @@ Route::prefix('admin')->group(function () {
         Route::delete('/{banner_id}/delete', [AdminBannerController::class, 'delete'])->name('admin.banner.delete');
         Route::get('/{banner_id}/status', [AdminBannerController::class, 'status'])->name('admin.banner.status.update');
     });
-     
+
     // Admin-category
     Route::prefix('category')->group(function () {
         Route::get('/', [AdminCategoryController::class, 'index'])->name('admin.category.index');
@@ -124,17 +126,17 @@ Route::prefix('admin')->group(function () {
         Route::post('/filter', [AdminCategoryController::class, 'filter'])->name('admin.category.filter');
         Route::get('/{category_id}/status', [AdminCategoryController::class, 'status'])->name('admin.category.status.update');
     });
-    
-    // Admin-product 
+
+    // Admin-product
     Route::prefix('product')->group(function () {
-        Route::get('/', [AdminProductController::class, 'index'])->name('admin.product.index');
-        Route::get('/all', [AdminProductController::class, 'all'])->name('admin.product.all');
-        Route::get('/{product_id}/get', [AdminProductController::class, 'get'])->name('admin.product.get');
-        Route::post('/store', [AdminProductController::class, 'store'])->name('admin.product.store');
-        Route::get('/{product_id}/edit', [AdminProductController::class, 'edit'])->name('admin.product.edit');
-        Route::post('/{product_id}/update', [AdminProductController::class, 'update'])->name('admin.product.update');
-        Route::delete('/{product_id}/delete', [AdminProductController::class, 'delete'])->name('admin.product.delete');
-        Route::post('/filter', [AdminProductController::class, 'filter'])->name('admin.product.filter');
+        Route::get('/', [AdminBusController::class, 'index'])->name('admin.product.index');
+        Route::get('/all', [AdminBusController::class, 'all'])->name('admin.product.all');
+        Route::get('/{product_id}/get', [AdminBusController::class, 'get'])->name('admin.product.get');
+        Route::post('/store', [AdminBusController::class, 'store'])->name('admin.product.store');
+        Route::get('/{product_id}/edit', [AdminBusController::class, 'edit'])->name('admin.product.edit');
+        Route::post('/{product_id}/update', [AdminBusController::class, 'update'])->name('admin.product.update');
+        Route::delete('/{product_id}/delete', [AdminBusController::class, 'delete'])->name('admin.product.delete');
+        Route::post('/filter', [AdminBusController::class, 'filter'])->name('admin.product.filter');
     });
 
     // Admin-product-image
@@ -177,4 +179,3 @@ Route::prefix('admin')->group(function () {
 });
 
 require __DIR__ . '/auth.php';
-

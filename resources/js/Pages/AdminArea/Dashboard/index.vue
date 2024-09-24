@@ -1,7 +1,102 @@
 <template>
     <AdminLayout title="Dashboard">
-        <template #header> </template>
-        <template #content> </template>
+        <template #header>
+            <div class="header pb-6">
+                <div class="container-fluid">
+                    <div class="header-body row">
+                        <div class="col-lg-8 align-items-center py-4">
+                            <h6 class="h2 text-maroon d-inline-block mb-0">Dashboard</h6>
+                            <nav aria-label="breadcrumb" class="d-none d-md-block ">
+                                <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                                    <li class="breadcrumb-item">
+                                        <Link :href="route('admin.dashboard')" class="text-dark">
+                                        <i class="fa-solid fa-house"></i>
+                                        </Link>
+                                    </li>
+                                    <li class="breadcrumb-item active breadcrumb-yellow" aria-current="page">
+                                        Dashboard
+                                    </li>
+                                </ol>
+                            </nav>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </template>
+        <template #content>
+            <div class="mt-0 row">
+                <div class="col-md-12 mt-1">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-12">
+                            <div class="mb-4 card">
+                                <div class="p-3 card-body">
+                                    <div class="row">
+                                        <div class="col-8">
+                                            <div class="numbers">
+                                                <p class="mb-0 text-sm text-uppercase font-weight-bold"> PENDING
+                                                    ENQUIRIES </p>
+                                                <h5 class="font-weight-bolder">26</h5>
+                                            </div>
+                                        </div>
+                                        <div class="col-4 text-right">
+                                            <div
+                                                class="text-center icon icon-shape bg-gradient-secondary shadow-danger rounded-circle">
+                                                <i class="fa fa-clock"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-4 col-12">
+                            <div class="mb-4 card">
+                                <div class="p-3 card-body">
+                                    <div class="row">
+                                        <div class="col-8">
+                                            <div class="numbers">
+                                                <p class="mb-0 text-sm text-uppercase font-weight-bold"> PENDING
+                                                    ENQUIRIES </p>
+                                                <h5 class="font-weight-bolder">26</h5>
+                                            </div>
+                                        </div>
+                                        <div class="col-4 text-right">
+                                            <div
+                                                class="text-center icon icon-shape bg-gradient-secondary shadow-danger rounded-circle">
+                                                <i class="fa fa-clock"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-4 col-12">
+                            <div class="mb-4 card">
+                                <div class="p-3 card-body">
+                                    <div class="row">
+                                        <div class="col-8">
+                                            <div class="numbers">
+                                                <p class="mb-0 text-sm text-uppercase font-weight-bold"> PENDING
+                                                    ENQUIRIES </p>
+                                                <h5 class="font-weight-bolder">26</h5>
+                                            </div>
+                                        </div>
+                                        <div class="col-4 text-right">
+                                            <div
+                                                class="text-center icon icon-shape bg-gradient-secondary shadow-danger rounded-circle">
+                                                <i class="fa fa-clock"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </template>
     </AdminLayout>
 </template>
 
@@ -99,10 +194,3 @@ onMounted(() => {
 //     }
 // }
 </script>
-
-<style>
-.cls-1 {
-    fill: #699f4c;
-    fill-rule: evenodd;
-}
-</style>

@@ -15,8 +15,8 @@ use App\Models\Product;
 use Spatie\QueryBuilder\QueryBuilder;
 use Spatie\QueryBuilder\AllowedFilter;
 
-class ProductController extends ParentController
-{    
+class BusController extends ParentController
+{
     /**
      * Index
      * load admin product section
@@ -25,15 +25,15 @@ class ProductController extends ParentController
      */
     public function index()
     {
-        return Inertia::render('AdminArea/Product/index');
-        
+        return Inertia::render('AdminArea/Buses/index');
+
     }
-     
+
     /**
      * Store
-     * store product data 
-     * 
-     * @param CreateProductRequest $request 
+     * store product data
+     *
+     * @param CreateProductRequest $request
      *
      * @return void
      */
@@ -41,18 +41,18 @@ class ProductController extends ParentController
     {
         return ProductFacade::store($request->all());
     }
-    
+
     /**
      * All
-     * retrieve all products 
+     * retrieve all products
      *
      * @return void
-     */ 
+     */
     public function all()
-    {   
+    {
         $query = Product::with('Category', 'ProductImage', 'ProductImage.Image', 'WishList', 'CartItem', 'CartItem.Cart')
                         ->orderBy('products.id', 'desc');
-                          
+
 
         if(request('code')){
             $code = request('code');
@@ -72,7 +72,7 @@ class ProductController extends ParentController
         }
 
         if(request('status')){
-           
+
             $status = request('status');
             if($status == "1"){
                 $query->where('status', 1);
@@ -90,26 +90,26 @@ class ProductController extends ParentController
                     $query->orWhere('name', 'like', "%{$value}%");
                     $query->orWhere('category_name', 'like', "%{$value}%");
                     $query->orWhere('status', $value);
-                }) 
+                })
             )
             ->paginate(request('per_page', config('basic.pagination_per_page')));
         return $payload;
     }
-    
+
     /**
      * Edit
      * get the specific data using product_id and load the product edit section
      *
-     * @param $product_id 
-     * 
+     * @param $product_id
+     *
      * @return void
      */
     public function edit($product_id)
     {
         $response['product'] = ProductFacade::edit($product_id);
-        return inertia::render('AdminArea/Product/edit', $response);
+        return inertia::render('AdminArea/Buses/edit', $response);
     }
-    
+
     /**
      * Get
      * retrive relevent data using product_id
@@ -122,13 +122,13 @@ class ProductController extends ParentController
     {
         return ProductFacade::get($product_id);
     }
-     
+
     /**
      * Method update
      * update product details using product_id
      *
-     * @param UpdateProductRequest $request 
-     * @param $product_id 
+     * @param UpdateProductRequest $request
+     * @param $product_id
      *
      * @return void
      */
@@ -136,12 +136,12 @@ class ProductController extends ParentController
     {
         return ProductFacade::update($request->all(),$product_id);
     }
-    
+
     /**
      * Delete
      * delete specific data using product_id
      *
-     * @param $product_id 
+     * @param $product_id
      *
      * @return void
      */
@@ -149,5 +149,5 @@ class ProductController extends ParentController
     {
         return ProductFacade::delete($product_id);
     }
-    
+
 }

@@ -55,18 +55,6 @@ return [
             'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
             'throw' => false,
         ],
-
-        'do' => [
-            'driver' => 's3',
-            'key' => env('DO_SPACES_KEY','B7AXXXMSCEMS67E66FVW'),
-            'secret' => env('DO_SPACES_SECRET','resD6a0o1s9FRwJkJg69ypaRIdrQENGYW7CyS1nYLGQ'),
-            'endpoint' => env('DO_SPACES_ENDPOINT','https://sgp1.digitaloceanspaces.com'),
-            'region' => env('DO_SPACES_REGION','sgp1'),
-            'bucket' => env('DO_SPACES_BUCKET','cyberelysium'),
-            'public_url' => env('DO_SPACES_PUBLIC','https://cyberelysium.sgp1.digitaloceanspaces.com'),
-            'folder' => env('DO_SPACES_FOLDER','Ecommerce/dev'),
-        ],
-
     ],
 
     /*
