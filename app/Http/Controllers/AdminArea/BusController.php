@@ -2,16 +2,11 @@
 
 namespace App\Http\Controllers\AdminArea;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Product\CreateProductRequest;
-use App\Http\Requests\Product\UpdateProductRequest;
-use App\Http\Resources\Product\AllProductResource;
-use domain\Facades\ImageFacade\ImageFacade;
-use domain\Facades\ProductFacade\ProductFacade;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\Bus\CreateBusRequest;
+use App\Http\Requests\Bus\UpdateBusRequest;
+use App\Models\Bus;
+use domain\Facades\BusFacade\BusFacade;
 use Inertia\Inertia;
-use App\Models\Product;
 use Spatie\QueryBuilder\QueryBuilder;
 use Spatie\QueryBuilder\AllowedFilter;
 
@@ -19,7 +14,7 @@ class BusController extends ParentController
 {
     /**
      * Index
-     * load admin product section
+     * load admin Bus section
      *
      * @return void
      */
@@ -31,27 +26,27 @@ class BusController extends ParentController
 
     /**
      * Store
-     * store product data
+     * store Bus data
      *
-     * @param CreateProductRequest $request
+     * @param CreateBusRequest $request
      *
      * @return void
      */
-    public function store(CreateProductRequest $request)
+    public function store(CreateBusRequest $request)
     {
-        return ProductFacade::store($request->all());
+        return BusFacade::store($request->all());
     }
 
     /**
      * All
-     * retrieve all products
+     * retrieve all Buss
      *
      * @return void
      */
     public function all()
     {
-        $query = Product::with('Category', 'ProductImage', 'ProductImage.Image', 'WishList', 'CartItem', 'CartItem.Cart')
-                        ->orderBy('products.id', 'desc');
+        $query = Bus::with('Category', 'BusImage', 'BusImage.Image', 'WishList', 'CartItem', 'CartItem.Cart')
+                        ->orderBy('Buss.id', 'desc');
 
 
         if(request('code')){
@@ -59,9 +54,9 @@ class BusController extends ParentController
             $query->where('code', 'like', "%{$code}%");
         }
 
-        if(request('product_name')){
-            $product_name = request('product_name');
-            $query->where('name', 'like', "%{$product_name}%");
+        if(request('bus_name')){
+            $bus_name = request('bus_name');
+            $query->where('name', 'like', "%{$bus_name}%");
         }
 
         if(request('category_name')){
@@ -98,56 +93,56 @@ class BusController extends ParentController
 
     /**
      * Edit
-     * get the specific data using product_id and load the product edit section
+     * get the specific data using bus_id and load the Bus edit section
      *
-     * @param $product_id
+     * @param $bus_id
      *
      * @return void
      */
-    public function edit($product_id)
+    public function edit($bus_id)
     {
-        $response['product'] = ProductFacade::edit($product_id);
+        $response['Bus'] = BusFacade::edit($bus_id);
         return inertia::render('AdminArea/Buses/edit', $response);
     }
 
     /**
      * Get
-     * retrive relevent data using product_id
+     * retrive relevent data using bus_id
      *
-     * @param $product_id
+     * @param $bus_id
      *
      * @return void
      */
-    public function get($product_id)
+    public function get($bus_id)
     {
-        return ProductFacade::get($product_id);
+        return BusFacade::get($bus_id);
     }
 
     /**
      * Method update
-     * update product details using product_id
+     * update Bus details using bus_id
      *
-     * @param UpdateProductRequest $request
-     * @param $product_id
+     * @param UpdateBusRequest $request
+     * @param $bus_id
      *
      * @return void
      */
-    public function update(UpdateProductRequest $request, $product_id,)
+    public function update(UpdateBusRequest $request, $bus_id,)
     {
-        return ProductFacade::update($request->all(),$product_id);
+        return BusFacade::update($request->all(),$bus_id);
     }
 
     /**
      * Delete
-     * delete specific data using product_id
+     * delete specific data using bus_id
      *
-     * @param $product_id
+     * @param $bus_id
      *
      * @return void
      */
-    public function delete($product_id)
+    public function delete($bus_id)
     {
-        return ProductFacade::delete($product_id);
+        return BusFacade::delete($bus_id);
     }
 
 }

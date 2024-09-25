@@ -74,7 +74,7 @@ const createProductImage = async () => {
         productImage.value.image = product_image.value;
         productImage.value.product_id = props.productId;
         const response = await axios
-            .post(route("admin.product.image.store"), productImage.value, {
+            .post(route("admin.bus.image.store"), productImage.value, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                 },
@@ -118,7 +118,7 @@ const createProductImage = async () => {
 const getProductImage = async () => {
     try {
         const respones = await axios.get(
-            route("admin.product.image.all", props.productId)
+            route("admin.bus.image.all", props.productId)
         );
         productImages.value = respones.data.product_image;
     } catch (error) {
@@ -149,7 +149,7 @@ const deleteProductImage = async (id) => {
                 if (result.isConfirmed) {
                     try {
                         const response = await axios.post(
-                            route("admin.product.image.delete", id)
+                            route("admin.bus.image.delete", id)
                         );
                         getProductImage();
                     } catch (error) {
@@ -177,7 +177,7 @@ const makePrimaryImage = async (requestId, productId) => {
         if (result.isConfirmed) {
             try {
                 const response = await axios.post(
-                    route("admin.product.image.primary", {
+                    route("admin.bus.image.primary", {
                         request_id: requestId,
                         product_id: productId,
                     })

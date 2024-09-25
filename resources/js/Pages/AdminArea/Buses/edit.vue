@@ -15,7 +15,7 @@
                                     </li>
 
                                     <li class="breadcrumb-item active text-dark" aria-current="page">
-                                        <Link :href="route('admin.product.index')" class="text-dark">
+                                        <Link :href="route('admin.bus.index')" class="text-dark">
                                         Bus Management
                                         </Link>
                                         <input type="image" src="" alt="" />

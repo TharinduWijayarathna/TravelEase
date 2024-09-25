@@ -3,9 +3,13 @@
 namespace App\Http\Controllers\PublicArea;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Bus\FilterBusRequest;
+use App\Http\Requests\Bus\SearchBusRequest;
 use App\Http\Requests\Product\FilterProductRequest;
 use App\Http\Requests\Product\SearchProductRequest;
+use App\Models\Bus;
 use App\Models\Product;
+use domain\Facades\BusFacade\BusFacade;
 use domain\Facades\ProductFacade\ProductFacade;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -27,15 +31,15 @@ class BusController extends Controller
 
     /**
      * SingleProduct
-     * get the selected product using product_id
+     * get the selected product using bus_id
      *
-     * @param $product_id
+     * @param $bus_id
      *
      * @return void
      */
-    public function singleProduct($product_id)
+    public function singleProduct($bus_id)
     {
-        $response['product'] = ProductFacade::get($product_id);
+        $response['product'] = BusFacade::get($bus_id);
         return Inertia::render('PublicArea/Buses/singleProduct', $response);
     }
 
@@ -50,7 +54,7 @@ class BusController extends Controller
         // $response['product'] = ProductFacade::all();
         // return $response;
 
-        $query = Product::with('Category', 'ProductImage', 'ProductImage.Image', 'WishList', 'CartItem', 'CartItem.Cart')
+        $query = Bus::with('Category', 'ProductImage', 'ProductImage.Image', 'WishList', 'CartItem', 'CartItem.Cart')
                         ->orderBy('products.id', 'desc');
 
         $payload = QueryBuilder::for($query)
@@ -66,15 +70,15 @@ class BusController extends Controller
 
     /**
      * Get
-     * Get specific product using product_id
+     * Get specific product using bus_id
      *
-     * @param $product_id
+     * @param $bus_id
      *
      * @return void
      */
-    public function get($product_id)
+    public function get($bus_id)
     {
-        return ProductFacade::get($product_id);
+        return BusFacade::get($bus_id);
     }
 
 
@@ -86,11 +90,11 @@ class BusController extends Controller
      *
      * @return void
      */
-    public function filter(FilterProductRequest $request)
+    public function filter(FilterBusRequest $request)
     {
         // $response['filtered_product'] = ProductFacade::filter($request->all());
 
-        $query = Product::with('Category', 'ProductImage', 'ProductImage.Image')
+        $query = Bus::with('Category', 'ProductImage', 'ProductImage.Image')
         ->orderBy('products.id', 'desc');
 
         $availability = $request->input('params.filterForm.availability');
@@ -134,9 +138,9 @@ class BusController extends Controller
      *
      * @return void
      */
-    public function search(SearchProductRequest $request)
+    public function search(SearchBusRequest $request)
     {
-        $response['searched_product'] = ProductFacade::search($request->all());
+        $response['searched_product'] = BusFacade::search($request->all());
         return $response;
     }
 }

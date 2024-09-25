@@ -6,10 +6,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class ProductImage extends Model
+class BusImage extends Model
 {
-    use HasFactory;
-    use SoftDeletes;
+    use HasFactory, SoftDeletes;
 
     const STATUS = [
         'ACTIVE' => 1,
@@ -19,7 +18,7 @@ class ProductImage extends Model
     protected $fillable = [
         'status',
         'image_id',
-        'product_id',
+        'bus_id',
     ];
 
     protected $appends = [
@@ -32,9 +31,9 @@ class ProductImage extends Model
     }
 
 
-    public function Product()
+    public function Bus()
     {
-        return $this->belongsTo(Product::class, 'product_id', 'id');
+        return $this->belongsTo(Bus::class, 'bus_id', 'id');
     }
 
     public function getImageUrlAttribute()

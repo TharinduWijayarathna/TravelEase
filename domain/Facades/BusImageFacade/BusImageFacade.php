@@ -1,12 +1,13 @@
 <?php
 
-namespace domain\Facades\ProductFacade;
+namespace domain\Facades\BusImageFacade;
 
-use domain\Services\ProductService\ProductService;
+use domain\Services\BusImageService\BusImageService;
+use domain\Services\ProductImageService\ProductImageService;
 use Illuminate\Support\Facades\Facade;
 
 /**
- * Product Facade
+ * ProductImage Facade
  * php version 8.2.15
  *
  * @category Facade
@@ -15,7 +16,7 @@ use Illuminate\Support\Facades\Facade;
  * @link     https://cyberelysium.com
  * */
 
-class ProductFacade extends Facade
+class BusImageFacade extends Facade
 {
     
     /**
@@ -23,8 +24,8 @@ class ProductFacade extends Facade
      *
      * @return void
      */
-    public static function getFacadeAccessor()
+    protected static function getFacadeAccessor()
     {
-        return ProductService::class;
+        return BusImageService::class;
     }
 }

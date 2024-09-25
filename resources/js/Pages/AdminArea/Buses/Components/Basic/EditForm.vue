@@ -169,7 +169,7 @@ const updateBasicData = async (id) => {
         productData.value.featured ? 1 : 0;
         productData.value.status ? 1 : 0;
         const response = await axios
-            .post(route("admin.product.update", id), productData.value)
+            .post(route("admin.bus.update", id), productData.value)
             .then((response) => {
                 Swal.fire({
                     icon: "success",
@@ -196,7 +196,7 @@ const updateBasicData = async (id) => {
 const getProductData = async () => {
     try {
         const response = await axios.get(
-            route("admin.product.get", props.productId)
+            route("admin.bus.get", props.productId)
         );
         productData.value = response.data;
         if (response.data.status == 1) {
@@ -257,11 +257,11 @@ const deleteProduct = async (id) => {
                 if (result.isConfirmed) {
                     try {
                         const response = await axios.delete(
-                            route("admin.product.delete", id)
+                            route("admin.bus.delete", id)
                         );
                         // resetData();
                         resetDisabled();
-                        router.visit(route('admin.product.index'));
+                        router.visit(route('admin.bus.index'));
                     } catch (error) {
                         console.log("Error", error);
                     }

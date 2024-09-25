@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Product;
+namespace App\Http\Requests\Bus;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SearchProductRequest extends FormRequest
+class FilterBusRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,7 +22,10 @@ class SearchProductRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['nullable' , 'string'],
+            'selected_category' => ['nullable' , 'array'],
+            'availability' => ['nullable' , 'string'],
+            'min_price' => ['nullable '],
+            'max_price' => ['nullable']
         ];
     }
 }

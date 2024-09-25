@@ -21,7 +21,7 @@
                         </div>
                         <div class="col-lg-4 text-right py-4">
                             <button type="button" class="btn btn-primary btn btn-sm btn-neutral" data-toggle="modal"
-                                @click.prevent="resetData()" data-target="#newProductModal">
+                                @click.prevent="resetData()" data-target="#newBusModal">
                                 <i class="fa-solid fa-circle-plus"></i> ADD NEW
                             </button>
                         </div>
@@ -39,7 +39,7 @@
                                 <div class="items-center text-muted mx-1">
                                     <div class="">Status</div>
                                     <div class="inline-block" style="width: 200px;">
-                                        <Multiselect v-model="select_product_status" :options="statusList"
+                                        <Multiselect v-model="select_bus_status" :options="statusList"
                                             :showLabels="false" :close-on-select="true" :clear-on-select="false"
                                             :searchable="true" placeholder="Select Status" label="name" track-by="id" />
                                     </div>
@@ -52,11 +52,11 @@
                                     </div>
                                 </div>
                                 <div class="items-center text-muted mx-1">
-                                    <div class="">Product Name</div>
+                                    <div class="">Bus Name</div>
                                     <div class="inline-block ">
-                                        <input type="text" class="form-control form-control-sm" name="product_name"
-                                            id="product_name" v-model="search_product_name" @keyup="getSearch"
-                                            placeholder="Product Name" />
+                                        <input type="text" class="form-control form-control-sm" name="bus_name"
+                                            id="bus_name" v-model="search_bus_name" @keyup="getSearch"
+                                            placeholder="Bus Name" />
                                     </div>
                                 </div>
                                 <div class="items-center text-muted mx-1">
@@ -103,7 +103,7 @@
                                             </th>
 
                                             <th class="textClassHead">
-                                                Product Name
+                                                Bus Name
                                             </th>
                                             <th class="textClassHead">
                                                 Category Name
@@ -127,7 +127,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr v-for="value in productData" :key="value.id"
+                                        <tr v-for="value in busData" :key="value.id"
                                             @click.prevent="edit(value.id)">
                                             <td class="textClassBody text-center">
                                                 <div class="" v-if="value.status == 1">
@@ -146,11 +146,11 @@
                                             <td class="textClassBody">
                                                 {{ value.category?.name }}
                                             </td>
-                                            <td class="textClassBody" v-if="value?.product_image.length > 0">
-                                                <div class="" v-for="image in value.product_image">
+                                            <td class="textClassBody" v-if="value?.bus_image.length > 0">
+                                                <div class="" v-for="image in value.bus_image">
                                                     <div class="" v-if="image.status == 1">
-                                                        <img v-if="value?.product_image.length > 0"
-                                                            class="img-fluid product-image-setup"
+                                                        <img v-if="value?.bus_image.length > 0"
+                                                            class="img-fluid bus-image-setup"
                                                             :src="image.image_url" />
                                                     </div>
                                                 </div>
@@ -158,8 +158,8 @@
                                             <td class="textClassBody" v-else>
                                                 <div class="">
                                                     <div class="">
-                                                        <img :src="productImage" alt="no image"
-                                                            class="product-image-setup" height="100px" />
+                                                        <img :src="busImage" alt="no image"
+                                                            class="bus-image-setup" height="100px" />
                                                     </div>
                                                 </div>
                                             </td>
@@ -235,14 +235,14 @@
         </template>
 
         <template #modals>
-            <div class="modal fade" id="newProductModal" data-bs-backdrop="static" tabindex="-1" role="dialog"
+            <div class="modal fade" id="newBusModal" data-bs-backdrop="static" tabindex="-1" role="dialog"
                 aria-labelledby="newVendorModal" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-mb" role="document">
                     <div class="modal-content p-2">
                         <div class="modal-header">
                             <h5 class="modal-title font-weight-bolder breadcrumb-text text-gradient"
                                 id="add_brandLabel">
-                                New Product
+                                New Bus
                             </h5>
                             <button type="button" class="close btn" data-dismiss="modal" aria-label="Close"
                                 @click.prevent="resetData()">
@@ -257,13 +257,13 @@
                                     <form role="form text-left" enctype="multipart/form-data">
                                         <div class="row mb-1">
                                             <div for="code" class="col-md-3 col-form-label">
-                                                PRODUCT NAME
+                                                Bus NAME
                                             </div>
                                             <div class="col-md-9">
                                                 <input type="text" class="form-control form-control-sm" name="name"
-                                                    id="name" placeholder="product name" v-model="Product.name"
+                                                    id="name" placeholder="Bus name" v-model="bus.name"
                                                     required />
-                                                <small v-if="validationErrors.name" id="product_name"
+                                                <small v-if="validationErrors.name" id="bus_name"
                                                     class="text-danger form-text text-error-msg error">{{
                                                         validationErrors.name }}</small>
                                             </div>
@@ -275,7 +275,7 @@
                                                 CATEGORY
                                             </div>
                                             <div class="col-md-9">
-                                                <Multiselect v-model="Product.category_id" :options="categoryData"
+                                                <Multiselect v-model="bus.category_id" :options="categoryData"
                                                     :showLabels="false" :close-on-select="true" :clear-on-select="false"
                                                     :searchable="true" placeholder="Select category" label="name"
                                                     track-by="id">
@@ -291,7 +291,7 @@
                                             </div>
                                             <div class="col-md-9">
                                                 <input type="number" class="form-control form-control-sm" name="price"
-                                                    id="price" placeholder="price" v-model="Product.price"
+                                                    id="price" placeholder="price" v-model="bus.price"
                                                     @input="checkMinPrice" required />
                                                 <small v-if="validationErrors.price" id="price"
                                                     class="text-danger form-text text-error-msg error">{{
@@ -303,7 +303,7 @@
                                         <div class="text-right mt-2">
                                             <button type="button"
                                                 class="btn btn-primary btn btn-sm btn-neutral float-end"
-                                                @click.prevent="createProduct()">
+                                                @click.prevent="createBus()">
                                                 <i class="fas fa-save"></i>
                                                 CREATE
                                             </button>
@@ -325,7 +325,7 @@ import axios from "axios";
 import Multiselect from "vue-multiselect";
 import { ref, onMounted, watch } from "vue";
 import { router, Link } from "@inertiajs/vue3";
-import productImage from '@/../src/AdminArea/img/product/invalid_image.png';
+import BusImage from '@/../src/AdminArea/img/product/invalid_image.png';
 import Swal from "sweetalert2";
 
 const page = ref(1);
@@ -333,9 +333,9 @@ const pageCount = ref(25);
 const perPage = ref([25, 50, 100]);
 const pagination = ref({});
 const search_code = ref(null);
-const search_product_name = ref();
+const search_bus_name = ref();
 const search_category_name = ref();
-const select_product_status = ref([]);
+const select_bus_status = ref([]);
 const statusList = ref([
     { id: 1, name: 'Active' },
     { id: 2, name: 'Inactive' },
@@ -343,8 +343,8 @@ const statusList = ref([
 
 const category = ref([]);
 const categoryData = ref([]);
-const productData = ref([]);
-const Product = ref({
+const busData = ref([]);
+const bus = ref({
     price: ref(0)
 });
 
@@ -376,37 +376,39 @@ const convertValidationError = (err) => {
     }
 };
 
-const edit = (product_id) => {
+const edit = (bus_id) => {
     try {
-        router.visit(route("admin.product.edit", product_id));
+        router.visit(route("admin.bus.edit", bus_id));
     } catch (error) {
         console.lod("Error", error);
     }
 }
 
-const createProduct = async (id) => {
+
+const createBus = async (id) => {
+    console.log('bus', bus.value);
     try {
-        if (Product.value.category_id?.id) {
-            Product.value.category_id = Product.value.category_id.id;
+        if (bus.value) {
+            bus.value.category_id = bus.value.category_id.id;
         }
         const response = await axios.post(
-            route("admin.product.store"),
-            Product.value)
+            route("admin.bus.store"),
+            bus.value)
             .then((response) => {
                 Swal.fire({
                     icon: "success",
                     title: "Success",
-                    text: "New Product has been created",
+                    text: "New bus has been created",
                     toast: true,
                     position: "top-end",
                     showConfirmButton: false,
                     timer: 3000,
                     timerProgressBar: true,
                 });
-                const productId = response.data.id;
+                const busId = response.data.id;
                 resetData();
-                router.visit(route("admin.product.edit", productId));
-                $("#newProductModal").modal("hide");
+                router.visit(route("admin.bus.edit", busId));
+                $("#newBusModal").modal("hide");
             })
             .catch((error) => {
                 convertValidationError(error);
@@ -414,7 +416,7 @@ const createProduct = async (id) => {
                 // Swal.fire({
                 //     icon: "error",
                 //     title: "Error",
-                //     text: "Failed to create product",
+                //     text: "Failed to create bus",
                 //     toast: true,
                 //     position: "top-end",
                 //     showConfirmButton: false,
@@ -442,19 +444,19 @@ const getCategories = async () => {
 const reload = async () => {
     try {
         const response = (
-            await axios.get(route("admin.product.all"), {
+            await axios.get(route("admin.bus.all"), {
                 params: {
                     page: page.value,
                     per_page: pageCount.value,
                     code: search_code.value,
-                    product_name: search_product_name.value,
+                    bus_name: search_bus_name.value,
                     category_name: search_category_name.value,
-                    status: select_product_status.value.id,
+                    status: select_bus_status.value.id,
                 },
             })
         ).data;
 
-        productData.value = response.data;
+        busData.value = response.data;
         pagination.value = response;
         getCategories();
         resetData();
@@ -484,9 +486,9 @@ const numberFormatter = (number) => {
 const clearFilter = () => {
     try {
         search_code.value = null;
-        search_product_name.value = null;
+        search_bus_name.value = null;
         search_category_name.value = null;
-        select_product_status.value = [];
+        select_bus_status.value = [];
         getCategories();
         reload();
     } catch (error) {
@@ -496,9 +498,9 @@ const clearFilter = () => {
 
 const resetData = () => {
     resetValidationErrors();
-    Product.value.name = '';
-    Product.value.category_id = '';
-    Product.value.price = '';
+    bus.value.name = '';
+    bus.value.category_id = '';
+    bus.value.price = '';
 }
 onMounted(() => {
     reload();
@@ -510,7 +512,7 @@ watch([page, pageCount], () => {
 });
 
 watch(() => {
-    if (select_product_status.value) {
+    if (select_bus_status.value) {
         reload();
     } else {
         reload();
@@ -547,7 +549,7 @@ const setPage = async (nextPage) => {
     vertical-align: middle;
 }
 
-.product-image-setup {
+.bus-image-setup {
     width: 100px;
     height: 100px;
     object-fit: cover;

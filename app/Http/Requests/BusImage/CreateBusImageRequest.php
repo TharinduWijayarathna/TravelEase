@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Product;
+namespace App\Http\Requests\BusImage;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class FilterProductRequest extends FormRequest
+class CreateBusImageRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,10 +22,8 @@ class FilterProductRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'selected_category' => ['nullable' , 'array'],
-            'availability' => ['nullable' , 'string'],
-            'min_price' => ['nullable '],
-            'max_price' => ['nullable']
+            'bus_id' => ['required', 'integer'],
+            'image'=> ['required', 'image'],
         ];
     }
 }

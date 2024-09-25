@@ -315,7 +315,7 @@ const getOrderData = async () => {
 
 const getProduct = async () => {
     try {
-        const response = await axios.get(route("admin.product.all"));
+        const response = await axios.get(route("admin.bus.all"));
         productData.value = response.data.data;
     } catch (error) {
         console.log("Error", error);
@@ -337,7 +337,7 @@ watch(select_product, (newProduct) => {
 // Function to handle product selection
 const onSearchProduct = async (productId) => {
     try {
-        const response = await axios.get(route("admin.product.get", productId));
+        const response = await axios.get(route("admin.bus.get", productId));
         select_product_data.value = response.data;
         const images = select_product_data.value.product_image;
         if (images.length > 0) {

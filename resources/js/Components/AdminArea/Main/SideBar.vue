@@ -24,8 +24,8 @@
                         </li>
                         <li class="nav-item">
                             <Link
-                                :class="{ 'active__sidebar': route().current() == 'admin.product.index' || route().current() == 'admin.product.edit' }"
-                                class="nav-link active-preloader" :href="route('admin.product.index')">
+                                :class="{ 'active__sidebar': route().current() == 'admin.bus.index' || route().current() == 'admin.bus.edit' }"
+                                class="nav-link active-preloader" :href="route('admin.bus.index')">
                             <i class="fa-solid fa-boxes-stacked"></i>
                             <span class="ml-2 nav-link-text font-weight-600">Buses</span>
                             </Link>

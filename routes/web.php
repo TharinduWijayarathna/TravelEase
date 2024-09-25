@@ -3,7 +3,7 @@
 use App\Http\Controllers\AdminArea\CustomerController as AdminCustomerController;
 use App\Http\Controllers\AdminArea\HomeController as AdminHomeController;
 use App\Http\Controllers\AdminArea\OrderController as AdminOrderController;
-use App\Http\Controllers\AdminArea\ProductImageController as AdminProductImageController;
+use App\Http\Controllers\AdminArea\BusImageController as AdminBusImageController;
 use App\Http\Controllers\AdminArea\BannerController as AdminBannerController;
 use App\Http\Controllers\AdminArea\CategoryController as AdminCategoryController;
 use App\Http\Controllers\AdminArea\BusController as AdminBusController;
@@ -129,22 +129,22 @@ Route::prefix('admin')->group(function () {
 
     // Admin-product
     Route::prefix('product')->group(function () {
-        Route::get('/', [AdminBusController::class, 'index'])->name('admin.product.index');
-        Route::get('/all', [AdminBusController::class, 'all'])->name('admin.product.all');
-        Route::get('/{product_id}/get', [AdminBusController::class, 'get'])->name('admin.product.get');
-        Route::post('/store', [AdminBusController::class, 'store'])->name('admin.product.store');
-        Route::get('/{product_id}/edit', [AdminBusController::class, 'edit'])->name('admin.product.edit');
-        Route::post('/{product_id}/update', [AdminBusController::class, 'update'])->name('admin.product.update');
-        Route::delete('/{product_id}/delete', [AdminBusController::class, 'delete'])->name('admin.product.delete');
-        Route::post('/filter', [AdminBusController::class, 'filter'])->name('admin.product.filter');
+        Route::get('/', [AdminBusController::class, 'index'])->name('admin.bus.index');
+        Route::get('/all', [AdminBusController::class, 'all'])->name('admin.bus.all');
+        Route::get('/{product_id}/get', [AdminBusController::class, 'get'])->name('admin.bus.get');
+        Route::post('/store', [AdminBusController::class, 'store'])->name('admin.bus.store');
+        Route::get('/{product_id}/edit', [AdminBusController::class, 'edit'])->name('admin.bus.edit');
+        Route::post('/{product_id}/update', [AdminBusController::class, 'update'])->name('admin.bus.update');
+        Route::delete('/{product_id}/delete', [AdminBusController::class, 'delete'])->name('admin.bus.delete');
+        Route::post('/filter', [AdminBusController::class, 'filter'])->name('admin.bus.filter');
     });
 
     // Admin-product-image
     Route::prefix('product-image')->group(function () {
-        Route::get('/{product_id}/all', [AdminProductImageController::class, 'all'])->name('admin.product.image.all');
-        Route::post('/store', [AdminProductImageController::class, 'store'])->name('admin.product.image.store');
-        Route::post('/{request_id}/{product_id}/primary', [AdminProductImageController::class, 'primary'])->name('admin.product.image.primary');
-        Route::post('/{product_image_id}/delete', [AdminProductImageController::class, 'delete'])->name('admin.product.image.delete');
+        Route::get('/{product_id}/all', [AdminBusImageController::class, 'all'])->name('admin.bus.image.all');
+        Route::post('/store', [AdminBusImageController::class, 'store'])->name('admin.bus.image.store');
+        Route::post('/{request_id}/{product_id}/primary', [AdminBusImageController::class, 'primary'])->name('admin.bus.image.primary');
+        Route::post('/{product_image_id}/delete', [AdminBusImageController::class, 'delete'])->name('admin.bus.image.delete');
     });
 
     // Admin-product-image
