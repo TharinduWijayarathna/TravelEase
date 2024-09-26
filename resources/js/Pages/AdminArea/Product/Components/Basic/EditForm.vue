@@ -13,41 +13,46 @@
                     </div>
                 </div>
                 <div class="row mb-1">
+                    <div for="name" class="col-md-2 col-form-label">VEHICLE NO</div>
+                    <div class="col-md-10">
+                        <input type="text" class="form-control form-control-sm" v-model="productData.code" name="name"
+                            id="name" disabled />
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div for="name" class="col-md-2 col-form-label">SEATS</div>
+                    <div class="col-md-10">
+                        <input type="number" class="form-control form-control-sm" name="price" id="price" min="0"
+                            placeholder="seats" v-model="productData.price" disabled />
+                    </div>
+                </div>
+                <div class="row mb-1">
                     <div for="name" class="col-md-2 col-form-label">
-                        CATEGORY
+                        FROM
                     </div>
                     <div class="col-md-10">
-                        <select class="form-control form-control-sm" aria-label="Default select example" disabled>
-                            <option :value="productData.category_id" class="text-dark" hidden>
+                        <select class="form-control form-control-sm" aria-label="Default select example">
+                            <option :value="productData.category_id" class="text-dark">
                                 {{ productData.category ? productData.category.name : "" }}
                             </option>
                         </select>
                     </div>
                 </div>
                 <div class="row mb-1">
-                    <div for="name" class="col-md-2 col-form-label">PRICE</div>
-                    <div class="col-md-10">
-                        <input type="number" class="form-control form-control-sm" name="price" id="price" min="0"
-                            placeholder="Price" v-model="productData.price" />
-                        <small v-if="validationErrors.price" id="price"
-                            class="text-danger form-text text-error-msg error">{{
-                                validationErrors.price }}</small>
-                    </div>
-                </div>
-                <div class="row mb-1">
                     <div for="name" class="col-md-2 col-form-label">
-                        DISCOUNT PRICE
+                        TO
                     </div>
                     <div class="col-md-10">
-                        <input type="number" class="form-control form-control-sm" name="discount_price" min="0"
-                            id="discount_price" placeholder="Discount Price" v-model="productData.discount_price" />
-                        <small v-if="validationErrors.discount_price" id="discount_price"
-                            class="text-danger form-text text-error-msg error">{{
-                                validationErrors.discount_price }}</small>
+                        <select class="form-control form-control-sm" aria-label="Default select example">
+                            <option :value="productData.category_id" class="text-dark">
+                                {{ productData.category ? productData.category.name : "" }}
+                            </option>
+                        </select>
                     </div>
                 </div>
+
                 <div class="row mb-1">
-                    <div for="name" class="col-md-2 col-form-label" productData>STATUS</div>
+                    <div for="name" class="col-md-2 col-form-label" productData>TYPE (A/C)</div>
                     <div class="col-md-10">
                         <div class="custom-switch">
                             <input type="checkbox" class="custom-control-input" id="customSwitch1"
@@ -60,34 +65,27 @@
                     </div>
                 </div>
                 <div class="row mb-1">
-                    <div for="name" class="col-md-2 col-form-label">
-                        FEATURED
-                    </div>
+                    <div for="name" class="col-md-2 col-form-label">STOPS</div>
                     <div class="col-md-10">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
-                                v-model="productData.featured" />
-                            <label class="form-check-label" for="flexCheckDefault">
-                            </label>
-                            <small v-if="validationErrors.featured" id="featured"
-                                class="text-danger form-text text-error-msg error">{{
-                                    validationErrors.featured }}</small>
+                        <input type="number" class="form-control form-control-sm" name="price" id="price" min="0"
+                            placeholder="stops" />
+                    </div>
+                </div>
+                <li v-for="stop in stops">
+                    <div class="row mb-1">
+                        <div for="name" class="col-md-2 col-form-label">
+                            TOjhjkhg
+                        </div>
+                        <div class="col-md-10">
+                            <select class="form-control form-control-sm" aria-label="Default select example">
+                                <option class="text-dark">
+
+                                </option>
+                            </select>
                         </div>
                     </div>
-                </div>
-                <div class="row mb-1">
-                    <div for="name" class="col-md-2 col-form-label">
-                        QUANTITY
-                    </div>
-                    <div class="col-md-10">
-                        <input type="number" class="form-control form-control-sm" name="quantity" id="quantity"
-                            placeholder="Discount Price" v-model="productData.quantity" />
-                        <small v-if="validationErrors.quantity" id="quantity"
-                            class="text-danger form-text text-error-msg error">{{
-                                validationErrors.quantity }}</small>
-                    </div>
-                </div>
-                <div class="row mb-1">
+                </li>
+                <!-- <div class="row mb-1">
                     <div for="name" class="col-md-2 col-form-label">
                         DESCRIPTION
                     </div>
@@ -98,7 +96,7 @@
                             class="text-danger form-text text-error-msg error">{{
                                 validationErrors.description }}</small>
                     </div>
-                </div>
+                </div> -->
                 <div class="text-right">
                     <!-- <button type="button" class="btn btn-sm btn-round btn-outline-dark mb-0"
                         @click.prevent="resetData()">
@@ -138,6 +136,7 @@ const categoryData = ref([]);
 const productData = ref({});
 const validationErrors = ref({});
 const validationMessage = ref(null);
+const stops = ref({});
 
 const resetValidationErrors = () => {
     validationErrors.value = {};

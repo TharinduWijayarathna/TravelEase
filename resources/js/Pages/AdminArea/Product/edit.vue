@@ -5,23 +5,23 @@
                 <div class="container-fluid">
                     <div class="header-body">
                         <div class="py-4 col align-items-center">
-                            <h6 class="mb-0 h2 d-inline-block">Products</h6>
+                            <h6 class="mb-0 h2 d-inline-block">Bus</h6>
                             <nav aria-label="breadcrumb" class="d-none d-md-block">
                                 <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                                     <li class="breadcrumb-item">
-                                       <Link :href="route('admin.dashboard')" class="text-dark">
-                                            <i class="fa-solid fa-house"></i>
+                                        <Link :href="route('admin.dashboard')" class="text-dark">
+                                        <i class="fa-solid fa-house"></i>
                                         </Link>
                                     </li>
-                                    
+
                                     <li class="breadcrumb-item active text-dark" aria-current="page">
                                         <Link :href="route('admin.product.index')" class="text-dark">
-                                            Products
+                                        Bus
                                         </Link>
                                         <input type="image" src="" alt="" />
                                     </li>
                                     <li class="breadcrumb-item text-muted" aria-current="page">
-                                        {{ product.code }}<input type="image" src="" alt="" />
+                                        ABC-4000<input type="image" src="" alt="" />
                                     </li>
                                 </ol>
                             </nav>
@@ -39,14 +39,8 @@
                             <li class="mb-2 nav-item">
                                 <a class="nav-link active" id="basic-data-tab" data-toggle="tab" href="#basic-data"
                                     role="tab" aria-controls="basic-data" aria-selected="true">
-                                    Product's Data</a>
+                                    Busses Data</a>
                             </li>
-                            <li class="mb-2 nav-item">
-                                <a class="nav-link" id="hotel-images-tab" data-toggle="tab" href="#hotel-images"
-                                    role="tab" aria-controls="hotel-images" aria-selected="true">
-                                    Product's Images</a>
-                            </li>
-                            <li hidden></li>
                         </ul>
                     </div>
                 </div>
@@ -58,13 +52,10 @@
                                 <div class="tab-pane fade show active" id="basic-data" role="tabpanel">
                                     <BasicEditForm :productId="product.id" />
                                 </div>
-                                <div class="tab-pane fade show" id="hotel-images" role="tabpanel">
-                                    <ProductImagesAll :productId="product.id" />
-                                </div>
                             </div>
                         </div>
                     </div>
-                </div> 
+                </div>
             </div>
         </template>
     </AdminLayout>

@@ -5,7 +5,8 @@
             <div class="mb-4 text-center sidenav-header">
 
                 <Link class="navbar-brand text-primary" :href="route('admin.dashboard')">
-                <img src="/assets/PublicArea/images/logo.svg" alt="E-Commerce" class="home-logo mt-1 ml-1">
+                <img src="/assets/PublicArea/images/logo-no-background.svg" alt="E-Commerce"
+                    class="home-logo mt-1 ml-1">
                 </Link>
             </div>
             <br>
@@ -27,7 +28,7 @@
                                 :class="{ 'active__sidebar': route().current() == 'admin.product.index' || route().current() == 'admin.product.edit' }"
                                 class="nav-link active-preloader" :href="route('admin.product.index')">
                             <i class="fa-solid fa-cubes"></i>
-                            <span class="ml-2 nav-link-text font-weight-600">Products</span>
+                            <span class="ml-2 nav-link-text font-weight-600">Bus Management</span>
                             </Link>
                         </li>
                         <li class="nav-item">
@@ -39,11 +40,17 @@
                             </Link>
                         </li>
                         <li class="nav-item">
+                            <Link class="nav-link active-preloader">
+                            <i class="fa-solid fa-user"></i>
+                            <span class="ml-2 nav-link-text font-weight-600">TP Management</span>
+                            </Link>
+                        </li>
+                        <li class="nav-item">
                             <Link
                                 :class="{ 'active__sidebar': route().current() == 'admin.order.index' || route().current() == 'admin.order.edit' }"
                                 class="nav-link active-preloader" :href="route('admin.order.index')">
                             <i class="fa-solid fa-scroll"></i>
-                            <span class="ml-2 nav-link-text font-weight-600">Orders</span>
+                            <span class="ml-2 nav-link-text font-weight-600">Reports</span>
                             </Link>
                         </li>
                         <li class="nav-item">
@@ -65,20 +72,14 @@
                                     <span class="nav-link-text font-weight-400">Categories</span>
                                     </Link>
                                 </li>
-                                <li>
+                                <!-- <li>
                                     <Link class="nav-link ml-4"
                                         :class="{ 'active__sidebar': route().current() == 'admin.banner.index' }"
                                         :href="route('admin.banner.index')">
                                     <i class="fa-solid fa-image"></i>
                                     <span class="nav-link-text font-weight-400">Banners</span>
                                     </Link>
-                                </li>
-                                <li>
-                                    <Link class="nav-link ml-4">
-                                    <i class="fa-solid fa-user"></i>
-                                    <span class="nav-link-text font-weight-400">User</span>
-                                    </Link>
-                                </li>
+                                </li> -->
                             </ul>
                         </li>
                     </ul>

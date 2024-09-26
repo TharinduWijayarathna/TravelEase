@@ -5,7 +5,7 @@
                 <div class="container-fluid">
                     <div class="header-body row">
                         <div class="col-lg-8 align-items-center py-4">
-                            <h6 class="h2 text-maroon d-inline-block mb-0">Order Managements</h6>
+                            <h6 class="h2 text-maroon d-inline-block mb-0">Bookings Managements</h6>
                             <nav aria-label="breadcrumb" class="d-none d-md-block ">
                                 <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                                     <li class="breadcrumb-item">
@@ -14,14 +14,14 @@
                                         </Link>
                                     </li>
                                     <li class="breadcrumb-item active breadcrumb-yellow" aria-current="page">
-                                        Orders
+                                        Bookings
                                     </li>
                                 </ol>
                             </nav>
                         </div>
                         <div class="col-lg-4 text-right py-4">
                             <button type="button" class="btn btn-primary btn btn-sm btn-neutral" data-toggle="modal"
-                                @click.prevent="showNewOrderModal()" data-target="#exampleModal">
+                                @click.prevent="showNewReportModal()" data-target="#exampleModal">
                                 <i class="fa-solid fa-circle-plus"></i> ADD NEW
                             </button>
                         </div>
@@ -60,6 +60,22 @@
                                     </div>
                                 </div>
                                 <div class="items-center text-muted mx-1">
+                                    <div class="">Start time</div>
+                                    <div class="inline-block ">
+                                        <input type="time" class="form-control form-control-sm" name="date_to"
+                                            id="date_to" v-model="search_start_time" @keyup="getSearch"
+                                            placeholder="date" />
+                                    </div>
+                                </div>
+                                <div class="items-center text-muted mx-1">
+                                    <div class="">End time</div>
+                                    <div class="inline-block ">
+                                        <input type="time" class="form-control form-control-sm" name="date_to"
+                                            id="date_to" v-model="search_end_time" @keyup="getSearch"
+                                            placeholder="date" />
+                                    </div>
+                                </div>
+                                <div class="items-center text-muted mx-1">
                                     <div class="">Customer Name</div>
                                     <div class="inline-block ">
                                         <input type="text" class="form-control form-control-sm" name="customer_name"
@@ -68,22 +84,14 @@
                                     </div>
                                 </div>
 
-                                <div class="items-center text-muted mx-1">
+                                <!-- <div class="items-center text-muted mx-1">
                                     <div class="">Is Paid</div>
                                     <div class="inline-block" style="width: 200px;">
                                         <Multiselect v-model="select_is_paid" :options="isPaid" :showLabels="false"
                                             :close-on-select="true" :clear-on-select="false" :searchable="true"
                                             placeholder="Select Status" label="name" track-by="id" />
                                     </div>
-                                </div>
-                                <div class="items-center text-muted mx-1">
-                                    <div class="">Is Shipped</div>
-                                    <div class="inline-block" style="width: 200px;">
-                                        <Multiselect v-model="select_is_shipped" :options="isShipped"
-                                            :showLabels="false" :close-on-select="true" :clear-on-select="false"
-                                            :searchable="true" placeholder="Select Status" label="name" track-by="id" />
-                                    </div>
-                                </div>
+                                </div> -->
                                 <div class="text-muted mx-1">
                                     <div class="mt-2">
                                         <button @click.prevent="clearFilter()" class="btn btn-ash float-end mt-2 pt-2">
@@ -115,63 +123,47 @@
                                                 CODE
                                             </th>
                                             <th class="textClassHead text-left">
-                                                DATE
-                                            </th>
-                                            <th class="textClassHead text-left">
-                                                CUSTOMER CODE
+                                                BUS NO
                                             </th>
                                             <th class="textClassHead text-left">
                                                 CUSTOMER NAME
                                             </th>
-                                            <th class="textClassHead text-left">
-                                                CUSTOMER EMAIL
-                                            </th>
-                                            <th class="textClassHead text-right">
-                                                TOTAL
+                                            <th class="textClassHead text-center">
+                                                PRICE
                                             </th>
                                             <th class="textClassHead text-center">
-                                                IS PAID
+                                                TYPE
                                             </th>
                                             <th class="textClassHead text-center">
-                                                IS SHIPPED
+                                                DATE
+                                            </th>
+                                            <th class="textClassHead text-center">
+                                                TIME
                                             </th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr v-for="value in orderData" :key="value.id" @click.prevent="edit(value.id)">
+                                        <tr>
                                             <td class="textClassBody text-left">
-                                                {{ value.code }}
+                                            G-445349
                                             </td>
-                                            <td class="textClassBody">
-                                                {{ removeTFromTimestamp(value.updated_at) }}
+                                            <td class="textClassBody text-left">
+                                            ABC-1000
                                             </td>
-                                            <td class="textClassBody">
-                                                {{ value.customer_code }}
-                                            </td>
-                                            <td class="textClassBody">
-                                                {{ value.customer_name }}
-                                            </td>
-                                            <td class="textClassBody">
-                                                {{ value.customer_email }}
-                                            </td>
-                                            <td class="textClassBody text-right">
-                                                Rs.{{ numberFormatter(value.total) }}
+                                            <td class="textClassBody text-left">
+                                            Ruveen
                                             </td>
                                             <td class="textClassBody text-center">
-                                                <div class="" v-if="value.is_paid == 1">
-                                                    <span class="badge badge-success">PAID</span>
-                                                </div>
-                                                <div class="" v-else>
-                                                    <span class="badge bg-light">NOT PAID</span>
-                                                </div>
+                                            Rs.400
                                             </td>
                                             <td class="textClassBody text-center">
-                                                <div class="" v-if="value.is_shipped == 1">
-                                                    <span class="badge badge-success">SHIPPED</span>
-                                                </div>
-                                                <div class="" v-else>
-                                                    <span class="badge bg-light">NOT SHIPPED</span>
-                                                </div>
+                                            A/C
+                                            </td>
+                                            <td class="textClassBody text-center">
+                                            2024/02/04
+                                            </td>
+                                            <td class="textClassBody text-center">
+                                            15:00
                                             </td>
                                         </tr>
                                     </tbody>
@@ -227,7 +219,7 @@
         </template>
 
         <template #modals>
-            <div class="modal fade" id="newOrderModal" data-bs-backdrop="static" tabindex="-1" role="dialog"
+            <div class="modal fade" id="newReportModal" data-bs-backdrop="static" tabindex="-1" role="dialog"
                 aria-labelledby="newVendorModal" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-mb" role="document">
                     <div class="modal-content p-2">
@@ -357,7 +349,7 @@ const createOrder = async () => {
         const response = await axios.post(
             route("admin.order.store", select_customer_data.value.id),
             select_customer_data.value);
-        $("#newOrderModal").modal("hide");
+        $("#newReportModal").modal("hide");
         router.visit(route("admin.order.edit", response.data.id));
     } catch (error) {
         console.log("Error:", error);
@@ -481,8 +473,8 @@ const getSearch = () => {
     reload();
 }
 
-const showNewOrderModal = () => {
-    $("#newOrderModal").modal("show");
+const showNewReportModal = () => {
+    $("#newReportModal").modal("show");
 }
 const perPageChange = async () => {
     reload();

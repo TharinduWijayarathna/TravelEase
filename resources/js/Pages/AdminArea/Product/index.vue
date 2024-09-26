@@ -5,7 +5,7 @@
                 <div class="container-fluid">
                     <div class="header-body row">
                         <div class="col-lg-8 align-items-center py-4">
-                            <h6 class="h2 text-maroon d-inline-block mb-0">Product Managements</h6>
+                            <h6 class="h2 text-maroon d-inline-block mb-0">Bus Managements</h6>
                             <nav aria-label="breadcrumb" class="d-none d-md-block ">
                                 <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                                     <li class="breadcrumb-item">
@@ -14,14 +14,14 @@
                                         </Link>
                                     </li>
                                     <li class="breadcrumb-item active breadcrumb-yellow" aria-current="page">
-                                        Products
+                                        Bus
                                     </li>
                                 </ol>
                             </nav>
                         </div>
                         <div class="col-lg-4 text-right py-4">
                             <button type="button" class="btn btn-primary btn btn-sm btn-neutral" data-toggle="modal"
-                                @click.prevent="resetData()" data-target="#newProductModal">
+                                @click.prevent="resetData()" data-target="#newBusModal">
                                 <i class="fa-solid fa-circle-plus"></i> ADD NEW
                             </button>
                         </div>
@@ -37,34 +37,35 @@
                         <div class="py-3 filters-margin mx-3 text-sm card-body">
                             <div class="flex">
                                 <div class="items-center text-muted mx-1">
-                                    <div class="">Status</div>
-                                    <div class="inline-block" style="width: 200px;">
+                                    <div class="">Type (A/C)</div>
+                                    <div class="inline-block" style="width: 100px;">
                                         <Multiselect v-model="select_product_status" :options="statusList"
                                             :showLabels="false" :close-on-select="true" :clear-on-select="false"
-                                            :searchable="true" placeholder="Select Status" label="name" track-by="id" />
+                                            :searchable="true" placeholder="Selete" label="name" track-by="id" />
                                     </div>
                                 </div>
                                 <div class="items-center text-muted mx-1">
-                                    <div class="">Code</div>
-                                    <div class="inline-block ">
-                                        <input type="text" class="form-control form-control-sm" name="code" id="code"
-                                            v-model="search_code" @keyup="getSearch" placeholder="Code" />
+                                    <div class="">Brand</div>
+                                    <div class="inline-block" style="width: 150px;">
+                                        <Multiselect v-model="select_product_status" :options="statusList"
+                                            :showLabels="false" :close-on-select="true" :clear-on-select="false"
+                                            :searchable="true" placeholder="Select" label="name" track-by="id" />
                                     </div>
                                 </div>
                                 <div class="items-center text-muted mx-1">
-                                    <div class="">Product Name</div>
+                                    <div class="">Vehicle No</div>
                                     <div class="inline-block ">
-                                        <input type="text" class="form-control form-control-sm" name="product_name"
+                                        <input type="text" class="form-control form-control-sm" name=""
                                             id="product_name" v-model="search_product_name" @keyup="getSearch"
-                                            placeholder="Product Name" />
+                                            placeholder="Ex-: NB 100" />
                                     </div>
                                 </div>
                                 <div class="items-center text-muted mx-1">
-                                    <div class="">Category Name</div>
+                                    <div class="">Seats</div>
                                     <div class="inline-block ">
-                                        <input type="text" class="form-control form-control-sm" name="category_name"
+                                        <input type="number" class="form-control form-control-sm" name=""
                                             id="category_name" v-model="search_category_name" @keyup="getSearch"
-                                            placeholder="Category Name" />
+                                            placeholder="seats" />
                                     </div>
                                 </div>
 
@@ -96,89 +97,73 @@
                                     <thead>
                                         <tr>
                                             <th class="textClassHead text-center">
-                                                Status
+                                                Vehicle No
                                             </th>
                                             <th class="textClassHead text-left">
-                                                CODE
+                                                Brand
                                             </th>
 
                                             <th class="textClassHead">
-                                                Product Name
+                                                Travel provider Name
                                             </th>
                                             <th class="textClassHead">
-                                                Category Name
+                                                From
                                             </th>
                                             <th class="textClassHead">
-                                                Primary Image
+                                                To
                                             </th>
                                             <!-- <th class="textClassHead">Rating</th> -->
                                             <th class="textClassHead text-right">
-                                                Price
+                                                Type
                                             </th>
                                             <th class="textClassHead text-right">
-                                                Discount Price
+                                                Start Time
                                             </th>
                                             <th class="textClassHead text-center">
-                                                Featured
+                                                End Time
                                             </th>
                                             <th class="textClassHead text-right">
-                                                quantity
+                                                Seats
+                                            </th>
+                                            <th class="textClassHead text-right">
+                                                Travelling Distance
                                             </th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr v-for="value in productData" :key="value.id"
                                             @click.prevent="edit(value.id)">
-                                            <td class="textClassBody text-center">
-                                                <div class="" v-if="value.status == 1">
-                                                    <span class="badge badge-success">Active</span>
-                                                </div>
-                                                <div class="" v-else>
-                                                    <span class="badge badge-warning">Inactive</span>
-                                                </div>
-                                            </td>
                                             <td class="textClassBody text-left">
                                                 {{ value.code }}
                                             </td>
-                                            <td class="textClassBody">
-                                                {{ value.name }}
+                                            <td class="textClassBody text-left">
+                                                ABC-4000
                                             </td>
                                             <td class="textClassBody">
-                                                {{ value.category?.name }}
+                                                Ruveen Dilshan
                                             </td>
-                                            <td class="textClassBody" v-if="value?.product_image.length > 0">
-                                                <div class="" v-for="image in value.product_image">
-                                                    <div class="" v-if="image.status == 1">
-                                                        <img v-if="value?.product_image.length > 0" class="img-fluid product-image-setup"
-                                                            :src="image.image_url" />
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td class="textClassBody" v-else>
-                                                <div class="">
-                                                    <div class="">
-                                                        <img :src="productImage" alt="no image" class="product-image-setup"
-                                                            height="100px" />
-                                                    </div>
-                                                </div>
+                                            <td class="textClassBody">
+                                                Colombo
                                             </td>
                                             <td class="textClassBody text-right">
-                                                Rs.{{ numberFormatter(value.price) }}
+                                                Galle
                                             </td>
-                                            <td class="textClassBody text-right">
-                                                Rs.{{ numberFormatter(value.discount_price) }}
-                                            </td>
-
                                             <td class="textClassBody text-center">
-                                                <div class="" v-if="value.featured == 1">
-                                                    <span class="badge badge-dark">FEATURED</span>
-                                                </div>
-                                                <div class="" v-else>
-                                                    <span class="badge badge-primary">STANDARD</span>
+                                                <div class="">
+                                                    <span class="badge badge-success">A/C</span>
                                                 </div>
                                             </td>
-                                            <td class="textClassBody text-right">
-                                                {{ value.quantity }}
+                                            <td class="textClassBody text-center">
+                                                2.30 PM
+                                            </td>
+                                            <td class="textClassBody text-center">
+                                                5.30 PM
+                                            </td>
+                                            <td class="textClassBody text-center">
+                                                45
+                                            </td>
+                                            <td class="textClassBody text-center">
+                                                250 KM
                                             </td>
                                         </tr>
                                     </tbody>
@@ -234,14 +219,14 @@
         </template>
 
         <template #modals>
-            <div class="modal fade" id="newProductModal" data-bs-backdrop="static" tabindex="-1" role="dialog"
+            <div class="modal fade" id="newBusModal" data-bs-backdrop="static" tabindex="-1" role="dialog"
                 aria-labelledby="newVendorModal" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-mb" role="document">
                     <div class="modal-content p-2">
                         <div class="modal-header">
                             <h5 class="modal-title font-weight-bolder breadcrumb-text text-gradient"
                                 id="add_brandLabel">
-                                New Product
+                                New Bus Add
                             </h5>
                             <button type="button" class="close btn" data-dismiss="modal" aria-label="Close"
                                 @click.prevent="resetData()">
@@ -256,53 +241,104 @@
                                     <form role="form text-left" enctype="multipart/form-data">
                                         <div class="row mb-1">
                                             <div for="code" class="col-md-3 col-form-label">
-                                                PRODUCT NAME
+                                                VEHICLE NO
                                             </div>
                                             <div class="col-md-9">
-                                                <input type="text" class="form-control form-control-sm" name="name"
-                                                    id="name" placeholder="product name" v-model="Product.name"
-                                                    required />
-                                                <small v-if="validationErrors.name" id="product_name"
+                                                <input type="text" class="form-control form-control-sm" name="" id=""
+                                                    placeholder="vehicle no" v-model="Product.name" required />
+                                                <small v-if="validationErrors.name" id=""
                                                     class="text-danger form-text text-error-msg error">{{
                                                         validationErrors.name }}</small>
                                             </div>
-
-
                                         </div>
                                         <div class="row mb-1">
                                             <div for="code" class="col-md-3 col-form-label">
-                                                CATEGORY
+                                                BRAND
+                                            </div>
+                                            <div class="col-md-9">
+                                                <input type="text" class="form-control form-control-sm" name="" id=""
+                                                    placeholder="brand" required />
+                                                <small v-if="validationErrors" id=""
+                                                    class="text-danger form-text text-error-msg error">{{
+                                                        validationErrors.name }}</small>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-1">
+                                            <div for="code" class="col-md-3 col-form-label">
+                                                FROM
                                             </div>
                                             <div class="col-md-9">
                                                 <Multiselect v-model="Product.category_id" :options="categoryData"
                                                     :showLabels="false" :close-on-select="true" :clear-on-select="false"
-                                                    :searchable="true" placeholder="Select category" label="name"
+                                                    :searchable="true" placeholder="select start point" label="name"
                                                     track-by="id">
                                                 </Multiselect>
-                                                <small v-if="validationErrors.category_id" id="category"
+                                                <small v-if="validationErrors.category_id" id=""
+                                                    class="text-danger form-text text-error-msg error">{{
+                                                        validationErrors.category_id }}</small>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-1">
+                                            <div for="code" class="col-md-3 col-form-label">
+                                                TO
+                                            </div>
+                                            <div class="col-md-9">
+                                                <Multiselect v-model="Product.category_id" :options="categoryData"
+                                                    :showLabels="false" :close-on-select="true" :clear-on-select="false"
+                                                    :searchable="true" placeholder="select end point" label="name"
+                                                    track-by="id">
+                                                </Multiselect>
+                                                <small v-if="validationErrors.category_id" id=""
                                                     class="text-danger form-text text-error-msg error">{{
                                                         validationErrors.category_id }}</small>
                                             </div>
                                         </div>
                                         <div class="row mb-1">
                                             <div for="price" class="col-md-3 col-form-label">
-                                                PRICE
+                                                SEATS
                                             </div>
                                             <div class="col-md-9">
-                                                <input type="number" class="form-control form-control-sm" name="price"
-                                                    id="price" placeholder="price" v-model="Product.price"
-                                                    @input="checkMinPrice" required />
-                                                <small v-if="validationErrors.price" id="price"
+                                                <input type="number" class="form-control form-control-sm" name="Seats"
+                                                    id="Seats" placeholder="seats" @input="checkMinPrice" required />
+                                                <small v-if="validationErrors.price" id=""
                                                     class="text-danger form-text text-error-msg error">{{
                                                         validationErrors.price }}</small>
                                             </div>
                                             <small id="msg_code"
                                                 class="text-danger form-text text-error-msg error"></small>
                                         </div>
+                                        <div class="row mb-1">
+                                            <div for="price" class="col-md-3 col-form-label">
+                                                DISTANCE (KM)
+                                            </div>
+                                            <div class="col-md-9">
+                                                <input type="number" class="form-control form-control-sm"
+                                                    name="Distance" id="Distance" placeholder="distance"
+                                                    @input="checkMinPrice" required />
+                                                <small v-if="validationErrors.price" id=""
+                                                    class="text-danger form-text text-error-msg error">{{
+                                                        validationErrors.price }}</small>
+                                            </div>
+                                            <small id="msg_code"
+                                                class="text-danger form-text text-error-msg error"></small>
+                                        </div>
+                                        <div class="row mb-1">
+                                            <div for="name" class="col-md-3 col-form-label">A/C</div>
+                                            <div class="col-md-9">
+                                                <div class="custom-switch">
+                                                    <input type="checkbox" class="custom-control-input"
+                                                        id="customSwitch1" />
+                                                    <label class="custom-control-label" for="customSwitch1"></label>
+                                                    <small v-if="validationErrors.status" id="status"
+                                                        class="text-danger form-text text-error-msg error">{{
+                                                            validationErrors.status }}</small>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div class="text-right mt-2">
                                             <button type="button"
                                                 class="btn btn-primary btn btn-sm btn-neutral float-end"
-                                                @click.prevent="createProduct()">
+                                                @click.prevent="createBus()">
                                                 <i class="fas fa-save"></i>
                                                 CREATE
                                             </button>
@@ -383,7 +419,7 @@ const edit = (product_id) => {
     }
 }
 
-const createProduct = async (id) => {
+const createBus = async (id) => {
     try {
         if (Product.value.category_id?.id) {
             Product.value.category_id = Product.value.category_id.id;
@@ -405,7 +441,7 @@ const createProduct = async (id) => {
                 const productId = response.data.id;
                 resetData();
                 router.visit(route("admin.product.edit", productId));
-                $("#newProductModal").modal("hide");
+                $("#newBusModal").modal("hide");
             })
             .catch((error) => {
                 convertValidationError(error);
@@ -546,15 +582,15 @@ const setPage = async (nextPage) => {
     vertical-align: middle;
 }
 
-.product-image-setup{
-    width: 100px; 
-    height: 100px; 
-    object-fit: cover; 
-    object-position: center; 
+.product-image-setup {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    object-position: center;
     border-radius: 10px;
 }
 
-.cursor-pointer{
+.cursor-pointer {
     cursor: pointer;
 }
 </style>

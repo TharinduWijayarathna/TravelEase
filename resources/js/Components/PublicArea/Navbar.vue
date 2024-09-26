@@ -22,11 +22,11 @@
                         </li>
 
                         <li class="nav-item">
-                            <Link class="nav-link" :href="route('products.index')">Shop</Link>
+                            <Link class="nav-link" :href="route('products.index')">Buses</Link>
                         </li>
 
                         <li class="nav-item">
-                            <Link class="nav-link" :href="route('categories')">Categories</Link>
+                            <Link class="nav-link" :href="route('categories')">My Bookings</Link>
                         </li>
 
                         <li class="nav-item">
@@ -114,7 +114,7 @@
                     <!-- Dark mode option END -->
 
                     <!-- Search -->
-                    <li class="nav-item flex-nowrap align-items-center ms-3 d-none d-md-block">
+                    <!-- <li class="nav-item flex-nowrap align-items-center ms-3 d-none d-md-block">
                         <form class="position-relative">
                             <input class="form-control pe-5 bg-light" type="search" placeholder="Search"
                                 aria-label="Search" />
@@ -124,12 +124,12 @@
                                 <i class="fas fa-search"></i>
                             </button>
                         </form>
-                    </li>
+                    </li> -->
 
                     <!-- Offcanvas cart menu -->
                     <li class="nav-item position-relative ms-2 ms-sm-3" v-if="user">
                         <Link class="btn btn-light border btn-round mb-0" :href="route('cart.index')" role="button">
-                        <i class="bi bi-cart3 fa-fw"></i>
+                            <i class="bi bi-journal-text"></i>
                         </Link>
                         <span
                             class="position-absolute top-0 start-100 translate-middle badge smaller rounded-circle bg-primary mt-xl-2 ms-n1"
@@ -140,7 +140,7 @@
 
                     <li class="nav-item position-relative ms-2 ms-sm-3" v-else>
                         <Link class="btn btn-light border btn-round mb-0" :href="route('customer.login')" role="button">
-                        <i class="bi bi-cart3 fa-fw"></i>
+                            <i class="bi bi-journal-text"></i>
                         </Link>
                     </li>
                     <!-- Profile -->

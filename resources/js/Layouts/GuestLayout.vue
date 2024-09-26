@@ -8,7 +8,7 @@ import { Link } from '@inertiajs/vue3';
     <div class="container min-vh-100 d-flex flex-column justify-content-center align-items-center w-25">
         <div class="mb-3">
             <a href="/">
-                <img src="../../../public/assets/PublicArea/images/logo.svg" alt="Application Logo" width="150px" height="150px" />
+                <img src="../../../public/assets/PublicArea/images/logo-no-background.svg" alt="Application Logo" width="150px" height="150px" />
             </a>
         </div>
 
