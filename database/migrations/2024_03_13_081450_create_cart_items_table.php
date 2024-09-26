@@ -21,7 +21,7 @@ return new class extends Migration
             $table->decimal('sub_total', 15, 2)->default(0);
             $table->decimal('total', 15, 2)->default(0);
             $table->foreignId('cart_id')->nullable()->constrained('carts');
-            $table->foreignId('product_id')->nullable()->constrained('products');
+            $table->foreignId('bus_id')->nullable()->constrained('buses');
             $table->softDeletes();
             $table->timestamps();
         });

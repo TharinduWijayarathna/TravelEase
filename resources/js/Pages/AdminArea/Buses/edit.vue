@@ -21,7 +21,7 @@
                                         <input type="image" src="" alt="" />
                                     </li>
                                     <li class="breadcrumb-item text-muted" aria-current="page">
-                                        {{ product.code }}<input type="image" src="" alt="" />
+                                        {{ bus.code }}<input type="image" src="" alt="" />
                                     </li>
                                 </ol>
                             </nav>
@@ -39,12 +39,12 @@
                             <li class="mb-2 nav-item">
                                 <a class="nav-link active" id="basic-data-tab" data-toggle="tab" href="#basic-data"
                                     role="tab" aria-controls="basic-data" aria-selected="true">
-                                    Product's Data</a>
+                                    Bus Data</a>
                             </li>
                             <li class="mb-2 nav-item">
                                 <a class="nav-link" id="hotel-images-tab" data-toggle="tab" href="#hotel-images"
                                     role="tab" aria-controls="hotel-images" aria-selected="true">
-                                    Product's Images</a>
+                                    Bus Images</a>
                             </li>
                             <li hidden></li>
                         </ul>
@@ -56,10 +56,10 @@
                         <div class="card-body">
                             <div class="tab-content" id="myTabContent">
                                 <div class="tab-pane fade show active" id="basic-data" role="tabpanel">
-                                    <BasicEditForm :productId="product.id" />
+                                    <BasicEditForm :busId="bus.id" />
                                 </div>
                                 <div class="tab-pane fade show" id="hotel-images" role="tabpanel">
-                                    <ProductImagesAll :productId="product.id" />
+                                    <BusImagesAll :busId="bus.id" />
                                 </div>
                             </div>
                         </div>
@@ -75,10 +75,10 @@ import AdminLayout from "@/Layouts/AdminLayout.vue";
 import { Link } from "@inertiajs/vue3";
 import { defineProps, onMounted } from "vue";
 import BasicEditForm from "@/Pages/AdminArea/Buses/Components/Basic/EditForm.vue";
-import ProductImagesAll from "@/Pages/AdminArea/Buses/Components/ProductImages/All.vue";
+import BusImagesAll from "@/Pages/AdminArea/Buses/Components/BusImages/All.vue";
 
 const props = defineProps({
-    product: {
+    bus: {
         type: Object,
         required: true,
     },

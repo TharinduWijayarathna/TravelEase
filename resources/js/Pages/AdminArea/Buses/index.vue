@@ -105,25 +105,7 @@
                                             <th class="textClassHead">
                                                 Bus Name
                                             </th>
-                                            <th class="textClassHead">
-                                                Category Name
-                                            </th>
-                                            <th class="textClassHead">
-                                                Primary Image
-                                            </th>
-                                            <!-- <th class="textClassHead">Rating</th> -->
-                                            <th class="textClassHead text-right">
-                                                Price
-                                            </th>
-                                            <th class="textClassHead text-right">
-                                                Discount Price
-                                            </th>
-                                            <th class="textClassHead text-center">
-                                                Featured
-                                            </th>
-                                            <th class="textClassHead text-right">
-                                                quantity
-                                            </th>
+
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -146,7 +128,7 @@
                                             <td class="textClassBody">
                                                 {{ value.category?.name }}
                                             </td>
-                                            <td class="textClassBody" v-if="value?.bus_image.length > 0">
+                                            <!-- <td class="textClassBody" v-if="value?.bus_image.length > 0">
                                                 <div class="" v-for="image in value.bus_image">
                                                     <div class="" v-if="image.status == 1">
                                                         <img v-if="value?.bus_image.length > 0"
@@ -162,25 +144,10 @@
                                                             class="bus-image-setup" height="100px" />
                                                     </div>
                                                 </div>
-                                            </td>
-                                            <td class="textClassBody text-right">
-                                                Rs.{{ numberFormatter(value.price) }}
-                                            </td>
-                                            <td class="textClassBody text-right">
-                                                Rs.{{ numberFormatter(value.discount_price) }}
-                                            </td>
+                                            </td> -->
 
-                                            <td class="textClassBody text-center">
-                                                <div class="" v-if="value.featured == 1">
-                                                    <span class="badge badge-dark">FEATURED</span>
-                                                </div>
-                                                <div class="" v-else>
-                                                    <span class="badge badge-primary">STANDARD</span>
-                                                </div>
-                                            </td>
-                                            <td class="textClassBody text-right">
-                                                {{ value.quantity }}
-                                            </td>
+
+
                                         </tr>
                                     </tbody>
                                 </table>

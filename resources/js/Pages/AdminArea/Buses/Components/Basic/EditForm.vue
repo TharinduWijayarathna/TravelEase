@@ -9,7 +9,7 @@
                     <div for="name" class="col-md-2 col-form-label">NAME</div>
                     <div class="col-md-10">
                         <input type="text" class="form-control form-control-sm" name="name" id="name"
-                            v-model="productData.name" disabled />
+                            v-model="busData.name" disabled />
                     </div>
                 </div>
                 <div class="row mb-1">
@@ -18,8 +18,8 @@
                     </div>
                     <div class="col-md-10">
                         <select class="form-control form-control-sm" aria-label="Default select example" disabled>
-                            <option :value="productData.category_id" class="text-dark" hidden>
-                                {{ productData.category ? productData.category.name : "" }}
+                            <option :value="busData.category_id" class="text-dark" hidden>
+                                {{ busData.category ? busData.category.name : "" }}
                             </option>
                         </select>
                     </div>
@@ -28,7 +28,7 @@
                     <div for="name" class="col-md-2 col-form-label">PRICE</div>
                     <div class="col-md-10">
                         <input type="number" class="form-control form-control-sm" name="price" id="price" min="0"
-                            placeholder="Price" v-model="productData.price" />
+                            placeholder="Price" v-model="busData.price" />
                         <small v-if="validationErrors.price" id="price"
                             class="text-danger form-text text-error-msg error">{{
                                 validationErrors.price }}</small>
@@ -40,18 +40,18 @@
                     </div>
                     <div class="col-md-10">
                         <input type="number" class="form-control form-control-sm" name="discount_price" min="0"
-                            id="discount_price" placeholder="Discount Price" v-model="productData.discount_price" />
+                            id="discount_price" placeholder="Discount Price" v-model="busData.discount_price" />
                         <small v-if="validationErrors.discount_price" id="discount_price"
                             class="text-danger form-text text-error-msg error">{{
                                 validationErrors.discount_price }}</small>
                     </div>
                 </div>
                 <div class="row mb-1">
-                    <div for="name" class="col-md-2 col-form-label" productData>STATUS</div>
+                    <div for="name" class="col-md-2 col-form-label" busData>STATUS</div>
                     <div class="col-md-10">
                         <div class="custom-switch">
                             <input type="checkbox" class="custom-control-input" id="customSwitch1"
-                                v-model="productData.status" />
+                                v-model="busData.status" />
                             <label class="custom-control-label" for="customSwitch1"></label>
                             <small v-if="validationErrors.status" id="status"
                                 class="text-danger form-text text-error-msg error">{{
@@ -66,7 +66,7 @@
                     <div class="col-md-10">
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
-                                v-model="productData.featured" />
+                                v-model="busData.featured" />
                             <label class="form-check-label" for="flexCheckDefault">
                             </label>
                             <small v-if="validationErrors.featured" id="featured"
@@ -81,7 +81,7 @@
                     </div>
                     <div class="col-md-10">
                         <input type="number" class="form-control form-control-sm" name="quantity" id="quantity"
-                            placeholder="Discount Price" v-model="productData.quantity" />
+                            placeholder="Discount Price" v-model="busData.quantity" />
                         <small v-if="validationErrors.quantity" id="quantity"
                             class="text-danger form-text text-error-msg error">{{
                                 validationErrors.quantity }}</small>
@@ -93,7 +93,7 @@
                     </div>
                     <div class="col-md-10">
                         <textarea type="text" class="form-control form-control-sm description" name="description"
-                            id="description" placeholder="Description" v-model="productData.description" rows="5" />
+                            id="description" placeholder="Description" v-model="busData.description" rows="5" />
                         <small v-if="validationErrors.description" id="description"
                             class="text-danger form-text text-error-msg error">{{
                                 validationErrors.description }}</small>
@@ -106,12 +106,12 @@
                         RESET
                     </button> -->
                     <button type="button" class="btn btn-sm btn-round btn-outline-danger mb-0"
-                        @click.prevent="deleteProduct(productData.id)">
+                        @click.prevent="deleteProduct(busData.id)">
                         <font-awesome-icon icon="fa-solid fa-trash" />
                         DELETE
                     </button>
                     <button type="submit" class="btn btn-round custom-button btn-sm mb-0"
-                        @click.prevent="updateBasicData(productData.id)">
+                        @click.prevent="updateBasicData(busData.id)">
                         <font-awesome-icon icon="fa-solid fa-floppy-disk" />
                         SAVE
                     </button>
@@ -128,14 +128,14 @@ import Swal from "sweetalert2";
 import { router } from "@inertiajs/vue3";
 
 const props = defineProps({
-    productId: {
+    busId: {
         type: Number,
         required: true,
     },
 });
 
 const categoryData = ref([]);
-const productData = ref({});
+const busData = ref({});
 const validationErrors = ref({});
 const validationMessage = ref(null);
 
@@ -166,10 +166,10 @@ const convertValidationError = (err) => {
 
 const updateBasicData = async (id) => {
     try {
-        productData.value.featured ? 1 : 0;
-        productData.value.status ? 1 : 0;
+        busData.value.featured ? 1 : 0;
+        busData.value.status ? 1 : 0;
         const response = await axios
-            .post(route("admin.bus.update", id), productData.value)
+            .post(route("admin.bus.update", id), busData.value)
             .then((response) => {
                 Swal.fire({
                     icon: "success",
@@ -182,7 +182,7 @@ const updateBasicData = async (id) => {
                     timerProgressBar: true,
                 });
                 resetValidationErrors();
-                getProductData();
+                getbusData();
             })
             .catch((error) => {
                 convertValidationError(error);
@@ -193,21 +193,21 @@ const updateBasicData = async (id) => {
     }
 };
 
-const getProductData = async () => {
+const getbusData = async () => {
     try {
         const response = await axios.get(
-            route("admin.bus.get", props.productId)
+            route("admin.bus.get", props.busId)
         );
-        productData.value = response.data;
+        busData.value = response.data;
         if (response.data.status == 1) {
-            productData.value.status = true;
+            busData.value.status = true;
         } else {
-            productData.value.status = false;
+            busData.value.status = false;
         }
         if (response.data.featured == 1) {
-            productData.value.featured = true;
+            busData.value.featured = true;
         } else {
-            productData.value.featured = false;
+            busData.value.featured = false;
         }
     } catch (error) {
         console.log("Error", error);
@@ -224,14 +224,14 @@ const getCategories = async () => {
 }
 
 // const resetData = () => {
-//     productData.value.price = "";
-//     productData.value.discount_price = "";
-//     productData.value.featured = "";
-//     productData.value.status = "";
+//     busData.value.price = "";
+//     busData.value.discount_price = "";
+//     busData.value.featured = "";
+//     busData.value.status = "";
 // };
 
 const resetDisabled = () => {
-    productData.value = "";
+    busData.value = "";
 };
 
 const deleteProduct = async (id) => {
@@ -266,7 +266,7 @@ const deleteProduct = async (id) => {
                         console.log("Error", error);
                     }
                 } else if (result.dismiss === Swal.DismissReason.cancel) {
-                    getProductData();
+                    getbusData();
                     getCategories();
                 }
             });
@@ -276,7 +276,7 @@ const deleteProduct = async (id) => {
 };
 
 onMounted(() => {
-    getProductData();
+    getbusData();
     getCategories();
 });
 </script>

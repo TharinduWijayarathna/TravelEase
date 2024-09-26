@@ -19,8 +19,8 @@ return new class extends Migration
             $table->integer('product_price')->nullable();
             $table->integer('product_discount')->nullable();
             $table->string('product_description')->nullable();
-            $table->foreignId('product_image_id')->nullable()->constrained('product_images');
-            $table->foreignId('product_id')->nullable()->constrained('products');
+            $table->foreignId('bus_image_id')->nullable()->constrained('bus_images');
+            $table->foreignId('bus_id')->nullable()->constrained('buses');
             $table->foreignId('customer_id')->nullable()->constrained('users');
             $table->softDeletes();
             $table->timestamps();

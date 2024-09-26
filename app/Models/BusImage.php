@@ -30,7 +30,6 @@ class BusImage extends Model
         return $this->hasOne(Image::class, 'id', 'image_id');
     }
 
-
     public function Bus()
     {
         return $this->belongsTo(Bus::class, 'bus_id', 'id');

@@ -45,9 +45,7 @@ class BusController extends ParentController
      */
     public function all()
     {
-        $query = Bus::with('Category', 'BusImage', 'BusImage.Image', 'WishList', 'CartItem', 'CartItem.Cart')
-                        ->orderBy('Buss.id', 'desc');
-
+        $query = Bus::query();
 
         if(request('code')){
             $code = request('code');
@@ -101,7 +99,7 @@ class BusController extends ParentController
      */
     public function edit($bus_id)
     {
-        $response['Bus'] = BusFacade::edit($bus_id);
+        $response['bus'] = BusFacade::edit($bus_id);
         return inertia::render('AdminArea/Buses/edit', $response);
     }
 
