@@ -7,6 +7,7 @@ use App\Http\Controllers\AdminArea\BusImageController as AdminBusImageController
 use App\Http\Controllers\AdminArea\BannerController as AdminBannerController;
 use App\Http\Controllers\AdminArea\CategoryController as AdminCategoryController;
 use App\Http\Controllers\AdminArea\BusController as AdminBusController;
+use App\Http\Controllers\AdminArea\BusStopController;
 use App\Http\Controllers\AdminArea\CartItemController as AdminCartItemController;
 
 use App\Http\Controllers\Auth\RegisteredUserController;
@@ -156,6 +157,15 @@ Route::prefix('admin')->group(function () {
         Route::post('/store', [AdminCustomerController::class, 'store'])->name('admin.customer.store');
         Route::post('/{customer_id}/update', [AdminCustomerController::class, 'update'])->name('admin.customer.update');
         Route::delete('/{customer_id}/delete', [AdminCustomerController::class, 'delete'])->name('admin.customer.delete');
+    });
+    // admin-bus-stop
+    Route::prefix('bus-stop')->group(function () {
+        Route::get('/', [BusStopController::class, 'index'])->name('admin.bus.stop.index');
+        Route::get('/all', [BusStopController::class, 'all'])->name('admin.bus.stop.all');
+        Route::get('/{bus_stop_id}/get', [BusStopController::class, 'get'])->name('admin.bus.stop.get');
+        Route::post('/store', [BusStopController::class, 'store'])->name('admin.bus.stop.store');
+        Route::post('/{bus_stop_id}/update', [BusStopController::class, 'update'])->name('admin.bus.stop.update');
+        Route::delete('/{bus_stop_id}/delete', [BusStopController::class, 'delete'])->name('admin.bus.stop.delete');
     });
 
     // Admin-order
