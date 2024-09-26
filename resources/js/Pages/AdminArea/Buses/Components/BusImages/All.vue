@@ -1,7 +1,7 @@
 <template>
     <div id="basic-info">
         <div class="card-header">
-            <h5>Product Images</h5>
+            <h5>Bus Images</h5>
         </div>
         <div class="card-body pt-0 mt-0">
             <div class="col image-header">
@@ -9,10 +9,10 @@
                     <div class="">
                         <div class="row">
                             <input type="file" class="form-control file m-2 " id="fileInput"
-                                @input="(e) => (product_image = e.target.files[0])" style="width: 300px;" />
+                                @input="(e) => (bus_image = e.target.files[0])" style="width: 300px;" />
 
                             <div class="justify-content-start mt-3">
-                                <button @click.prevent="createProductImage()"
+                                <button @click.prevent="createBusImage()"
                                     class="btn btn-sm btn-round btn-outline-primary">
                                     <i class="fa-solid fa-floppy-disk"></i> Upload
                                 </button>
@@ -23,7 +23,7 @@
             </div>
 
             <div class="image-setup image-top-header border mt-2">
-                <div v-for="value in productImages" class="card image-section" style="width: 22rem; height: 18rem">
+                <div v-for="value in busImages" class="card image-section" style="width: 22rem; height: 18rem">
                     <div class="m-auto">
                         <img :src="value.image_url" class="card-img-top " alt="no image"
                             style="width: 18rem; height: 14rem" />
@@ -38,10 +38,9 @@
                             </div>
                             <div class="" v-else>
                                 <i class="fa-solid fa-toggle-off text-mute mr-3"
-                                    @click.prevent=" makePrimaryImage(value.id, value.product_id)"
-                                    style="cursor: pointer;"></i>
+                                    @click.prevent=" makePrimaryImage(value.id)" style="cursor: pointer;"></i>
 
-                                <i class="fa-solid fa-trash" @click.prevent=" deleteProductImage(value.id)"
+                                <i class="fa-solid fa-trash" @click.prevent=" deleteBusImage(value.id)"
                                     style="cursor: pointer;"></i>
                             </div>
                         </div>
@@ -58,23 +57,23 @@ import { ref, onMounted, defineProps } from "vue";
 import Swal from "sweetalert2";
 
 const props = defineProps({
-    productId: {
+    busId: {
         type: Number,
         required: true,
     },
 });
 
-const productImages = ref([]);
-const product_image = ref([]);
-const productImage = ref({});
-const product_id = ref(0);
+const busImages = ref([]);
+const bus_image = ref([]);
+const BusImage = ref({});
+const Bus_id = ref(0);
 
-const createProductImage = async () => {
+const createBusImage = async () => {
     try {
-        productImage.value.image = product_image.value;
-        productImage.value.product_id = props.productId;
+        BusImage.value.image = bus_image.value;
+        BusImage.value.bus_id = props.busId;
         const response = await axios
-            .post(route("admin.bus.image.store"), productImage.value, {
+            .post(route("admin.bus.image.store"), BusImage.value, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                 },
@@ -83,19 +82,19 @@ const createProductImage = async () => {
                 Swal.fire({
                     icon: "success",
                     title: "Success",
-                    text: "Product image addedd Successfully",
+                    text: "Bus image addedd Successfully",
                     toast: true,
                     position: "top-end",
                     showConfirmButton: false,
                     timer: 3000,
                     timerProgressBar: true,
                 });
-                getProductImage();
+                getBusImage();
                 const fileInput = document.getElementById('fileInput');
                 if (fileInput) {
                     fileInput.value = '';
                 }
-                product_image.value = '';
+                bus_image.value = '';
             })
             .catch((error) => {
                 console.log("Error:", error);
@@ -115,18 +114,20 @@ const createProductImage = async () => {
     }
 };
 
-const getProductImage = async () => {
+const getBusImage = async () => {
     try {
-        const respones = await axios.get(
-            route("admin.bus.image.all", props.productId)
+        const response = await axios.get(
+            route("admin.bus.image.all", props.busId)
         );
-        productImages.value = respones.data.product_image;
+
+        console.log("Bus Images", response.data.bus_image);
+        busImages.value = response.data.bus_image;
     } catch (error) {
         console.log("Error", error);
     }
 };
 
-const deleteProductImage = async (id) => {
+const deleteBusImage = async (id) => {
     try {
         const swalWithBootstrapButtons = Swal.mixin({
             customClass: {
@@ -151,12 +152,12 @@ const deleteProductImage = async (id) => {
                         const response = await axios.post(
                             route("admin.bus.image.delete", id)
                         );
-                        getProductImage();
+                        getBusImage();
                     } catch (error) {
                         console.log("Error", error);
                     }
                 } else if (result.dismiss === Swal.DismissReason.cancel) {
-                   
+
                 }
             });
     } catch (error) {
@@ -164,7 +165,7 @@ const deleteProductImage = async (id) => {
     }
 };
 
-const makePrimaryImage = async (requestId, productId) => {
+const makePrimaryImage = async (requestId) => {
     Swal.fire({
         title: "Are you sure?",
         text: "Make this image as primary",
@@ -179,10 +180,10 @@ const makePrimaryImage = async (requestId, productId) => {
                 const response = await axios.post(
                     route("admin.bus.image.primary", {
                         request_id: requestId,
-                        product_id: productId,
+                        bus_id: props.busId,
                     })
                 );
-                getProductImage();
+                getBusImage();
             } catch (error) {
                 console.log("Error", error);
             }
@@ -196,7 +197,7 @@ const makePrimaryImage = async (requestId, productId) => {
 };
 
 onMounted(() => {
-    getProductImage();
+    getBusImage();
 });
 </script>
 

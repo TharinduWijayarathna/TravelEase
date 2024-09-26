@@ -143,7 +143,7 @@ Route::prefix('admin')->group(function () {
     Route::prefix('product-image')->group(function () {
         Route::get('/{product_id}/all', [AdminBusImageController::class, 'all'])->name('admin.bus.image.all');
         Route::post('/store', [AdminBusImageController::class, 'store'])->name('admin.bus.image.store');
-        Route::post('/{request_id}/{product_id}/primary', [AdminBusImageController::class, 'primary'])->name('admin.bus.image.primary');
+        Route::post('/primary', [AdminBusImageController::class, 'primary'])->name('admin.bus.image.primary');
         Route::post('/{product_image_id}/delete', [AdminBusImageController::class, 'delete'])->name('admin.bus.image.delete');
     });
 

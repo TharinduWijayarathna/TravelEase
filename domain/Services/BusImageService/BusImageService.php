@@ -8,7 +8,7 @@ class BusImageService
 {
 
     protected $BusImage;
-    
+
     /**
      * __construct
      *
@@ -18,12 +18,12 @@ class BusImageService
     {
         $this->BusImage = new BusImage();
     }
-    
+
     /**
      * Find
      * retieve specific image using bus_id
      *
-     * @param $bus_id 
+     * @param $bus_id
      *
      * @return void
      */
@@ -36,7 +36,7 @@ class BusImageService
             return 0;
         }
     }
-    
+
     /**
      * Store
      * store Bus image data into database
@@ -50,12 +50,12 @@ class BusImageService
         return $this->BusImage
             ->create($data);
     }
-    
+
     /**
      * All
      * retrieve all data from BusImage with Bus and Image models
      *
-     * @param $bus_id 
+     * @param $bus_id
      *
      * @return void
      */
@@ -68,7 +68,7 @@ class BusImageService
             ->get();
         return $Bus;
     }
-    
+
     /**
      * Delete
      * delete spedific data using image_id
@@ -84,25 +84,26 @@ class BusImageService
             ->first();
         return $Bus->delete();
     }
-    
+
     /**
      * UpdatePrimaryImage
      * update primary image usig request_id and bus_id
      *
-     * @param $request_id 
-     * @param $bus_id 
+     * @param $request_id
+     * @param $bus_id
      *
      * @return void
      */
     public function updatePrimaryImage(int $request_id,int $bus_id)
     {
-        $requested_primary_image = $this->BusImage
-            ->where('id', $request_id)->first();
-        $current_primary_image = $this->BusImage
+        $Bus = $this->BusImage
             ->where('bus_id', $bus_id)
-            ->where('status', 1)
-            ->first();
-        $current_primary_image->update(['status' => 0]);
-        $requested_primary_image->update(['status' => 1]);
+            ->update(['status' => 0]);
+
+        $Bus = $this->BusImage
+            ->where('id', $request_id)
+            ->update(['status' => 1]);
+
+        return $Bus;
     }
 }

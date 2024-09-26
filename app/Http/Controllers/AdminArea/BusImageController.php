@@ -9,8 +9,8 @@ use domain\Facades\BusImageFacade\BusImageFacade;
 use Illuminate\Http\Request;
 
 class BusImageController extends Controller
-{    
-    
+{
+
     /**
      * Store
      * store the Bus image
@@ -21,10 +21,10 @@ class BusImageController extends Controller
      */
     public function store(CreateBusImageRequest $request)
     {
-        $Bus_id = $request->input('Bus_id');
-        
+        $Bus_id = $request->input('bus_id');
+
         $ifExist = BusImageFacade::find($Bus_id);
-        
+
         if ($ifExist) {
             $status = 0;
             $image = ImageFacade::store($request->file("image"));
@@ -37,7 +37,7 @@ class BusImageController extends Controller
             return BusImageFacade::store($request->all());
         }
     }
-    
+
     /**
      * All
      * get all the Bus images using Bus_id
@@ -48,15 +48,15 @@ class BusImageController extends Controller
      */
     public function all($Bus_id)
     {
-        $response['Bus_image'] = BusImageFacade::all($Bus_id);
+        $response['bus_image'] = BusImageFacade::all($Bus_id);
         return $response;
     }
-    
+
     /**
      * Delete
-     * delete specific Bus image using Bus_image_id 
+     * delete specific Bus image using Bus_image_id
      *
-     * @param $Bus_image_id 
+     * @param $Bus_image_id
      *
      * @return void
      */
@@ -64,7 +64,7 @@ class BusImageController extends Controller
     {
         return BusImageFacade::delete($Bus_image_id);
     }
-    
+
     /**
      * Primary
      * change primary image using request_id and Bus_id
@@ -74,8 +74,8 @@ class BusImageController extends Controller
      *
      * @return void
      */
-    public function primary($request_id, $Bus_id)
+    public function primary(Request $request)
     {
-        BusImageFacade::updatePrimaryImage($request_id, $Bus_id);
+        BusImageFacade::updatePrimaryImage($request->request_id, $request->bus_id);
     }
 }

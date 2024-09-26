@@ -30,4 +30,9 @@ class Bus extends Model
     {
         return $this->hasOne(Category::class, 'id', 'category_id');
     }
+
+    public function BusImage()
+    {
+        return $this->hasMany(BusImage::class, 'bus_id', 'id');
+    }
 }
