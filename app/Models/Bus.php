@@ -21,6 +21,8 @@ class Bus extends Model
         'license_plate',
         'driver_name',
         'name',
+        'from',
+        'to',
         'status',
         'description',
         'category_id',
