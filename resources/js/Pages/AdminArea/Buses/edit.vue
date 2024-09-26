@@ -42,9 +42,14 @@
                                     Bus Data</a>
                             </li>
                             <li class="mb-2 nav-item">
-                                <a class="nav-link" id="hotel-images-tab" data-toggle="tab" href="#hotel-images"
-                                    role="tab" aria-controls="hotel-images" aria-selected="true">
+                                <a class="nav-link" id="bus-images-tab" data-toggle="tab" href="#bus-images"
+                                    role="tab" aria-controls="bus-images" aria-selected="true">
                                     Bus Images</a>
+                            </li>
+                            <li class="mb-2 nav-item">
+                                <a class="nav-link" id="bus-stops-tab" data-toggle="tab" href="#bus-stops"
+                                    role="tab" aria-controls="bus-stops" aria-selected="true">
+                                    Bus Stops</a>
                             </li>
                             <li hidden></li>
                         </ul>
@@ -58,8 +63,11 @@
                                 <div class="tab-pane fade show active" id="basic-data" role="tabpanel">
                                     <BasicEditForm :busId="bus.id" />
                                 </div>
-                                <div class="tab-pane fade show" id="hotel-images" role="tabpanel">
+                                <div class="tab-pane fade show" id="bus-images" role="tabpanel">
                                     <BusImagesAll :busId="bus.id" />
+                                </div>
+                                <div class="tab-pane fade show" id="bus-stops" role="tabpanel">
+                                    <BusStopsALl :busId="bus.id" />
                                 </div>
                             </div>
                         </div>
@@ -76,6 +84,7 @@ import { Link } from "@inertiajs/vue3";
 import { defineProps, onMounted } from "vue";
 import BasicEditForm from "@/Pages/AdminArea/Buses/Components/Basic/EditForm.vue";
 import BusImagesAll from "@/Pages/AdminArea/Buses/Components/BusImages/All.vue";
+import BusStopsALl from "@/Pages/AdminArea/Buses/Components/BusStops/All.vue";
 
 const props = defineProps({
     bus: {

@@ -25,25 +25,34 @@
                     </div>
                 </div>
                 <div class="row mb-1">
-                    <div for="name" class="col-md-2 col-form-label">PRICE</div>
+                    <div for="name" class="col-md-2 col-form-label">DRIVER NAME</div>
                     <div class="col-md-10">
-                        <input type="number" class="form-control form-control-sm" name="price" id="price" min="0"
-                            placeholder="Price" v-model="busData.price" />
-                        <small v-if="validationErrors.price" id="price"
+                        <input type="text" class="form-control form-control-sm" name="price" id="price" min="0"
+                            placeholder="Driver Name" v-model="busData.driver_name" />
+                        <small v-if="validationErrors.driver_name" id="price"
                             class="text-danger form-text text-error-msg error">{{
-                                validationErrors.price }}</small>
+                                validationErrors.driver_name }}</small>
                     </div>
                 </div>
                 <div class="row mb-1">
                     <div for="name" class="col-md-2 col-form-label">
-                        DISCOUNT PRICE
+                        ROUTE
                     </div>
-                    <div class="col-md-10">
-                        <input type="number" class="form-control form-control-sm" name="discount_price" min="0"
-                            id="discount_price" placeholder="Discount Price" v-model="busData.discount_price" />
-                        <small v-if="validationErrors.discount_price" id="discount_price"
+                    <div class="col-md-4">
+                        <input type="text" class="form-control form-control-sm" name="from" min="0" id="from"
+                            placeholder="Route From" v-model="busData.from" />
+                        <small v-if="validationErrors.from" id="from"
                             class="text-danger form-text text-error-msg error">{{
-                                validationErrors.discount_price }}</small>
+                                validationErrors.from }}</small>
+                    </div>
+                    <div class="">
+                        <i class="fas fa-arrow-right mt-2"></i>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control form-control-sm" name="to" min="0" id="to"
+                            placeholder="Route To" v-model="busData.to" />
+                        <small v-if="validationErrors.to" id="to" class="text-danger form-text text-error-msg error">{{
+                            validationErrors.to }}</small>
                     </div>
                 </div>
                 <div class="row mb-1">
@@ -57,34 +66,6 @@
                                 class="text-danger form-text text-error-msg error">{{
                                     validationErrors.status }}</small>
                         </div>
-                    </div>
-                </div>
-                <div class="row mb-1">
-                    <div for="name" class="col-md-2 col-form-label">
-                        FEATURED
-                    </div>
-                    <div class="col-md-10">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
-                                v-model="busData.featured" />
-                            <label class="form-check-label" for="flexCheckDefault">
-                            </label>
-                            <small v-if="validationErrors.featured" id="featured"
-                                class="text-danger form-text text-error-msg error">{{
-                                    validationErrors.featured }}</small>
-                        </div>
-                    </div>
-                </div>
-                <div class="row mb-1">
-                    <div for="name" class="col-md-2 col-form-label">
-                        QUANTITY
-                    </div>
-                    <div class="col-md-10">
-                        <input type="number" class="form-control form-control-sm" name="quantity" id="quantity"
-                            placeholder="Discount Price" v-model="busData.quantity" />
-                        <small v-if="validationErrors.quantity" id="quantity"
-                            class="text-danger form-text text-error-msg error">{{
-                                validationErrors.quantity }}</small>
                     </div>
                 </div>
                 <div class="row mb-1">
