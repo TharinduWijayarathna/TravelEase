@@ -28,20 +28,18 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th scope="col">Code</th>
                             <th scope="col">Name</th>
                             <th scope="col">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr v-for="busStop in busStops" :key="busStop.id">
-                            <td>{{ busStop.code }}</td>
                             <td>{{ busStop.name }}</td>
                             <td>
-                                <button class="btn btn-sm btn-round btn-outline-primary">
+                                <button class="btn btn-sm btn-round btn-outline-primary" @click="editBusStopModal(busStop.id)">
                                     <i class="fa-solid fa-edit"></i> Edit
                                 </button>
-                                <button class="btn btn-sm btn-round btn-outline-danger">
+                                <button class="btn btn-sm btn-round btn-outline-danger" @click="deleteBusStop(busStop.id)">
                                     <i class="fa-solid fa-trash"></i> Delete
                                 </button>
                             </td>
@@ -98,6 +96,53 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="editBusStopModal" data-bs-backdrop="static" tabindex="-1" role="dialog"
+        aria-labelledby="newVendorModal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-mb" role="document">
+            <div class="modal-content p-2">
+                <div class="modal-header">
+                    <h5 class="modal-title font-weight-bolder breadcrumb-text text-gradient" id="add_brandLabel">
+                        Edit Bus Stop
+                    </h5>
+                    <button type="button" class="close btn" data-dismiss="modal" aria-label="Close"
+                        @click.prevent="resetData()">
+                        <span aria-hidden="true">
+                            <i class="fa fa-times"></i>
+                        </span>
+                    </button>
+                </div>
+                <div class="modal-body p-0">
+                    <div class="card-plain">
+                        <div class="card-body">
+                            <form role="form text-left" enctype="multipart/form-data">
+                                <div class="row mb-1">
+                                    <div for="code" class="col-md-3 col-form-label">
+                                        NAME
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="text" class="form-control form-control-sm" name="name" id="name"
+                                            placeholder="Bus stop name" v-model="editBusStop.name" required />
+                                        <small v-if="validationErrors.name" id="bus_name"
+                                            class="text-danger form-text text-error-msg error">{{
+                                                validationErrors.name }}</small>
+                                    </div>
+
+
+                                </div>
+                                <div class="text-right mt-2">
+                                    <button type="button" class="btn btn-primary btn btn-sm btn-neutral float-end"
+                                        @click.prevent="updateBusStop()">
+                                        <i class="fas fa-save"></i>
+                                        UPDATE
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
 <script setup>
 import axios from 'axios';
@@ -141,6 +186,7 @@ const props = defineProps({
 });
 const busStops = ref([]);
 const busStop = ref({});
+const editBusStop = ref({});
 const createBusStopModal = () => {
     $("#newBusStopModal").modal("show");
 }
@@ -161,8 +207,8 @@ const createBusStop = async () => {
                     timer: 3000,
                     timerProgressBar: true,
                 });
-                const busId = response.data.id;
                 resetData();
+                reload();
                 $("#newBusStopModal").modal("hide");
             })
             .catch((error) => {
@@ -174,4 +220,65 @@ const createBusStop = async () => {
         console.log("Error:", error);
     }
 };
+const editBusStopModal = async (id) => {
+    const response = await axios.get(route("admin.bus.stop.get", id));
+            editBusStop.value = response.data
+        $("#editBusStopModal").modal("show");
+};
+const updateBusStop = async () => {
+    const response = await axios.post(route("admin.bus.stop.update", editBusStop.value.id), editBusStop.value)
+        .then((response) => {
+            Swal.fire({
+                icon: "success",
+                title: "Success",
+                text: "Bus stop has been updated",
+                toast: true,
+                position: "top-end",
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+            });
+            reload();
+            $("#editBusStopModal").modal("hide");
+        })
+        .catch((error) => {
+            convertValidationError(error);
+            console.log("Error:", error);
+        })
+};
+const deleteBusStop = async (id) => {
+    const response = (await axios.delete(route("admin.bus.stop.delete", id))).data;
+    Swal.fire({
+        icon: "success",
+        title: "Success",
+        text: "Bus stop has been deleted",
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+    });
+    reload();
+};
+const reload = async () => {
+    try {
+        const response = (
+            await axios.get(route("admin.bus.stop.all", props.busId))
+        ).data;
+
+        busStops.value = response.data;
+        resetData();
+    } catch (error) {
+        console.log("Error", error);
+    }
+};
+const resetData = () => {
+    busStop.value = {};
+    validationErrors.value = {};
+    validationMessage.value = null;
+};
+
+onMounted(() => {
+    reload();
+});
 </script>

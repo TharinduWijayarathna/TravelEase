@@ -3,112 +3,50 @@
 namespace App\Http\Controllers\AdminArea;
 
 use App\Http\Controllers\Controller;
-use App\Models\BuStop;
+use App\Models\BusStop;
+use domain\Facades\BusStopFacade\BusStopFacade;
 use Illuminate\Http\Request;
+use Spatie\QueryBuilder\AllowedFilter;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class BusStopController extends  Controller
 {
     /**
-     * Index
-     * load customer index page 
-     *
-     * @return void
-     */
-    public function index()
-    {
-        return Inertia::render('AdminArea/Customer/index');
-    }
-
-    /**
      * All
-     * fetch all customer details with pagination
+     * fetch all bus_stop details with pagination
      *
      * @return void
      */
-    public function all()
+    public function all($id)
     {
 
-        $query = User::where('role', 2)->orderBy('id', 'desc');
+        $query = BusStop::where('bus_id', $id)->orderBy('id', 'desc');
 
 
-        if(request('status')){
-           
-            $status = request('status');
-            if($status == 1){
-                $query->where('status', 1);
-            }else{
-                $query->where('status', 0);
-            }
-        }
-
-        if (request('code')) {
-            $code = request('code');
-            $query->where('code', 'like', "%{$code}%");
-        }
-
-        if (request('first_name')) {
-            $first_name = request('first_name');
-            $query->where('first_name', 'like', "%{$first_name}%");
-        }
-
-        if (request('last_name')) {
-            $last_name = request('last_name');
-            $query->where('last_name', 'like', "%{$last_name}%");
-        }
-
-        if (request('email')) {
-            $email = request('email');
-            $query->where('email', 'like', "%{$email}%");
-
-        }
 
         $payload = QueryBuilder::for($query)
             ->allowedSorts(['id', 'name'])
-            ->allowedFilters(
-                AllowedFilter::callback('search', function ($query, $value) {
-                    $query->orWhere('id', 'like', "%{$value}%");
-                    $query->orWhere('status', 'like', "%{$value}%");
-                    $query->orWhere('code', 'like', "%{$value}%");
-                    $query->orWhere('first_name', 'like', "%{$value}%");
-                    $query->orWhere('last_name', 'like', "%{$value}%");
-                    $query->orWhere('email', 'like', "%{$value}%");
-                })
-            )
             ->paginate(request('per_page', config('basic.pagination_per_page')));
         return $payload;
     }
 
     /**
-     * Edit
-     * get specific customer details and redirect to basic edit form
-     *
-     * @param $customer_id
-     *
-     * @return void
-     */
-    public function edit($customer_id)
-    {
-        $response['customer'] = CustomerFacade::edit($customer_id);
-        return Inertia::render('AdminArea/Customer/edit', $response);
-    }
-
-    /**
      * Get
-     * get specific customer data
+     * get specific bus_stop data
      *
-     * @param $customer_id 
+     * @param $bus_stop_id 
      *
      * @return void
      */
-    public function get($customer_id)
+    public function get($bus_stop_id)
     {
-        $response['customer'] = CustomerFacade::get($customer_id);
+        $response = BusStopFacade::get($bus_stop_id);
         return $response;
     }
 
     /**
      * Store
-     * create new customer 
+     * create new bus_stop 
      *
      * @param Request $request
      *
@@ -119,33 +57,33 @@ class BusStopController extends  Controller
         $request->validate([
             'name' => 'required',
         ]);
-        return BuStop::store($request->all());
+        return BusStopFacade::store($request->all());
     }
     
     /**
      * Update
-     * update specific customer data
+     * update specific bus_stop data
      *
-     * @param $customer_id
+     * @param $bus_stop_id
      * @param Request $request
      *
      * @return void
      */
-    public function update($customer_id, UpdateCustomerRequest $request)
+    public function update($bus_stop_id, Request $request)
     {
-        return CustomerFacade::update($customer_id, $request->all());
+        return BusStopFacade::update( $request->all() , $bus_stop_id);
     }
     
     /**
      * Delete
-     * delete specific customer
+     * delete specific bus_stop
      *
-     * @param $customer_id 
+     * @param $bus_stop_id 
      *
      * @return void
      */
-    public function delete($customer_id)
+    public function delete($bus_stop_id)
     {
-        return CustomerFacade::delete($customer_id);
+        return BusStopFacade::delete($bus_stop_id);
     }
 }

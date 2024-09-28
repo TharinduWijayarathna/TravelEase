@@ -3,7 +3,7 @@
 namespace domain\Services\BusStopService;
 
 use App\Models\Bus;
-use App\Models\BuStop;
+use App\Models\BusStop;
 
 class BusStopService
 {
@@ -17,7 +17,7 @@ class BusStopService
      */
     public function __construct()
     {
-        $this->Bus = new BuStop();
+        $this->Bus = new BusStop();
     }
 
     /**
@@ -75,7 +75,7 @@ class BusStopService
      */
     public function get(int $Bus_id)
     {
-        return $this->Bus->with('Category', 'BusImage', 'BusImage.Image')->find($Bus_id);
+        return $this->Bus->find($Bus_id);
     }
 
     /**

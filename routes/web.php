@@ -161,7 +161,7 @@ Route::prefix('admin')->group(function () {
     // admin-bus-stop
     Route::prefix('bus-stop')->group(function () {
         Route::get('/', [BusStopController::class, 'index'])->name('admin.bus.stop.index');
-        Route::get('/all', [BusStopController::class, 'all'])->name('admin.bus.stop.all');
+        Route::get('/{bus_id}/all', [BusStopController::class, 'all'])->name('admin.bus.stop.all');
         Route::get('/{bus_stop_id}/get', [BusStopController::class, 'get'])->name('admin.bus.stop.get');
         Route::post('/store', [BusStopController::class, 'store'])->name('admin.bus.stop.store');
         Route::post('/{bus_stop_id}/update', [BusStopController::class, 'update'])->name('admin.bus.stop.update');
