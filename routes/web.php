@@ -8,7 +8,7 @@ use App\Http\Controllers\AdminArea\BannerController as AdminBannerController;
 use App\Http\Controllers\AdminArea\CategoryController as AdminCategoryController;
 use App\Http\Controllers\AdminArea\BusController as AdminBusController;
 use App\Http\Controllers\AdminArea\CartItemController as AdminCartItemController;
-
+use App\Http\Controllers\AdminArea\PaymentController as AdminPaymentController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\PublicArea\BannerController as PublicBannerController;
 use App\Http\Controllers\PublicArea\CartController as PublicCartController;
@@ -156,6 +156,16 @@ Route::prefix('admin')->group(function () {
         Route::post('/store', [AdminCustomerController::class, 'store'])->name('admin.customer.store');
         Route::post('/{customer_id}/update', [AdminCustomerController::class, 'update'])->name('admin.customer.update');
         Route::delete('/{customer_id}/delete', [AdminCustomerController::class, 'delete'])->name('admin.customer.delete');
+    });
+
+    //Payments
+    Route::prefix('payment')->group(function () {
+        Route::get('/', [AdminPaymentController::class, 'index'])->name('admin.payment.index');
+        Route::get('/all', [AdminPaymentController::class, 'all'])->name('admin.payment.all');
+        Route::get('/{payment_id}/get', [AdminPaymentController::class, 'get'])->name('admin.payment.get');
+        Route::post('/store', [AdminPaymentController::class, 'store'])->name('admin.payment.store');
+        Route::post('/{payment_id}/update', [AdminPaymentController::class, 'update'])->name('admin.payment.update');
+        Route::delete('/{payment_id}/delete', [AdminPaymentController::class, 'delete'])->name('admin.payment.delete');
     });
 
     // Admin-order

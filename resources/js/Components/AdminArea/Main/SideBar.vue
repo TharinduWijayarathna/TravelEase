@@ -40,8 +40,8 @@
                         </li>
                         <li class="nav-item">
                             <Link
-                                :class="{ 'active__sidebar': route().current() == 'admin.customer.index' || route().current() == 'admin.customer.edit' }"
-                                class="nav-link active-preloader" :href="route('admin.customer.index')">
+                                :class="{ 'active__sidebar': route().current() == 'admin.payment.index' }"
+                                class="nav-link active-preloader" :href="route('admin.payment.index')">
                             <i class="fa-solid fa-money-check"></i>
                             <span class="ml-2 nav-link-text font-weight-600">Payments</span>
                             </Link>
