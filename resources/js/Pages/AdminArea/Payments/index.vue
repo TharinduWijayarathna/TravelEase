@@ -5,7 +5,7 @@
                 <div class="container-fluid">
                     <div class="header-body row">
                         <div class="col-lg-8 align-items-center py-4">
-                            <h6 class="h2 text-maroon d-inline-block mb-0">Bus Management</h6>
+                            <h6 class="h2 text-maroon d-inline-block mb-0">Payment Management</h6>
                             <nav aria-label="breadcrumb" class="d-none d-md-block ">
                                 <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                                     <li class="breadcrumb-item">
@@ -14,14 +14,14 @@
                                         </Link>
                                     </li>
                                     <li class="breadcrumb-item active breadcrumb-yellow" aria-current="page">
-                                        Bus Management
+                                        Payment Management
                                     </li>
                                 </ol>
                             </nav>
                         </div>
                         <div class="col-lg-4 text-right py-4">
                             <button type="button" class="btn btn-primary btn btn-sm btn-neutral" data-toggle="modal"
-                                @click.prevent="resetData()" data-target="#newBusModal">
+                                @click.prevent="resetData()" data-target="#newcustomerModal">
                                 <i class="fa-solid fa-circle-plus"></i> ADD NEW
                             </button>
                         </div>
@@ -36,41 +36,55 @@
                     <div class="card shadow">
                         <div class="py-3 filters-margin mx-3 text-sm card-body">
                             <div class="flex">
+
                                 <div class="items-center text-muted mx-1">
                                     <div class="">Status</div>
                                     <div class="inline-block" style="width: 200px;">
-                                        <Multiselect v-model="select_bus_status" :options="statusList"
+                                        <Multiselect v-model="select_customer_status" :options="statusList"
                                             :showLabels="false" :close-on-select="true" :clear-on-select="false"
                                             :searchable="true" placeholder="Select Status" label="name" track-by="id" />
                                     </div>
                                 </div>
+
                                 <div class="items-center text-muted mx-1">
-                                    <div class="">Code</div>
+                                    <div class="">Payment Code</div>
                                     <div class="inline-block ">
-                                        <input type="text" class="form-control form-control-sm" name="code" id="code"
-                                            v-model="search_code" @keyup="getSearch" placeholder="Code" />
+                                        <input type="text" class="form-control form-control-sm" name="customer_code"
+                                            id="customer_code" v-model="customer_code" @keyup="getSearch"
+                                            placeholder="customer Code" />
                                     </div>
                                 </div>
+
                                 <div class="items-center text-muted mx-1">
-                                    <div class="">Bus Name</div>
+                                    <div class="">First Name</div>
                                     <div class="inline-block ">
-                                        <input type="text" class="form-control form-control-sm" name="bus_name"
-                                            id="bus_name" v-model="search_bus_name" @keyup="getSearch"
-                                            placeholder="Bus Name" />
+                                        <input type="text" class="form-control form-control-sm" name="first_name"
+                                            id="first_name" v-model="first_name" @keyup="getSearch"
+                                            placeholder="First Name" />
                                     </div>
                                 </div>
+
                                 <div class="items-center text-muted mx-1">
-                                    <div class="">Category Name</div>
+                                    <div class="">Last Name</div>
+                                    <div class="inline-block ">
+                                        <input type="text" class="form-control form-control-sm" name="last_name"
+                                            id="last_name" v-model="last_name" @keyup="getSearch"
+                                            placeholder="Last Name" />
+                                    </div>
+                                </div>
+
+                                <div class="items-center text-muted mx-1">
+                                    <div class="">Email</div>
                                     <div class="inline-block ">
                                         <input type="text" class="form-control form-control-sm" name="category_name"
-                                            id="category_name" v-model="search_category_name" @keyup="getSearch"
-                                            placeholder="Category Name" />
+                                            id="category_name" v-model="email" @keyup="getSearch" placeholder="Email" />
                                     </div>
                                 </div>
 
                                 <div class="text-muted mx-1">
                                     <div class="mt-2">
-                                        <button @click.prevent="clearFilter()" class="btn  btn-ash float-end mt-2 pt-2">
+                                        <button @click.prevent="clearFilter()"
+                                            class="btn btn-ash float-end mt-2 pt-2">
                                             <i class="fa fa-refresh" aria-hidden="true" />
                                         </button>
                                     </div>
@@ -95,25 +109,36 @@
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                            <th class="textClassHead text-center">
+                                            <th class="textClassHead text-center" style="width: 14%;">
                                                 Status
                                             </th>
-                                            <th class="textClassHead text-left">
-                                                CODE
+                                            <th class="textClassHead text-left" style="width: 14%;">
+                                                Payment Code
                                             </th>
+                                            <th class="textClassHead text-left" style="width: 14%;">
+                                                First Name
+                                            </th>
+                                            <th class="textClassHead text-left" style="width: 14%;">
+                                                Last Name
+                                            </th>
+                                            <th class="textClassHead" style="width: 14%;">
+                                                email
+                                            </th>
+                                            <!-- <th class="textClassHead text-center">
+                                                Profile Image
+                                            </th> -->
+                                            <th class="textClassHead text-right" style="width: 14%;">
+                                                Contact Number
+                                            </th>
+                                            <!-- <th class="textClassHead">Rating</th> -->
 
-                                            <th class="textClassHead">
-                                                Bus Name
-                                            </th>
-                                            <th class="textClassHead">
-                                                Image
-                                            </th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr v-for="value in busData" :key="value.id" @click.prevent="edit(value.id)">
+                                        <tr v-for="value in customerData" :key="value.id"
+                                            @click.prevent="edit(value.id)">
                                             <td class="textClassBody text-center">
-                                                <div class="" v-if="value.status == 1">
+                                                <div class="" v-if="value.status === 1">
                                                     <span class="badge badge-success">Active</span>
                                                 </div>
                                                 <div class="" v-else>
@@ -123,28 +148,35 @@
                                             <td class="textClassBody text-left">
                                                 {{ value.code }}
                                             </td>
+                                            <td class="textClassBody text-left">
+                                                {{ value.first_name }}
+                                            </td>
+                                            <td class="textClassBody text-left">
+                                                {{ value.last_name }}
+                                            </td>
                                             <td class="textClassBody">
-                                                {{ value.name }}
+                                                {{ value.email }}
                                             </td>
-
-                                            <td class="textClassBody" v-if="value.bus_image">
-                                                <div class="">
-                                                    <div class="">
-                                                        <img :src="value.bus_image" alt="no image"
-                                                            class="bus-image-setup" height="100px" />
-                                                    </div>
+                                            <!-- <td class="textClassBody text-center">
+                                                <img width="160px" v-if="value.image_url" :src="value.image_url"
+                                                    alt="" />
+                                                <img v-else width="80px" src="/assets/PublicArea/images/avatar/user.jpg"
+                                                    alt="" />
+                                            </td> -->
+                                            <td class="textClassBody text-right">
+                                                {{ value.contact_number }}
+                                            </td>
+                                            <!-- <td class="textClassBody text-center">
+                                                <div v-if="value.gender == 1">
+                                                    <span>Male</span>
                                                 </div>
-                                            </td>
-                                            <td class="textClassBody" v-else>
-                                                <div class="">
-                                                    <div class="">
-                                                        <img :src="busImage" alt="no image"
-                                                            class="bus-image-setup" height="100px" />
-                                                    </div>
+                                                <div v-else-if="value.gender == 2">
+                                                    <span>Female</span>
                                                 </div>
-                                            </td>
-
-
+                                                <div v-else-if="value.gender == 3">
+                                                    <span>Other</span>
+                                                </div>
+                                            </td> -->
                                         </tr>
                                     </tbody>
                                 </table>
@@ -165,9 +197,9 @@
                                     id="DataTables_Table_0_paginate">
                                     <nav aria-label="Page navigation" style="float: right">
                                         <ul class="pagination">
-                                            <li class="page-item"
+                                            <li class="page-item "
                                                 :class="pagination.current_page == 1 ? 'disabled' : ''">
-                                                <a class="page-link cursor-pointer" href="javascript:void(0)"
+                                                <a class="page-link" href="javascript:void(0)"
                                                     @click="setPage(pagination.current_page - 1)">
                                                     <i class="fa-solid fa-angles-left"></i>
                                                 </a>
@@ -183,7 +215,7 @@
                                             </template>
                                             <li class="page-item"
                                                 :class="pagination.current_page == pagination.last_page ? 'disabled' : ''">
-                                                <a class="page-link cursor-pointer" href="javascript:void(0)"
+                                                <a class="page-link" href="javascript:void(0)"
                                                     @click="setPage(pagination.current_page + 1)">
                                                     <i class="fa-solid fa-angles-right"></i>
                                                 </a>
@@ -199,14 +231,14 @@
         </template>
 
         <template #modals>
-            <div class="modal fade" id="newBusModal" data-bs-backdrop="static" tabindex="-1" role="dialog"
+            <div class="modal fade" id="newcustomerModal" data-bs-backdrop="static" tabindex="-1" role="dialog"
                 aria-labelledby="newVendorModal" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-mb" role="document">
                     <div class="modal-content p-2">
                         <div class="modal-header">
                             <h5 class="modal-title font-weight-bolder breadcrumb-text text-gradient"
                                 id="add_brandLabel">
-                                New Bus
+                                New customer
                             </h5>
                             <button type="button" class="close btn" data-dismiss="modal" aria-label="Close"
                                 @click.prevent="resetData()">
@@ -221,52 +253,45 @@
                                     <form role="form text-left" enctype="multipart/form-data">
                                         <div class="row mb-1">
                                             <div for="code" class="col-md-3 col-form-label">
-                                                Bus NAME
+                                                FIRST NAME
                                             </div>
                                             <div class="col-md-9">
-                                                <input type="text" class="form-control form-control-sm" name="name"
-                                                    id="name" placeholder="Bus name" v-model="bus.name" required />
-                                                <small v-if="validationErrors.name" id="bus_name"
+                                                <input type="text" class="form-control form-control-sm"
+                                                    name="first_name" id="name" placeholder="First name"
+                                                    v-model="customer.first_name" required />
+                                                <small v-if="validationErrors.first_name" id="first_name"
                                                     class="text-danger form-text text-error-msg error">{{
-                                                        validationErrors.name }}</small>
-                                            </div>
-
-
-                                        </div>
-                                        <div class="row mb-1">
-                                            <div for="code" class="col-md-3 col-form-label">
-                                                CATEGORY
-                                            </div>
-                                            <div class="col-md-9">
-                                                <Multiselect v-model="bus.category_id" :options="categoryData"
-                                                    :showLabels="false" :close-on-select="true" :clear-on-select="false"
-                                                    :searchable="true" placeholder="Select category" label="name"
-                                                    track-by="id">
-                                                </Multiselect>
-                                                <small v-if="validationErrors.category_id" id="category"
-                                                    class="text-danger form-text text-error-msg error">{{
-                                                        validationErrors.category_id }}</small>
+                                                        validationErrors.first_name }}</small>
                                             </div>
                                         </div>
                                         <div class="row mb-1">
                                             <div for="price" class="col-md-3 col-form-label">
-                                                PRICE
+                                                LAST NAME
                                             </div>
                                             <div class="col-md-9">
-                                                <input type="number" class="form-control form-control-sm" name="price"
-                                                    id="price" placeholder="price" v-model="bus.price"
-                                                    @input="checkMinPrice" required />
-                                                <small v-if="validationErrors.price" id="price"
-                                                    class="text-danger form-text text-error-msg error">{{
-                                                        validationErrors.price }}</small>
+                                                <input type="text" class="form-control form-control-sm" name="last_name"
+                                                    id="last_name" placeholder="last name" v-model="customer.last_name"
+                                                    required />
                                             </div>
                                             <small id="msg_code"
                                                 class="text-danger form-text text-error-msg error"></small>
                                         </div>
+                                        <div class="row mb-1">
+                                            <div for="email" class="col-md-3 col-form-label">
+                                                EMAIL
+                                            </div>
+                                            <div class="col-md-9">
+                                                <input type="email" class="form-control form-control-sm" name="email"
+                                                    id="email" placeholder="email" v-model="customer.email" required />
+                                                <small v-if="validationErrors.email" id="email"
+                                                    class="text-danger form-text text-error-msg error">{{
+                                                        validationErrors.email }}</small>
+                                            </div>
+                                        </div>
                                         <div class="text-right mt-2">
                                             <button type="button"
                                                 class="btn btn-primary btn btn-sm btn-neutral float-end"
-                                                @click.prevent="createBus()">
+                                                @click.prevent="createcustomer()">
                                                 <i class="fas fa-save"></i>
                                                 CREATE
                                             </button>
@@ -288,29 +313,25 @@ import axios from "axios";
 import Multiselect from "vue-multiselect";
 import { ref, onMounted, watch } from "vue";
 import { router, Link } from "@inertiajs/vue3";
-import BusImage from '@/../src/AdminArea/img/product/invalid_image.png';
+import productImage from '@/../src/AdminArea/img/product/invalid_image.png';
 import Swal from "sweetalert2";
 
 const page = ref(1);
 const pageCount = ref(25);
 const perPage = ref([25, 50, 100]);
 const pagination = ref({});
-const search_code = ref(null);
-const search_bus_name = ref();
-const search_category_name = ref();
-const select_bus_status = ref([]);
+const customer_code = ref(null);
+const first_name = ref(null);
+const last_name = ref(null);
+const email = ref(null);
+const select_customer_status = ref([]);
 const statusList = ref([
     { id: 1, name: 'Active' },
     { id: 2, name: 'Inactive' },
 ]);
 
-const category = ref([]);
-const categoryData = ref([]);
-const busData = ref([]);
-const bus = ref({
-    price: ref(0)
-});
-
+const customerData = ref([]);
+const customer = ref({});
 const validationErrors = ref({});
 const validationMessage = ref(null);
 
@@ -339,120 +360,35 @@ const convertValidationError = (err) => {
     }
 };
 
-const edit = (bus_id) => {
-    try {
-        router.visit(route("admin.bus.edit", bus_id));
-    } catch (error) {
-        console.lod("Error", error);
-    }
-}
-
-
-const createBus = async (id) => {
-    console.log('bus', bus.value);
-    try {
-        if (bus.value) {
-            bus.value.category_id = bus.value.category_id.id;
-        }
-        const response = await axios.post(
-            route("admin.bus.store"),
-            bus.value)
-            .then((response) => {
-                Swal.fire({
-                    icon: "success",
-                    title: "Success",
-                    text: "New bus has been created",
-                    toast: true,
-                    position: "top-end",
-                    showConfirmButton: false,
-                    timer: 3000,
-                    timerProgressBar: true,
-                });
-                const busId = response.data.id;
-                resetData();
-                router.visit(route("admin.bus.edit", busId));
-                $("#newBusModal").modal("hide");
-            })
-            .catch((error) => {
-                convertValidationError(error);
-                console.log("Error:", error);
-                // Swal.fire({
-                //     icon: "error",
-                //     title: "Error",
-                //     text: "Failed to create bus",
-                //     toast: true,
-                //     position: "top-end",
-                //     showConfirmButton: false,
-                //     timer: 3000,
-                //     timerProgressBar: true,
-                // });
-            });
-    } catch (error) {
-        console.log("Error:", error);
-    }
-};
-
-const getCategories = async () => {
-    try {
-        const response = await axios.get(route("admin.category.all"));
-        categoryData.value = response.data.data.map((category) => ({
-            id: category.id,
-            name: category.name,
-        }));
-    } catch (error) {
-        console.log("Error", error);
-    }
-};
-
 const reload = async () => {
     try {
         const response = (
-            await axios.get(route("admin.bus.all"), {
+            await axios.get(route("admin.customer.all"), {
                 params: {
                     page: page.value,
                     per_page: pageCount.value,
-                    code: search_code.value,
-                    bus_name: search_bus_name.value,
-                    category_name: search_category_name.value,
-                    status: select_bus_status.value.id,
+                    status: select_customer_status.value?.id,
+                    code: customer_code.value,
+                    first_name: first_name.value,
+                    last_name: last_name.value,
+                    email: email.value,
                 },
             })
         ).data;
-
-        busData.value = response.data;
+        customerData.value = response.data;
         pagination.value = response;
-        getCategories();
-        resetData();
     } catch (error) {
         console.log("Error", error);
     }
-};
-
-const numberFormatter = (number) => {
-    if (number == undefined || number == null || number == Infinity) {
-        return "0.00"; // or some default value
-    }
-    const parsedNumber = Number(number);
-    if (isNaN(parsedNumber)) {
-        return "0.00"; // or some default value
-    }
-    if (typeof parsedNumber !== "number") {
-        return "0.00"; // or some default value
-    }
-    return parsedNumber.toLocaleString("en-US", {
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2,
-        useGrouping: true,
-    });
 };
 
 const clearFilter = () => {
     try {
-        search_code.value = null;
-        search_bus_name.value = null;
-        search_category_name.value = null;
-        select_bus_status.value = [];
-        getCategories();
+        select_customer_status.value = null;
+        customer_code.value = null;
+        first_name.value = null;
+        last_name.value = null;
+        email.value = null;
         reload();
     } catch (error) {
         console.log('Error', error);
@@ -460,14 +396,15 @@ const clearFilter = () => {
 }
 
 const resetData = () => {
-    resetValidationErrors();
-    bus.value.name = '';
-    bus.value.category_id = '';
-    bus.value.price = '';
+    validationErrors.value = "";
+    validationMessage.value = "";
+    customer.value.first_name = '';
+    customer.value.last_name = '';
+    customer.value.email = '';
 }
+
 onMounted(() => {
     reload();
-    getCategories();
 });
 
 watch([page, pageCount], () => {
@@ -475,18 +412,12 @@ watch([page, pageCount], () => {
 });
 
 watch(() => {
-    if (select_bus_status.value) {
+    if (select_customer_status.value) {
         reload();
     } else {
         reload();
     }
-});
-
-const checkMinPrice = (event) => {
-    if (event.target.value < 0) {
-        event.target.value = '';
-    }
-}
+})
 
 const getSearch = () => {
     page.value = 1;
@@ -512,15 +443,7 @@ const setPage = async (nextPage) => {
     vertical-align: middle;
 }
 
-.bus-image-setup {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-    object-position: center;
-    border-radius: 10px;
-}
-
-.cursor-pointer {
+.cursor-pointer{
     cursor: pointer;
 }
 </style>

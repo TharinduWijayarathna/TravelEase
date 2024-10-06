@@ -15,7 +15,7 @@ class Cart extends Model
         'ACTIVE' => 1,
         'INACTIVE' => 0
     ];
-    
+
     protected $fillable = [
         'status',
         'created_by',
@@ -25,6 +25,7 @@ class Cart extends Model
         'customer_paid',
         'balance',
         'quantity',
+        // 'bus_id',
         'customer_id',
         'customer_name',
         'customer_address',
@@ -32,10 +33,10 @@ class Cart extends Model
         'customer_contact_number',
     ];
 
-    public function Product()
-    {
-        return $this->hasMany(Product::class, 'id', 'product_id');
-    }
+    // public function Product()
+    // {
+    //     return $this->hasMany(Bus::class, 'id', 'bus_id');
+    // }
 
     public function Customer()
     {

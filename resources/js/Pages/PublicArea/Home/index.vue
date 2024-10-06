@@ -3,43 +3,8 @@
         <template #content>
             <main>
                 <div class="">
-                    <!-- Banner carousel showing bus journeys or destinations -->
-                    <div v-if="banners.length === 0">
-                        <Carousel :autoplay="4000" :wrap-around="true" class="w-100px">
-                            <Slide v-for="slide in 5" :key="slide">
-                                <div class="carousel__item" style="width:100%">
-                                    <div class="card overflow-hidden h-500px h-xl-750px rounded-0"
-                                        :style="{ backgroundImage: `url(/assets/PublicArea/images/shop/bg/0${slide}.jpg)`, backgroundPosition: 'center left', backgroundSize: 'cover' }">
-                                        <div class="bg-overlay bg-dark opacity-5 d-lg-none"></div>
-                                        <div class="card-img-overlay d-flex align-items-center">
-                                            <div class="container">
-                                                <div class="row">
-                                                    <div class="col-sm-11 col-lg-8 col-xl-5">
-                                                        <span
-                                                            class="d-inline-block text-bg-dark small rounded-pill px-3 py-2 mb-4">New
-                                                            Route Available</span>
-                                                        <h1 class="text-white display-6 mb-4">Explore Your Next
-                                                            Destination</h1>
-                                                        <p class="text-white mb-4">Book your tickets now and enjoy
-                                                            comfortable and affordable bus journeys to exciting
-                                                            destinations.</p>
-                                                        <a class="btn btn-lg btn-outline-white icon-link icon-link-hover mb-0"
-                                                            href="#">Book Now<i class="bi bi-arrow-right"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </Slide>
-                            <template #addons>
-                                <Pagination />
-                            </template>
-                        </Carousel>
-                    </div>
-
                     <!-- Display active banners -->
-                    <div v-else>
+                    <div>
                         <div class="swiper overflow-hidden pt-5" ref="swiper2" data-swiper-options="swiperOptions2">
                             <Carousel :autoplay="4000" :wrap-around="true">
                                 <Slide v-for="banner in banners" :key="banner.id">

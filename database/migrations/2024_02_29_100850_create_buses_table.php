@@ -21,6 +21,8 @@ return new class extends Migration
             $table->string('description')->nullable();
             $table->string('from')->nullable();
             $table->string('to')->nullable();
+            $table->time('departure_time')->nullable();
+            $table->time('arrival_time')->nullable();
             $table->foreignId('category_id')->nullable();
             $table->softDeletes();
             $table->timestamps();

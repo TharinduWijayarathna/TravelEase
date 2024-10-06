@@ -24,7 +24,6 @@ class CreateBusRequest extends FormRequest
         return [
             'name' => ['required', 'string'],
             'category_id' => ['required', 'integer'],
-            'price' => ['required', 'numeric' ,'min:0.00', 'max:99999999999.99'],
         ];
     }
 }

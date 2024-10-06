@@ -24,370 +24,75 @@
                     <div class="container">
                         <div class="row">
                             <aside class="col-xl-3">
-                                <form>
-                                    <div class="offcanvas-xl offcanvas-end" tabindex="-1" id="offcanvasSidebar"
-                                        aria-labelledby="offcanvasSidebarLabel">
-                                        <div class="offcanvas-header bg-light">
-                                            <h6 class="offcanvas-title" id="offcanvasSidebarLabel">
-                                                Advance Filter
-                                            </h6>
-                                            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
-                                                data-bs-target="#offcanvasSidebar" aria-label="Close"></button>
+                                <div class="card mb-4">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Filters</h5>
+
+                                        <!-- Route Filter -->
+                                        <div class="mb-3">
+                                            <label for="routeFilter" class="form-label">Bus Route</label>
+                                            <select id="routeFilter" class="form-select">
+                                                <option value="">All Routes</option>
+                                                <!-- <option v-for="route in uniqueRoutes" :key="route" :value="route">{{
+                                                    route }}</option> -->
+                                            </select>
                                         </div>
-                                        <div class="offcanvas-body flex-column p-3 p-xl-0">
-                                            <div class="accordion accordion-alt" id="accordionExample">
-                                                <div class="accordion-item">
-                                                    <h2 class="accordion-header">
-                                                        <button class="accordion-button fs-6 fw-semibold collapsed"
-                                                            type="button" data-bs-toggle="collapse"
-                                                            data-bs-target="#collapseOne" aria-expanded="false"
-                                                            aria-controls="collapseOne">
-                                                            Availability
-                                                        </button>
-                                                    </h2>
-                                                    <div id="collapseOne" class="accordion-collapse collapse"
-                                                        data-bs-parent="#accordionExample">
-                                                        <form class="accordion-body" id="availabilityForm">
-                                                            <div class="form-check">
-                                                                <input class="form-check-input focus-shadow-none"
-                                                                    type="radio" name="flexRadioDefault"
-                                                                    id="flexRadioDefault1" checked value="all"
-                                                                    v-model="filterForm.availability"
-                                                                    @change=" updateAvailability('all')" />
-                                                                <label class="form-check-label" for="flexRadioDefault1">
-                                                                    All
-                                                                </label>
-                                                            </div>
-                                                            <!-- <div class="form-check mt-2">
-															<input class="form-check-input focus-shadow-none" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
-															<label class="form-check-label" for="flexRadioDefault2">
-																New Arrival
-															</label>
-															</div> -->
-                                                            <div class="form-check mt-2">
-                                                                <input class="form-check-input focus-shadow-none"
-                                                                    type="radio" name="flexRadioDefault"
-                                                                    id="flexRadioDefault3" value="on_stock"
-                                                                    v-model="filterForm.availability"
-                                                                    @change=" updateAvailability('on_stock')" />
-                                                                <label class="form-check-label" for="flexRadioDefault3">
-                                                                    On Stock Only
-                                                                </label>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
 
-                                                <div class="accordion-item">
-                                                    <h2 class="accordion-header">
-                                                        <button class="accordion-button fs-6 fw-semibold collapsed"
-                                                            type="button" data-bs-toggle="collapse"
-                                                            data-bs-target="#collapseTwo" aria-expanded="true"
-                                                            aria-controls="collapseTwo">
-                                                            Categories
-                                                        </button>
-                                                    </h2>
-                                                    <div id="collapseTwo" class="accordion-collapse collapse show"
-                                                        data-bs-parent="#accordionExample">
-                                                        <form class="accordion-body">
-                                                            <div class="form-check" v-for="category in categories"
-                                                                :key="category.id">
-                                                                <input class="form-check-input" type="checkbox"
-                                                                    v-model="filterForm.selected_category"
-                                                                    :value="category.id" />
-                                                                <label class="form-check-label heading-color">
-                                                                    {{ category.name }}</label>
-                                                                <span class="small float-end">
-                                                                    ({{ category.product.length }})
-                                                                </span>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-
-                                                <div class="accordion-item">
-                                                    <h2 class="accordion-header">
-                                                        <button class="accordion-button fs-6 fw-semibold collapsed"
-                                                            type="button" data-bs-toggle="collapse"
-                                                            data-bs-target="#collapseThree" aria-expanded="true"
-                                                            aria-controls="collapseThree">
-                                                            Price
-                                                        </button>
-                                                    </h2>
-                                                    <div id="collapseThree" class="accordion-collapse collapse"
-                                                        data-bs-parent="#accordionExample">
-                                                        <div class="row mt-2">
-                                                            <div class="col-6">
-                                                                <label for="minPrice">Min
-                                                                    Price</label>
-                                                                <div class="input-group">
-                                                                    <span class="input-group-text">Rs</span>
-                                                                    <input type="text"
-                                                                        class="form-control with-currency" min="0"
-                                                                        id="minPrice" v-model="filterForm.min_price
-                                                                            " />
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-6">
-                                                                <label for="maxPrice">Max
-                                                                    Price</label>
-                                                                <div class="input-group">
-                                                                    <span class="input-group-text">Rs</span>
-                                                                    <input type="text"
-                                                                        class="form-control with-currency" min="0"
-                                                                        id="maxPrice" v-model="filterForm.max_price
-                                                                            " />
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <!-- Color -->
-                                                <!-- <div class="accordion-item">
-											<h2 class="accordion-header">
-												<button class="accordion-button fs-6 fw-semibold collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-													Color
-												</button>
-											</h2>
-											<div id="collapseFive" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-												<form class="accordion-body">
-
-														<div class="color-check-radio">
-															<input class="form-check-input" type="radio" name="flexRadiocolor" id="flexRadiocolor1" style="background-color: #9a0a0a;">
-															<label class="form-check-label" for="flexRadiocolor1"></label>
-
-															<input class="form-check-input" type="radio" name="flexRadiocolor" id="flexRadiocolor2" style="background-color: #32C7F5;">
-															<label class="form-check-label" for="flexRadiocolor2"></label>
-
-															<input class="form-check-input" type="radio" name="flexRadiocolor" id="flexRadiocolor3" style="background-color: #F7C32E;">
-															<label class="form-check-label" for="flexRadiocolor3"></label>
-
-															<input class="form-check-input" type="radio" name="flexRadiocolor" id="flexRadiocolor4" style="background-color: #333369;">
-															<label class="form-check-label" for="flexRadiocolor4"></label>
-														</div>
-													</form>
-												</div>
-											</div> -->
-
-                                                <!-- Rating star -->
-                                                <!-- <div class="accordion-item">
-												<h2 class="accordion-header">
-													<button class="accordion-button fs-6 fw-semibold collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-														Rating star
-													</button>
-												</h2>
-												<div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-													<form class="accordion-body">
-														<ul class="list-inline mb-0 g-3">
-
-															<li class="list-inline-item mb-0">
-																<input type="checkbox" class="btn-check" id="btn-check-6">
-																<label class="btn btn-sm btn-light btn-primary-soft-check" for="btn-check-6">1<i class="bi bi-star-fill"></i></label>
-															</li>
-
-															<li class="list-inline-item mb-0">
-																<input type="checkbox" class="btn-check" id="btn-check-7">
-																<label class="btn btn-sm btn-light btn-primary-soft-check" for="btn-check-7">2<i class="bi bi-star-fill"></i></label>
-															</li>
-
-															<li class="list-inline-item mb-0">
-																<input type="checkbox" class="btn-check" id="btn-check-8">
-																<label class="btn btn-sm btn-light btn-primary-soft-check" for="btn-check-8">3<i class="bi bi-star-fill"></i></label>
-															</li>
-
-															<li class="list-inline-item mb-0">
-																<input type="checkbox" class="btn-check" id="btn-check-15">
-																<label class="btn btn-sm btn-light btn-primary-soft-check" for="btn-check-15">4<i class="bi bi-star-fill"></i></label>
-															</li>
-
-															<li class="list-inline-item mb-0">
-																<input type="checkbox" class="btn-check" id="btn-check-16">
-																<label class="btn btn-sm btn-light btn-primary-soft-check" for="btn-check-16">5<i class="bi bi-star-fill"></i></label>
-															</li>
-														</ul>
-													</form>
-												</div>
-											</div> -->
-                                            </div>
-                                            <div class="d-flex justify-content-between p-2 p-xl-0 mt-xl-3">
-                                                <button class="btn btn-link text-primary-hover p-0 mb-0"
-                                                    @click.prevent=" clearFilter()"> Clear all
-                                                </button>
-                                                <button class="btn btn-primary mb-0" @click.prevent=" filterProducts()">
-                                                    Filter Result
-                                                </button>
-                                            </div>
+                                        <!-- Departure Time Filter -->
+                                        <div class="mb-3">
+                                            <label for="departureTimeFilter" class="form-label">Departure Time</label>
+                                            <input type="time" id="departureTimeFilter" class="form-control">
                                         </div>
-                                    </div>
-                                </form>
-                            </aside>
 
-                            <div class="col-xl-9 ps-xl-6">
-                                <form class="row g-2 g-xl-4 mb-4">
-                                    <!-- <div class="col-md-6">
-                                        <div class="rounded position-relative">
-                                            <input class="form-control bg-light pe-5" type="search"
-                                                placeholder="Search products by name or keyword..." aria-label="Search"
-                                                v-model="productName" />
-                                            <button
-                                                class="btn bg-transparent border-0 px-2 py-0 position-absolute top-50 end-0 translate-middle-y"
-                                                @click.prevent="searchByName">
-                                                <i class="bi bi-search"></i>
-                                            </button>
+                                        <!-- Seat Availability Filter -->
+                                        <div class="mb-3">
+                                            <label for="seatsAvailableFilter" class="form-label">Seats Available</label>
+                                            <input type="range" class="form-range" id="seatsAvailableFilter" min="0"
+                                                max="50">
+                                            <small>Minimum: seats</small>
                                         </div>
-                                    </div> -->
 
-                                    <div class="col-sm-6 col-md-3 ms-auto">
-                                        <select class="form-select" aria-label="Default select example" v-model="sortBy"
-                                            @change="sortProducts">
-                                            <option disabled selected value="">
-                                                Sort by
-                                            </option>
-                                            <option value="1">Name</option>
-                                            <option value="2">
-                                                Low to High Price
-                                            </option>
-                                            <option value="3">
-                                                High to Low Price
-                                            </option>
-                                        </select>
-                                    </div>
-
-                                    <div class="col-sm-6 col-md-3 d-grid d-xl-none">
-                                        <button class="btn btn-dark mb-0" type="button" data-bs-toggle="offcanvas"
-                                            data-bs-target="#offcanvasSidebar" aria-controls="offcanvasSidebar">
-                                            <i class="fas fa-sliders-h me-1"></i>
-                                            Show filter
-                                        </button>
-                                    </div>
-                                </form>
-
-                                <div class="row g-4 g-lg-5" v-if="products.length > 0">
-                                    <div class="col-sm-6 col-lg-4" v-for="(product, index) in products"
-                                        :key="product.id">
-                                        <div class="card border bg-transparent overflow-hidden p-0 h-100">
-                                            <Link class="" :href="route('product.single', { id: product.id, })">
-                                            <div
-                                                class="position-absolute start-0 top-0 d-flex align-items-start w-100 z-index-2 p-3">
-                                                <div class="position-absolute top-0 start-0 p-3"
-                                                    v-if="product.featured == 1">
-                                                    <span class="badge text-bg-dark">Featured</span>
-                                                </div>
-                                                <div class="ms-auto" v-if="user">
-                                                    <div class="ms-auto">
-                                                        <div class="ms-auto" v-if="checkWishList">
-                                                            <div class="ms-auto" v-if="wishListStatus[index] == 1">
-                                                                <div class="ms-auto">
-                                                                    <button
-                                                                        class="btn btn-light btn-round border mb-0 ms-auto"
-                                                                        @click.prevent="removeFromWishList(product.id)">
-                                                                        <i class="bi bi-heart-fill text-danger"></i>
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-                                                            <div v-else>
-                                                                <div class="ms-auto">
-                                                                    <button
-                                                                        class="btn btn-light btn-round border mb-0 ms-auto"
-                                                                        @click.prevent="addToWishList(product.id)">
-                                                                        <i class="bi bi-heart"></i>
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="" v-if="product.product_image.length > 0">
-                                                <div class="bg-light rounded"
-                                                    v-for="product_image in product.product_image.filter((image) => image.status == 1)"
-                                                    :key="product_image.id">
-                                                    <div class="image-wrapper"
-                                                        style="width: auto; height: 250px; overflow: hidden; position: relative;">
-                                                        <img :src="product_image.image_url" alt="primary image missed"
-                                                            style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); max-width: none; max-height: none; width: 90%; height: 95%; object-fit: cover; border-radius: 10px;" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="" v-else>
-                                                <div class="bg-light rounded">
-                                                    <div class="image-wrapper"
-                                                        style="width: auto; height: 250px; overflow: hidden; position: relative; border-radius: 10px;">
-                                                        <img :src="invalidImage" alt="primary image missed"
-                                                            style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); max-width: none; max-height: none; width: 90%; height: 95%; object-fit: cover;" />
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="card-body pb-0">
-                                                <h6 class="card-title">
-                                                    <a href="shop-single.html" class="stretched-link">
-                                                        {{ product.name }}
-                                                    </a>
-                                                </h6>
-                                                <ul class="list-inline">
-                                                    <li class="list-inline-item me-0 small">
-                                                        <i class="fas fa-star text-warning"></i>
-                                                    </li>
-                                                    <li class="list-inline-item me-0 small">
-                                                        <i class="fas fa-star text-warning"></i>
-                                                    </li>
-                                                    <li class="list-inline-item me-0 small">
-                                                        <i class="fas fa-star text-warning"></i>
-                                                    </li>
-                                                    <li class="list-inline-item me-0 small">
-                                                        <i class="fas fa-star text-warning"></i>
-                                                    </li>
-                                                    <li class="list-inline-item me-0 small">
-                                                        <i class="fas fa-star-half-alt text-warning"></i>
-                                                    </li>
-                                                </ul>
-                                                <div class="" v-if="product.discount_price > 0.00">
-                                                    Discount: Rs.{{ product.discount_price }}
-                                                </div>
-                                                <div class="" v-else>
-                                                    <br>
-                                                </div>
-                                            </div>
-                                            </Link>
-                                            <div
-                                                class="card-footer bg-transparent d-flex justify-content-between align-items-center pt-0">
-                                                <div class="" v-if="product.discount_price > 0.00">
-                                                    <div class="fw-bold mb-0" v-if="product.discount_price">
-                                                        <del>Rs.{{ product.price }}</del>
-                                                    </div>
-                                                    <div class="fw-bold text-success mb-0"
-                                                        v-if="product.discount_price">
-                                                        Rs.{{ product.price - product.discount_price }}
-                                                    </div>
-                                                </div>
-                                                <div class="" v-else>
-                                                    <div class="fw-bold text-success mb-0">
-                                                        <br>
-                                                        Rs.{{ product.price }}
-                                                    </div>
-                                                </div>
-
-                                                <a v-if="user" href="#" class="btn btn-dark mb-0 z-index-2"
-                                                    @click.prevent=" addToCard(product.id)">
-                                                    <i class="bi bi-cart"></i>
-                                                </a>
-
-                                                <Link v-else :href="route('customer.login')"
-                                                    class="btn btn-dark mb-0 z-index-2">
-                                                <i class="bi bi-cart"></i>
-                                                </Link>
-                                            </div>
-                                        </div>
+                                        <!-- Filter Button -->
+                                        <button @click="applyFilters" class="btn btn-primary w-100">Apply
+                                            Filters</button>
                                     </div>
                                 </div>
-
-                                <div class="row g-4 g-lg-5 mt-5 text-center product-match" v-else>
-                                    <div class="">
-                                        <h2>We're sorry, </h2>
-                                        <h4>unable to find the products!</h4>
+                            </aside>
+                            <div class="col-xl-9 ps-xl-6">
+                                <!-- Card View for each Bus -->
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div v-for="bus in buses" :key="bus.id" class="card mb-4 shadow-sm">
+                                            <div class="row g-0">
+                                                <div class="col-md-4">
+                                                    <!-- Bus Image (Optional) -->
+                                                    <img :src="bus.bus_image" alt="Bus Image"
+                                                        class="img-fluid rounded-start" />
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <div class="card-body">
+                                                        <div class="row">
+                                                            <div class="col-8">
+                                                                <h5 class="card-title">{{ bus.name }}</h5>
+                                                                <p class="card-text" style="font-size: small;">
+                                                                    Route: {{ bus.from }} to {{ bus.to }} <br />
+                                                                    Departure: {{ bus.departure_time }} <br />
+                                                                    Arrival: {{ bus.arrival_time }} <br />
+                                                                    Category: {{ bus.category_name }} <br />
+                                                                    Seats Available: {{ bus.seats }}
+                                                                </p>
+                                                            </div>
+                                                            <div class="col-4">
+                                                                <div class="d-flex justify-content-end">
+                                                                    <Link :href="route('booking.index')" class="btn btn-primary">Book a
+                                                                        Ticket</Link>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -396,9 +101,8 @@
                                     <div class="col-sm-12 col-md-6 p-0">
                                         <div class="dataTables_info column__left___padding" id="DataTables_Table_0_info"
                                             role="status" aria-live="polite">
-                                            Showing {{ pagination.from }} to
-                                            {{ pagination.to }} of
-                                            {{ pagination.total }} entries
+                                            Showing {{ pagination.from }} to {{ pagination.to }} of {{ pagination.total
+                                            }} entries
                                         </div>
                                     </div>
                                     <div class="col-sm-12 col-md-6 p-0">
@@ -439,6 +143,7 @@
                         </div>
                     </div>
                 </section>
+
             </main>
         </template>
     </AppLayout>
@@ -461,12 +166,12 @@ const pagination = ref({});
 const wishList = ref({});
 const checkWishList = ref([]);
 const wishListStatus = ref([]);
-const products = ref([]);
+const buses = ref([]);
 const categories = ref({});
 const sortBy = ref("");
-const productName = ref("");
+const busName = ref("");
 const user = usePage().props.auth.user;
-const productData = ref({
+const busData = ref({
     unit_price: '',
     unit_discount: '',
 
@@ -480,11 +185,11 @@ const isInWishlist = async () => {
         var customer_id = user.id;
         const response = await axios.get(route('wishList.check', { customer_id }));
         checkWishList.value = response.data;
-        const productIds = products.value.map(product => product.id);
-        const wishListProductIds = checkWishList.value.map(item => item.product_id);
-        productIds.forEach((productId, index) => {
-            if (wishListProductIds.includes(productId)) {
-                const statusIndex = wishListProductIds.indexOf(productId);
+        const busIds = buses.value.map(bus => bus.id);
+        const wishListbusIds = checkWishList.value.map(item => item.bus_id);
+        busIds.forEach((busId, index) => {
+            if (wishListbusIds.includes(busId)) {
+                const statusIndex = wishListbusIds.indexOf(busId);
                 const status = checkWishList.value[statusIndex].status;
                 if (status === 0) {
                     wishListStatus.value[index] = 0;
@@ -515,7 +220,7 @@ const getCategories = async () => {
 const reload = async () => {
     try {
         const response = (
-            await axios.get(route("product.all"), {
+            await axios.get(route("buses.all"), {
                 params: {
                     page: page.value,
                     per_page: pageCount.value,
@@ -523,35 +228,35 @@ const reload = async () => {
             })
         ).data;
 
-        products.value = response.data;
+        buses.value = response.data;
         pagination.value = response;
     } catch (error) {
         console.log("Error", error);
     }
 };
 
-const getSelectedProductData = async (product_id) => {
+const getSelectedbusData = async (bus_id) => {
     try {
-        const response = await axios.get(route('product.get', product_id));
-        productData.value.unit_price = response.data.price;
-        productData.value.unit_discount = response.data.discount_price;
+        const response = await axios.get(route('bus.get', bus_id));
+        busData.value.unit_price = response.data.price;
+        busData.value.unit_discount = response.data.discount_price;
     } catch (error) {
         console.log('Error', error);
     }
 }
 
-const addToCard = async (product_id) => {
+const addToCard = async (bus_id) => {
     try {
-        await getSelectedProductData(product_id);
+        await getSelectedbusData(bus_id);
         const customer_id = user.id;
-        productData.value.created_by = user.first_name;
+        busData.value.created_by = user.first_name;
         const response = await axios
-            .post(route("cart.item.store", { customer_id, product_id }), productData.value)
+            .post(route("cart.item.store", { customer_id, bus_id }), busData.value)
             .then((response) => {
                 Swal.fire({
                     icon: "success",
                     title: "Success",
-                    text: "Product added to cart!",
+                    text: "bus added to cart!",
                     toast: true,
                     position: "top-end",
                     showConfirmButton: false,
@@ -579,52 +284,14 @@ const addToCard = async (product_id) => {
     }
 };
 
-// const addToCard = async (product_id) => {
-//     try {
-//         await getSelectedProductData(product_id);
-//         const customer_id = user.id;
-//         productData.value.created_by = user.first_name,
-//             console.log('product data', productData.value);
-//         const response = await axios
-//             .post(route("cart.item.store", { customer_id, product_id }), productData.value)
-//             .then((response) => {
-//                 Swal.fire({
-//                     icon: "success",
-//                     title: "Success",
-//                     text: "Product added to cart!",
-//                     toast: true,
-//                     position: "top-end",
-//                     showConfirmButton: false,
-//                     timer: 1500,
-//                     timerProgressBar: true,
-//                 });
-//             })
-//             .catch((error) => {
-//                 console.log("Error:", error);
-//                 Swal.fire({
-//                     icon: "warning",
-//                     title: "Warning",
-//                     text: "Oops! Already in cart.",
-//                     toast: true,
-//                     position: "top-end",
-//                     showConfirmButton: false,
-//                     timer: 3000,
-//                     timerProgressBar: true,
-//                 });
-//             });
-//     } catch (error) {
-//         console.log("Error:", error);
-//     }
-// };
-
 const updateAvailability = (value) => {
     filterForm.value.availability = value;
 };
 
-const filterProducts = async () => {
+const filterBuses = async () => {
     try {
         const response = (
-            await axios.post(route("product.filter"), {
+            await axios.post(route("bus.filter"), {
                 params: {
                     page: page.value,
                     per_page: pageCount.value,
@@ -633,13 +300,13 @@ const filterProducts = async () => {
             })
         ).data;
         console.log('im filter', response.data.length);
-        products.value = response.data;
+        buses.value = response.data;
         if (response.data && response.data.length > 0) {
 
             Swal.fire({
                 icon: "success",
                 title: "Success",
-                text: "Product filter successfully!",
+                text: "bus filter successfully!",
                 toast: true,
                 position: "top-end",
                 showConfirmButton: false,
@@ -650,7 +317,7 @@ const filterProducts = async () => {
             Swal.fire({
                 icon: "warning",
                 title: "Oops!",
-                text: "No matching products found.",
+                text: "No matching buses found.",
                 toast: true,
                 position: "top-end",
                 showConfirmButton: false,
@@ -677,20 +344,20 @@ const filterProducts = async () => {
 const clearFilter = () => {
     // filterForm.value = [];
     // filterForm.value.availability = "all";
-    router.visit(route('products.index'));
+    router.visit(route('buses.index'));
 };
 
-const sortProducts = () => {
+const sortbuses = () => {
     console.log(sortBy.value);
     try {
         if (sortBy.value == 1) {
-            products.value = products.value.sort((a, b) =>
+            buses.value = buses.value.sort((a, b) =>
                 a.name.localeCompare(b.name)
             );
         } else if (sortBy.value == 2) {
-            products.value = products.value.sort((a, b) => a.price - b.price);
+            buses.value = buses.value.sort((a, b) => a.price - b.price);
         } else if (sortBy.value == 3) {
-            products.value = products.value.sort((a, b) => b.price - a.price);
+            buses.value = buses.value.sort((a, b) => b.price - a.price);
         }
     } catch (error) {
         console.log("Error", error);
@@ -699,20 +366,20 @@ const sortProducts = () => {
 
 const searchByName = async () => {
     try {
-        const response = await axios.post(route("product.search"), {
-            name: productName.value,
+        const response = await axios.post(route("bus.search"), {
+            name: busName.value,
         });
-        console.log("pr by name", response.data.searched_product);
-        products.value = response.data.searched_product;
+        console.log("pr by name", response.data.searched_bus);
+        buses.value = response.data.searched_bus;
     } catch (error) {
         console.log("Error", error);
     }
 };
 
-const addToWishList = async (product_id) => {
+const addToWishList = async (bus_id) => {
     try {
         const customer_id = user.id;
-        const response = await axios.post(route('wishList.add', { customer_id, product_id }));
+        const response = await axios.post(route('wishList.add', { customer_id, bus_id }));
         const Toast = Swal.mixin({
             toast: true,
             position: "top-end",
@@ -726,7 +393,7 @@ const addToWishList = async (product_id) => {
         });
         Toast.fire({
             icon: "success",
-            title: "Product successfully added to your wishlist."
+            title: "bus successfully added to your wishlist."
         });
         reload();
         isInWishlist();
@@ -736,10 +403,10 @@ const addToWishList = async (product_id) => {
     }
 }
 
-const removeFromWishList = async (product_id) => {
+const removeFromWishList = async (bus_id) => {
     try {
         const customer_id = user.id;
-        const response = await axios.post(route('wishList.remove', { customer_id, product_id }));
+        const response = await axios.post(route('wishList.remove', { customer_id, bus_id }));
         const Toast = Swal.mixin({
             toast: true,
             position: "top-end",
@@ -753,7 +420,7 @@ const removeFromWishList = async (product_id) => {
         });
         Toast.fire({
             icon: "success",
-            title: "Product successfully removed from your wishlist",
+            title: "bus successfully removed from your wishlist",
         });
 
         reload();

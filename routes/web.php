@@ -9,7 +9,7 @@ use App\Http\Controllers\AdminArea\CategoryController as AdminCategoryController
 use App\Http\Controllers\AdminArea\BusController as AdminBusController;
 use App\Http\Controllers\AdminArea\BusStopController;
 use App\Http\Controllers\AdminArea\CartItemController as AdminCartItemController;
-
+use App\Http\Controllers\AdminArea\PaymentController as AdminPaymentController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\PublicArea\BannerController as PublicBannerController;
 use App\Http\Controllers\PublicArea\CartController as PublicCartController;
@@ -20,6 +20,8 @@ use App\Http\Controllers\PublicArea\OrderController as PublicOrderController;
 use App\Http\Controllers\PublicArea\BusController as PublicBusController;
 use App\Http\Controllers\PublicArea\ProfileController as PublicProfileController;
 use App\Http\Controllers\PublicArea\WishListController as PublicWishListController;
+use App\Http\Controllers\PublicArea\BookingController as PublicBookingController;
+use App\Http\Controllers\PublicArea\PaymentController as PublicPaymentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -100,6 +102,17 @@ Route::prefix('order')->group(function () {
     Route::get('/{customer_id}/store', [PublicOrderController::class, 'store'])->name('order.store');
 });
 
+Route::prefix('booking')->group(function () {
+    Route::get('/', [PublicBookingController::class, 'index'])->name('booking.index');
+    Route::get('/{customer_id}/get', [PublicBookingController::class, 'get'])->name('booking.get');
+    Route::post('/{customer_id}/store', [PublicBookingController::class, 'store'])->name('booking.store');
+    Route::post('/{booking_id}/update', [PublicBookingController::class, 'update'])->name('booking.update');
+    Route::delete('/{booking_id}/delete', [PublicBookingController::class, 'delete'])->name('booking.delete');
+    Route::get('/{booking_id}/status', [PublicBookingController::class, 'status'])->name('booking.status.update');
+});
+
+Route::get('/payment', [PublicPaymentController::class, 'index'])->name('payment.index');
+
 /*Admin Area*/
 Route::prefix('admin')->group(function () {
 
@@ -128,8 +141,8 @@ Route::prefix('admin')->group(function () {
         Route::get('/{category_id}/status', [AdminCategoryController::class, 'status'])->name('admin.category.status.update');
     });
 
-    // Admin-product
-    Route::prefix('product')->group(function () {
+    // Admin-bus
+    Route::prefix('bus')->group(function () {
         Route::get('/', [AdminBusController::class, 'index'])->name('admin.bus.index');
         Route::get('/all', [AdminBusController::class, 'all'])->name('admin.bus.all');
         Route::get('/{product_id}/get', [AdminBusController::class, 'get'])->name('admin.bus.get');
@@ -140,15 +153,15 @@ Route::prefix('admin')->group(function () {
         Route::post('/filter', [AdminBusController::class, 'filter'])->name('admin.bus.filter');
     });
 
-    // Admin-product-image
-    Route::prefix('product-image')->group(function () {
+    // Admin-bus-image
+    Route::prefix('bus-image')->group(function () {
         Route::get('/{product_id}/all', [AdminBusImageController::class, 'all'])->name('admin.bus.image.all');
         Route::post('/store', [AdminBusImageController::class, 'store'])->name('admin.bus.image.store');
         Route::post('/primary', [AdminBusImageController::class, 'primary'])->name('admin.bus.image.primary');
         Route::post('/{product_image_id}/delete', [AdminBusImageController::class, 'delete'])->name('admin.bus.image.delete');
     });
 
-    // Admin-product-image
+    // Admin-customer
     Route::prefix('customer')->group(function () {
         Route::get('/', [AdminCustomerController::class, 'index'])->name('admin.customer.index');
         Route::get('/all', [AdminCustomerController::class, 'all'])->name('admin.customer.all');
@@ -166,6 +179,16 @@ Route::prefix('admin')->group(function () {
         Route::post('/store', [BusStopController::class, 'store'])->name('admin.bus.stop.store');
         Route::post('/{bus_stop_id}/update', [BusStopController::class, 'update'])->name('admin.bus.stop.update');
         Route::delete('/{bus_stop_id}/delete', [BusStopController::class, 'delete'])->name('admin.bus.stop.delete');
+    });
+
+    //Payments
+    Route::prefix('payment')->group(function () {
+        Route::get('/', [AdminPaymentController::class, 'index'])->name('admin.payment.index');
+        Route::get('/all', [AdminPaymentController::class, 'all'])->name('admin.payment.all');
+        Route::get('/{payment_id}/get', [AdminPaymentController::class, 'get'])->name('admin.payment.get');
+        Route::post('/store', [AdminPaymentController::class, 'store'])->name('admin.payment.store');
+        Route::post('/{payment_id}/update', [AdminPaymentController::class, 'update'])->name('admin.payment.update');
+        Route::delete('/{payment_id}/delete', [AdminPaymentController::class, 'delete'])->name('admin.payment.delete');
     });
 
     // Admin-order

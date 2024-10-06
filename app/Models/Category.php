@@ -15,11 +15,11 @@ class Category extends Model
         'ACTIVE' => 1,
         'INACTIVE' => 0
     ];
-    
+
     protected $fillable = [
         'code',
         'name',
-        'image_id', 
+        'image_id',
         'status',
         'description',
     ];
@@ -34,7 +34,7 @@ class Category extends Model
 
     public function Product()
     {
-        return $this->hasMany(Product::class, 'category_id', 'id');
+        return $this->hasMany(Bus::class, 'category_id', 'id');
     }
     public function getImageUrlAttribute()
     {
