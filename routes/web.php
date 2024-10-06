@@ -19,6 +19,8 @@ use App\Http\Controllers\PublicArea\OrderController as PublicOrderController;
 use App\Http\Controllers\PublicArea\BusController as PublicBusController;
 use App\Http\Controllers\PublicArea\ProfileController as PublicProfileController;
 use App\Http\Controllers\PublicArea\WishListController as PublicWishListController;
+use App\Http\Controllers\PublicArea\BookingController as PublicBookingController;
+use App\Http\Controllers\PublicArea\PaymentController as PublicPaymentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -98,6 +100,17 @@ Route::prefix('cart-items')->group(function () {
 Route::prefix('order')->group(function () {
     Route::get('/{customer_id}/store', [PublicOrderController::class, 'store'])->name('order.store');
 });
+
+Route::prefix('booking')->group(function () {
+    Route::get('/', [PublicBookingController::class, 'index'])->name('booking.index');
+    Route::get('/{customer_id}/get', [PublicBookingController::class, 'get'])->name('booking.get');
+    Route::post('/{customer_id}/store', [PublicBookingController::class, 'store'])->name('booking.store');
+    Route::post('/{booking_id}/update', [PublicBookingController::class, 'update'])->name('booking.update');
+    Route::delete('/{booking_id}/delete', [PublicBookingController::class, 'delete'])->name('booking.delete');
+    Route::get('/{booking_id}/status', [PublicBookingController::class, 'status'])->name('booking.status.update');
+});
+
+Route::get('/payment', [PublicPaymentController::class, 'index'])->name('payment.index');
 
 /*Admin Area*/
 Route::prefix('admin')->group(function () {

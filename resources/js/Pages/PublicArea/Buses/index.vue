@@ -71,14 +71,24 @@
                                                 </div>
                                                 <div class="col-md-8">
                                                     <div class="card-body">
-                                                        <h5 class="card-title">{{ bus.name }}</h5>
-                                                        <p class="card-text">
-                                                            Route: {{ bus.from }} to {{ bus.to }} <br />
-                                                            Departure: {{ bus.departure_time }} <br />
-                                                            Arrival: {{ bus.arrival_time }} <br />
-                                                            Seats Available: {{ bus.seats }}
-                                                        </p>
-                                                        <a href="#" class="btn btn-primary">Book a Ticket</a>
+                                                        <div class="row">
+                                                            <div class="col-8">
+                                                                <h5 class="card-title">{{ bus.name }}</h5>
+                                                                <p class="card-text" style="font-size: small;">
+                                                                    Route: {{ bus.from }} to {{ bus.to }} <br />
+                                                                    Departure: {{ bus.departure_time }} <br />
+                                                                    Arrival: {{ bus.arrival_time }} <br />
+                                                                    Category: {{ bus.category_name }} <br />
+                                                                    Seats Available: {{ bus.seats }}
+                                                                </p>
+                                                            </div>
+                                                            <div class="col-4">
+                                                                <div class="d-flex justify-content-end">
+                                                                    <Link :href="route('booking.index')" class="btn btn-primary">Book a
+                                                                        Ticket</Link>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>

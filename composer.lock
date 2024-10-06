@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "dffc8e982c27264813770fbedcd45287",
+    "content-hash": "100d158b61b1e77573bac2f827d31eb7",
     "packages": [
         {
             "name": "aws/aws-crt-php",
@@ -1273,6 +1273,81 @@
                 }
             ],
             "time": "2023-10-27T10:59:02+00:00"
+        },
+        {
+            "name": "lahirulhr/laravel-payhere",
+            "version": "v1.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Visanduma/laravel-payhere.git",
+                "reference": "72ce0aa87b495517e3b2d66633e588c86d417e61"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Visanduma/laravel-payhere/zipball/72ce0aa87b495517e3b2d66633e588c86d417e61",
+                "reference": "72ce0aa87b495517e3b2d66633e588c86d417e61",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^7.8",
+                "illuminate/contracts": "^9.0|^10.0|^11.0",
+                "php": "^8.1",
+                "spatie/laravel-package-tools": "^1.9.2"
+            },
+            "require-dev": {
+                "laravel/pint": "^1.16",
+                "nunomaduro/collision": "^6.0",
+                "orchestra/testbench": "^8.0",
+                "pestphp/pest": "^1.23",
+                "pestphp/pest-plugin-laravel": "^1.4",
+                "phpunit/phpunit": "^9.6.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Lahirulhr\\PayHere\\PayHereServiceProvider"
+                    ],
+                    "aliases": {
+                        "PayHere": "Lahirulhr\\PayHere\\PayHereFacade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Lahirulhr\\PayHere\\": "src",
+                    "Lahirulhr\\PayHere\\Database\\Factories\\": "database/factories"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "LaHiRu",
+                    "email": "lahirulhr@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "API integration for PayHere payment gateway in Sri Lanka",
+            "homepage": "https://github.com/lahirulhr/laravel-payhere",
+            "keywords": [
+                "lahirulhr",
+                "laravel",
+                "laravel-payhere"
+            ],
+            "support": {
+                "issues": "https://github.com/Visanduma/laravel-payhere/issues",
+                "source": "https://github.com/Visanduma/laravel-payhere/tree/v1.0.4"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/lahirulhr",
+                    "type": "github"
+                }
+            ],
+            "time": "2024-08-01T06:51:29+00:00"
         },
         {
             "name": "laravel/framework",

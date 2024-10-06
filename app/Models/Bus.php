@@ -24,13 +24,21 @@ class Bus extends Model
         'from',
         'to',
         'status',
+        'departure_time',
+        'arrival_time',
         'description',
         'category_id',
     ];
 
     protected $appends = [
         'bus_image',
+        'category_name',
     ];
+
+    public function getCategoryNameAttribute()
+    {
+        return $this->Category->name;
+    }
 
     public function getBusImageAttribute()
     {
