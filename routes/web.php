@@ -127,8 +127,8 @@ Route::prefix('admin')->group(function () {
         Route::get('/{category_id}/status', [AdminCategoryController::class, 'status'])->name('admin.category.status.update');
     });
 
-    // Admin-product
-    Route::prefix('product')->group(function () {
+    // Admin-bus
+    Route::prefix('bus')->group(function () {
         Route::get('/', [AdminBusController::class, 'index'])->name('admin.bus.index');
         Route::get('/all', [AdminBusController::class, 'all'])->name('admin.bus.all');
         Route::get('/{product_id}/get', [AdminBusController::class, 'get'])->name('admin.bus.get');
@@ -139,15 +139,15 @@ Route::prefix('admin')->group(function () {
         Route::post('/filter', [AdminBusController::class, 'filter'])->name('admin.bus.filter');
     });
 
-    // Admin-product-image
-    Route::prefix('product-image')->group(function () {
+    // Admin-bus-image
+    Route::prefix('bus-image')->group(function () {
         Route::get('/{product_id}/all', [AdminBusImageController::class, 'all'])->name('admin.bus.image.all');
         Route::post('/store', [AdminBusImageController::class, 'store'])->name('admin.bus.image.store');
         Route::post('/primary', [AdminBusImageController::class, 'primary'])->name('admin.bus.image.primary');
         Route::post('/{product_image_id}/delete', [AdminBusImageController::class, 'delete'])->name('admin.bus.image.delete');
     });
 
-    // Admin-product-image
+    // Admin-customer
     Route::prefix('customer')->group(function () {
         Route::get('/', [AdminCustomerController::class, 'index'])->name('admin.customer.index');
         Route::get('/all', [AdminCustomerController::class, 'all'])->name('admin.customer.all');

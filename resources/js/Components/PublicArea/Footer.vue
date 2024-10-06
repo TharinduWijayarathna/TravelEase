@@ -1,92 +1,9 @@
 <template>
     <!-- =======================
 Footer START -->
-    <footer class="bg-dark pt-6 position-relative" data-bs-theme="dark">
-        <div class="container position-relative mt-5">
+    <footer class="bg-dark position-relative" data-bs-theme="dark">
+        <div class="container position-relative">
 
-            <!-- Widgets -->
-            <div class="row g-4 justify-content-between">
-                <!-- Widget 1 START -->
-                <div class="col-lg-5">
-                    <!-- logo -->
-                    <a href="index.html">
-                        <img class="light-mode-item h-40px" src="/assets/PublicArea/images/logo.svg" alt="logo" />
-                        <img class="dark-mode-item h-40px" src="/assets/PublicArea/images/logo-light.svg" alt="logo" />
-                    </a>
-
-                    <p class="mt-4 mb-2">
-                        Simplify your online bus ticketing experience with us.
-                    </p>
-                    <!-- Social icon -->
-                    <ul class="list-inline mb-0 mt-4">
-                        <li class="list-inline-item">
-                            <a class="btn btn-xs btn-icon btn-light" href="#"><i
-                                    class="fab fa-fw fa-facebook-f lh-base"></i></a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a class="btn btn-xs btn-icon btn-light" href="#"><i
-                                    class="fab fa-fw fa-instagram lh-base"></i></a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a class="btn btn-xs btn-icon btn-light" href="#"><i
-                                    class="fab fa-fw fa-twitter lh-base"></i></a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a class="btn btn-xs btn-icon btn-light" href="#"><i
-                                    class="fab fa-fw fa-linkedin-in lh-base"></i></a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a class="btn btn-xs btn-icon btn-light" href="#"><i
-                                    class="fab fa-fw fa-youtube lh-base"></i></a>
-                        </li>
-                    </ul>
-                </div>
-                <!-- Widget 1 END -->
-
-                <!-- Widget 2 START -->
-                <div class="col-lg-6 col-xxl-4">
-                    <div class="row g-4">
-                        <!-- Link block -->
-                        <div class="col-6">
-                            <ul class="nav flex-column">
-                                <li class="nav-item">
-                                    <Link class="nav-link pt-0" :href="route('home')">Home</Link>
-                                </li>
-                                <li class="nav-item">
-                                    <Link class="nav-link" :href="route('buses.index')">Products</Link>
-                                </li>
-                                <li class="nav-item">
-                                    <Link class="nav-link" :href="route('categories')">Categories
-                                    <span class="badge text-bg-danger ms-2">2 New</span></Link>
-                                </li>
-                                <li class="nav-item">
-                                    <Link class="nav-link" :href="route('contact')">Contact</Link>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <!-- Link block -->
-                        <div class="col-6">
-                            <ul class="nav flex-column">
-                                <li class="nav-item">
-                                    <Link class="nav-link pt-0" :href="route('customer.index')">Profile</Link>
-                                </li>
-                                <li class="nav-item">
-                                    <Link class="nav-link pt-0" :href="route('cart.index')">Cart</Link>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Supports
-                                        <i class="bi bi-box-arrow-up-right small ms-1"></i></a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <!-- Widget 2 END -->
-            </div>
-
-            <!-- Divider -->
-            <hr class="mt-4 mb-0" />
 
             <!-- Bottom footer -->
             <div class="d-md-flex justify-content-between align-items-center text-center text-lg-start py-4">

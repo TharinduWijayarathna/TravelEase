@@ -105,12 +105,13 @@
                                             <th class="textClassHead">
                                                 Bus Name
                                             </th>
-
+                                            <th class="textClassHead">
+                                                Image
+                                            </th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr v-for="value in busData" :key="value.id"
-                                            @click.prevent="edit(value.id)">
+                                        <tr v-for="value in busData" :key="value.id" @click.prevent="edit(value.id)">
                                             <td class="textClassBody text-center">
                                                 <div class="" v-if="value.status == 1">
                                                     <span class="badge badge-success">Active</span>
@@ -125,15 +126,12 @@
                                             <td class="textClassBody">
                                                 {{ value.name }}
                                             </td>
-                                            <td class="textClassBody">
-                                                {{ value.category?.name }}
-                                            </td>
-                                            <!-- <td class="textClassBody" v-if="value?.bus_image.length > 0">
-                                                <div class="" v-for="image in value.bus_image">
-                                                    <div class="" v-if="image.status == 1">
-                                                        <img v-if="value?.bus_image.length > 0"
-                                                            class="img-fluid bus-image-setup"
-                                                            :src="image.image_url" />
+
+                                            <td class="textClassBody" v-if="value.bus_image">
+                                                <div class="">
+                                                    <div class="">
+                                                        <img :src="value.bus_image" alt="no image"
+                                                            class="bus-image-setup" height="100px" />
                                                     </div>
                                                 </div>
                                             </td>
@@ -144,8 +142,7 @@
                                                             class="bus-image-setup" height="100px" />
                                                     </div>
                                                 </div>
-                                            </td> -->
-
+                                            </td>
 
 
                                         </tr>
@@ -228,8 +225,7 @@
                                             </div>
                                             <div class="col-md-9">
                                                 <input type="text" class="form-control form-control-sm" name="name"
-                                                    id="name" placeholder="Bus name" v-model="bus.name"
-                                                    required />
+                                                    id="name" placeholder="Bus name" v-model="bus.name" required />
                                                 <small v-if="validationErrors.name" id="bus_name"
                                                     class="text-danger form-text text-error-msg error">{{
                                                         validationErrors.name }}</small>

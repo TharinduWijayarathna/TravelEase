@@ -28,6 +28,20 @@ class Bus extends Model
         'category_id',
     ];
 
+    protected $appends = [
+        'bus_image',
+    ];
+
+    public function getBusImageAttribute()
+    {
+        return $this->PrimaryBusImage->image_url;
+    }
+
+    public function PrimaryBusImage()
+    {
+        return $this->hasOne(BusImage::class, 'bus_id', 'id')->where('status', 1);
+    }
+
     public function Category()
     {
         return $this->hasOne(Category::class, 'id', 'category_id');

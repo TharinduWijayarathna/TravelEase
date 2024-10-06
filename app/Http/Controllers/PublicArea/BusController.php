@@ -29,19 +29,6 @@ class BusController extends Controller
         return Inertia::render('PublicArea/Buses/index');
     }
 
-    /**
-     * SingleProduct
-     * get the selected product using bus_id
-     *
-     * @param $bus_id
-     *
-     * @return void
-     */
-    public function singleProduct($bus_id)
-    {
-        $response['product'] = BusFacade::get($bus_id);
-        return Inertia::render('PublicArea/Buses/singleProduct', $response);
-    }
 
     /**
      * All
@@ -54,8 +41,7 @@ class BusController extends Controller
         // $response['product'] = ProductFacade::all();
         // return $response;
 
-        $query = Bus::with('Category', 'ProductImage', 'ProductImage.Image', 'WishList', 'CartItem', 'CartItem.Cart')
-                        ->orderBy('products.id', 'desc');
+        $query = Bus::query();
 
         $payload = QueryBuilder::for($query)
             ->allowedSorts(['id', 'name'])
