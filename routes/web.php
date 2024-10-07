@@ -70,7 +70,7 @@ Route::prefix('customer')->group(function () {
 Route::prefix('booking')->group(function () {
     Route::get('/{bus_id}', [PublicBookingController::class, 'index'])->name('booking.index');
     Route::get('/{customer_id}/get', [PublicBookingController::class, 'get'])->name('booking.get');
-    Route::post('/{customer_id}/store', [PublicBookingController::class, 'store'])->name('booking.store');
+    Route::post('/store', [PublicBookingController::class, 'store'])->name('booking.store');
     Route::post('/{booking_id}/update', [PublicBookingController::class, 'update'])->name('booking.update');
     Route::delete('/{booking_id}/delete', [PublicBookingController::class, 'delete'])->name('booking.delete');
     Route::get('/{booking_id}/status', [PublicBookingController::class, 'status'])->name('booking.status.update');
@@ -141,6 +141,7 @@ Route::prefix('admin')->group(function () {
     Route::prefix('bus-stop')->group(function () {
         Route::get('/', [BusStopController::class, 'index'])->name('admin.bus.stop.index');
         Route::get('/{bus_id}/all', [BusStopController::class, 'all'])->name('admin.bus.stop.all');
+        Route::get('/{bus_id}/list', [BusStopController::class, 'list'])->name('admin.bus.stop.list');
         Route::get('/{bus_stop_id}/get', [BusStopController::class, 'get'])->name('admin.bus.stop.get');
         Route::post('/store', [BusStopController::class, 'store'])->name('admin.bus.stop.store');
         Route::post('/{bus_stop_id}/update', [BusStopController::class, 'update'])->name('admin.bus.stop.update');
