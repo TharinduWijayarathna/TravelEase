@@ -20,4 +20,40 @@ class Payment extends Model
         'payment_reference',
         'payment_date',
     ];
+
+    protected $appends = [
+        'customer',
+        'booking',
+        'travel_provider',
+    ];
+
+    public function getCustomerAttribute()
+    {
+        return $this->customer->name ?? '';
+    }
+
+    public function getBookingAttribute()
+    {
+        return $this->booking->name ?? '';
+    }
+
+    public function getTravelProviderAttribute()
+    {
+        return $this->travelProvider->name ?? '';
+    }
+
+    public function customer()
+    {
+        return $this->hasOne(User::class, 'id', 'customer_id');
+    }
+
+    public function booking()
+    {
+        return $this->hasOne(Booking::class, 'id', 'booking_id');
+    }
+
+    public function travelProvider()
+    {
+        return $this->hasOne(User::class, 'id', 'travel_provider_id');
+    }
 }
