@@ -19,12 +19,7 @@
                                 </ol>
                             </nav>
                         </div>
-                        <div class="col-lg-4 text-right py-4">
-                            <button type="button" class="btn btn-primary btn btn-sm btn-neutral" data-toggle="modal"
-                                @click.prevent="resetData()" data-target="#newcustomerModal">
-                                <i class="fa-solid fa-circle-plus"></i> ADD NEW
-                            </button>
-                        </div>
+
                     </div>
                 </div>
             </div>
@@ -43,41 +38,6 @@
                                         <Multiselect v-model="select_customer_status" :options="statusList"
                                             :showLabels="false" :close-on-select="true" :clear-on-select="false"
                                             :searchable="true" placeholder="Select Status" label="name" track-by="id" />
-                                    </div>
-                                </div>
-
-                                <div class="items-center text-muted mx-1">
-                                    <div class="">Payment Code</div>
-                                    <div class="inline-block ">
-                                        <input type="text" class="form-control form-control-sm" name="customer_code"
-                                            id="customer_code" v-model="customer_code" @keyup="getSearch"
-                                            placeholder="customer Code" />
-                                    </div>
-                                </div>
-
-                                <div class="items-center text-muted mx-1">
-                                    <div class="">First Name</div>
-                                    <div class="inline-block ">
-                                        <input type="text" class="form-control form-control-sm" name="first_name"
-                                            id="first_name" v-model="first_name" @keyup="getSearch"
-                                            placeholder="First Name" />
-                                    </div>
-                                </div>
-
-                                <div class="items-center text-muted mx-1">
-                                    <div class="">Last Name</div>
-                                    <div class="inline-block ">
-                                        <input type="text" class="form-control form-control-sm" name="last_name"
-                                            id="last_name" v-model="last_name" @keyup="getSearch"
-                                            placeholder="Last Name" />
-                                    </div>
-                                </div>
-
-                                <div class="items-center text-muted mx-1">
-                                    <div class="">Email</div>
-                                    <div class="inline-block ">
-                                        <input type="text" class="form-control form-control-sm" name="category_name"
-                                            id="category_name" v-model="email" @keyup="getSearch" placeholder="Email" />
                                     </div>
                                 </div>
 
@@ -113,23 +73,30 @@
                                                 Status
                                             </th>
                                             <th class="textClassHead text-left" style="width: 14%;">
-                                                Payment Code
+                                                Customer
                                             </th>
                                             <th class="textClassHead text-left" style="width: 14%;">
-                                                First Name
+                                                Email
                                             </th>
                                             <th class="textClassHead text-left" style="width: 14%;">
-                                                Last Name
+                                                Pick Up
                                             </th>
                                             <th class="textClassHead" style="width: 14%;">
-                                                email
+                                                Drop Off
+                                            </th>
+                                            <th class="textClassHead" style="width: 14%;">
+                                                Date
+                                            </th>
+                                            <th class="textClassHead" style="width: 14%;">
+                                                Seats
+                                            </th>
+                                            <th class="textClassHead" style="width: 14%;">
+                                                Requests
                                             </th>
                                             <!-- <th class="textClassHead text-center">
                                                 Profile Image
                                             </th> -->
-                                            <th class="textClassHead text-right" style="width: 14%;">
-                                                Contact Number
-                                            </th>
+
                                             <!-- <th class="textClassHead">Rating</th> -->
 
                                         </tr>
@@ -145,17 +112,27 @@
                                                     <span class="badge badge-warning">Inactive</span>
                                                 </div>
                                             </td>
+
                                             <td class="textClassBody text-left">
-                                                {{ value.code }}
+                                                {{ value.name }}
                                             </td>
                                             <td class="textClassBody text-left">
-                                                {{ value.first_name }}
-                                            </td>
-                                            <td class="textClassBody text-left">
-                                                {{ value.last_name }}
+                                                {{ value.email }}
                                             </td>
                                             <td class="textClassBody">
-                                                {{ value.email }}
+                                                {{ value.pickup_name }}
+                                            </td>
+                                            <td class="textClassBody">
+                                                {{ value.dropoff_name }}
+                                            </td>
+                                            <td class="textClassBody">
+                                                {{ value.date }}
+                                            </td>
+                                            <td class="textClassBody">
+                                                {{ value.seats }}
+                                            </td>
+                                            <td class="textClassBody">
+                                                {{ value.requests }}
                                             </td>
                                             <!-- <td class="textClassBody text-center">
                                                 <img width="160px" v-if="value.image_url" :src="value.image_url"
@@ -163,9 +140,7 @@
                                                 <img v-else width="80px" src="/assets/PublicArea/images/avatar/user.jpg"
                                                     alt="" />
                                             </td> -->
-                                            <td class="textClassBody text-right">
-                                                {{ value.contact_number }}
-                                            </td>
+
                                             <!-- <td class="textClassBody text-center">
                                                 <div v-if="value.gender == 1">
                                                     <span>Male</span>
@@ -363,15 +338,12 @@ const convertValidationError = (err) => {
 const reload = async () => {
     try {
         const response = (
-            await axios.get(route("admin.customer.all"), {
+            await axios.get(route("admin.booking.all"), {
                 params: {
                     page: page.value,
                     per_page: pageCount.value,
                     status: select_customer_status.value?.id,
                     code: customer_code.value,
-                    first_name: first_name.value,
-                    last_name: last_name.value,
-                    email: email.value,
                 },
             })
         ).data;
