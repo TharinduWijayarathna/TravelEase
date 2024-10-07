@@ -12,4 +12,9 @@ class BookingController extends Controller
     {
         return Inertia::render('PublicArea/Bookings/index');
     }
+
+    public function userPage()
+    {
+        return Inertia::render('PublicArea/Bookings/userBookings');
+    }
 }

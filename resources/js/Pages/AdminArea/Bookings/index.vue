@@ -5,7 +5,7 @@
                 <div class="container-fluid">
                     <div class="header-body row">
                         <div class="col-lg-8 align-items-center py-4">
-                            <h6 class="h2 text-maroon d-inline-block mb-0">Order Managements</h6>
+                            <h6 class="h2 text-maroon d-inline-block mb-0">Bookings Management</h6>
                             <nav aria-label="breadcrumb" class="d-none d-md-block ">
                                 <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                                     <li class="breadcrumb-item">
@@ -14,14 +14,14 @@
                                         </Link>
                                     </li>
                                     <li class="breadcrumb-item active breadcrumb-yellow" aria-current="page">
-                                        Orders
+                                        Bookings Management
                                     </li>
                                 </ol>
                             </nav>
                         </div>
                         <div class="col-lg-4 text-right py-4">
                             <button type="button" class="btn btn-primary btn btn-sm btn-neutral" data-toggle="modal"
-                                @click.prevent="showNewOrderModal()" data-target="#exampleModal">
+                                @click.prevent="resetData()" data-target="#newcustomerModal">
                                 <i class="fa-solid fa-circle-plus"></i> ADD NEW
                             </button>
                         </div>
@@ -36,57 +36,55 @@
                     <div class="card shadow">
                         <div class="py-3 filters-margin mx-3 text-sm card-body">
                             <div class="flex">
-                                <div class="items-center text-muted mx-1">
-                                    <div class="">Code</div>
-                                    <div class="inline-block ">
-                                        <input type="text" class="form-control form-control-sm" name="code" id="code"
-                                            v-model="search_code" @keyup="getSearch" placeholder="Code" />
-                                    </div>
-                                </div>
-                                <div class="items-center text-muted mx-1">
-                                    <div class="">DATE FROM</div>
-                                    <div class="inline-block ">
-                                        <input type="date" class="form-control form-control-sm" name="date_from"
-                                            id="date_from" v-model="search_date_from" @keyup="getSearch"
-                                            placeholder="date" />
-                                    </div>
-                                </div>
-                                <div class="items-center text-muted mx-1">
-                                    <div class="">DATE TO</div>
-                                    <div class="inline-block ">
-                                        <input type="date" class="form-control form-control-sm" name="date_to"
-                                            id="date_to" v-model="search_date_to" @keyup="getSearch"
-                                            placeholder="date" />
-                                    </div>
-                                </div>
-                                <div class="items-center text-muted mx-1">
-                                    <div class="">Customer Name</div>
-                                    <div class="inline-block ">
-                                        <input type="text" class="form-control form-control-sm" name="customer_name"
-                                            id="customer_name" v-model="search_customer_name" @keyup="getSearch"
-                                            placeholder="Customer Name" />
-                                    </div>
-                                </div>
 
                                 <div class="items-center text-muted mx-1">
-                                    <div class="">Is Paid</div>
+                                    <div class="">Status</div>
                                     <div class="inline-block" style="width: 200px;">
-                                        <Multiselect v-model="select_is_paid" :options="isPaid" :showLabels="false"
-                                            :close-on-select="true" :clear-on-select="false" :searchable="true"
-                                            placeholder="Select Status" label="name" track-by="id" />
-                                    </div>
-                                </div>
-                                <div class="items-center text-muted mx-1">
-                                    <div class="">Is Shipped</div>
-                                    <div class="inline-block" style="width: 200px;">
-                                        <Multiselect v-model="select_is_shipped" :options="isShipped"
+                                        <Multiselect v-model="select_customer_status" :options="statusList"
                                             :showLabels="false" :close-on-select="true" :clear-on-select="false"
                                             :searchable="true" placeholder="Select Status" label="name" track-by="id" />
                                     </div>
                                 </div>
+
+                                <div class="items-center text-muted mx-1">
+                                    <div class="">Payment Code</div>
+                                    <div class="inline-block ">
+                                        <input type="text" class="form-control form-control-sm" name="customer_code"
+                                            id="customer_code" v-model="customer_code" @keyup="getSearch"
+                                            placeholder="customer Code" />
+                                    </div>
+                                </div>
+
+                                <div class="items-center text-muted mx-1">
+                                    <div class="">First Name</div>
+                                    <div class="inline-block ">
+                                        <input type="text" class="form-control form-control-sm" name="first_name"
+                                            id="first_name" v-model="first_name" @keyup="getSearch"
+                                            placeholder="First Name" />
+                                    </div>
+                                </div>
+
+                                <div class="items-center text-muted mx-1">
+                                    <div class="">Last Name</div>
+                                    <div class="inline-block ">
+                                        <input type="text" class="form-control form-control-sm" name="last_name"
+                                            id="last_name" v-model="last_name" @keyup="getSearch"
+                                            placeholder="Last Name" />
+                                    </div>
+                                </div>
+
+                                <div class="items-center text-muted mx-1">
+                                    <div class="">Email</div>
+                                    <div class="inline-block ">
+                                        <input type="text" class="form-control form-control-sm" name="category_name"
+                                            id="category_name" v-model="email" @keyup="getSearch" placeholder="Email" />
+                                    </div>
+                                </div>
+
                                 <div class="text-muted mx-1">
                                     <div class="mt-2">
-                                        <button @click.prevent="clearFilter()" class="btn btn-ash float-end mt-2 pt-2">
+                                        <button @click.prevent="clearFilter()"
+                                            class="btn btn-ash float-end mt-2 pt-2">
                                             <i class="fa fa-refresh" aria-hidden="true" />
                                         </button>
                                     </div>
@@ -111,68 +109,74 @@
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                            <th class="textClassHead text-left">
-                                                CODE
+                                            <th class="textClassHead text-center" style="width: 14%;">
+                                                Status
                                             </th>
-                                            <th class="textClassHead text-left">
-                                                DATE
+                                            <th class="textClassHead text-left" style="width: 14%;">
+                                                Payment Code
                                             </th>
-                                            <th class="textClassHead text-left">
-                                                CUSTOMER CODE
+                                            <th class="textClassHead text-left" style="width: 14%;">
+                                                First Name
                                             </th>
-                                            <th class="textClassHead text-left">
-                                                CUSTOMER NAME
+                                            <th class="textClassHead text-left" style="width: 14%;">
+                                                Last Name
                                             </th>
-                                            <th class="textClassHead text-left">
-                                                CUSTOMER EMAIL
+                                            <th class="textClassHead" style="width: 14%;">
+                                                email
                                             </th>
-                                            <th class="textClassHead text-right">
-                                                TOTAL
+                                            <!-- <th class="textClassHead text-center">
+                                                Profile Image
+                                            </th> -->
+                                            <th class="textClassHead text-right" style="width: 14%;">
+                                                Contact Number
                                             </th>
-                                            <th class="textClassHead text-center">
-                                                IS PAID
-                                            </th>
-                                            <th class="textClassHead text-center">
-                                                IS SHIPPED
-                                            </th>
+                                            <!-- <th class="textClassHead">Rating</th> -->
+
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr v-for="value in orderData" :key="value.id" @click.prevent="edit(value.id)">
+                                        <tr v-for="value in customerData" :key="value.id"
+                                            @click.prevent="edit(value.id)">
+                                            <td class="textClassBody text-center">
+                                                <div class="" v-if="value.status === 1">
+                                                    <span class="badge badge-success">Active</span>
+                                                </div>
+                                                <div class="" v-else>
+                                                    <span class="badge badge-warning">Inactive</span>
+                                                </div>
+                                            </td>
                                             <td class="textClassBody text-left">
                                                 {{ value.code }}
                                             </td>
-                                            <td class="textClassBody">
-                                                {{ removeTFromTimestamp(value.updated_at) }}
+                                            <td class="textClassBody text-left">
+                                                {{ value.first_name }}
+                                            </td>
+                                            <td class="textClassBody text-left">
+                                                {{ value.last_name }}
                                             </td>
                                             <td class="textClassBody">
-                                                {{ value.customer_code }}
+                                                {{ value.email }}
                                             </td>
-                                            <td class="textClassBody">
-                                                {{ value.customer_name }}
-                                            </td>
-                                            <td class="textClassBody">
-                                                {{ value.customer_email }}
-                                            </td>
+                                            <!-- <td class="textClassBody text-center">
+                                                <img width="160px" v-if="value.image_url" :src="value.image_url"
+                                                    alt="" />
+                                                <img v-else width="80px" src="/assets/PublicArea/images/avatar/user.jpg"
+                                                    alt="" />
+                                            </td> -->
                                             <td class="textClassBody text-right">
-                                                Rs.{{ numberFormatter(value.total) }}
+                                                {{ value.contact_number }}
                                             </td>
-                                            <td class="textClassBody text-center">
-                                                <div class="" v-if="value.is_paid == 1">
-                                                    <span class="badge badge-success">PAID</span>
+                                            <!-- <td class="textClassBody text-center">
+                                                <div v-if="value.gender == 1">
+                                                    <span>Male</span>
                                                 </div>
-                                                <div class="" v-else>
-                                                    <span class="badge bg-light">NOT PAID</span>
+                                                <div v-else-if="value.gender == 2">
+                                                    <span>Female</span>
                                                 </div>
-                                            </td>
-                                            <td class="textClassBody text-center">
-                                                <div class="" v-if="value.is_shipped == 1">
-                                                    <span class="badge badge-success">SHIPPED</span>
+                                                <div v-else-if="value.gender == 3">
+                                                    <span>Other</span>
                                                 </div>
-                                                <div class="" v-else>
-                                                    <span class="badge bg-light">NOT SHIPPED</span>
-                                                </div>
-                                            </td>
+                                            </td> -->
                                         </tr>
                                     </tbody>
                                 </table>
@@ -193,7 +197,7 @@
                                     id="DataTables_Table_0_paginate">
                                     <nav aria-label="Page navigation" style="float: right">
                                         <ul class="pagination">
-                                            <li class="page-item"
+                                            <li class="page-item "
                                                 :class="pagination.current_page == 1 ? 'disabled' : ''">
                                                 <a class="page-link" href="javascript:void(0)"
                                                     @click="setPage(pagination.current_page - 1)">
@@ -227,14 +231,14 @@
         </template>
 
         <template #modals>
-            <div class="modal fade" id="newOrderModal" data-bs-backdrop="static" tabindex="-1" role="dialog"
+            <div class="modal fade" id="newcustomerModal" data-bs-backdrop="static" tabindex="-1" role="dialog"
                 aria-labelledby="newVendorModal" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-mb" role="document">
                     <div class="modal-content p-2">
                         <div class="modal-header">
                             <h5 class="modal-title font-weight-bolder breadcrumb-text text-gradient"
                                 id="add_brandLabel">
-                                New Order
+                                New customer
                             </h5>
                             <button type="button" class="close btn" data-dismiss="modal" aria-label="Close"
                                 @click.prevent="resetData()">
@@ -249,41 +253,25 @@
                                     <form role="form text-left" enctype="multipart/form-data">
                                         <div class="row mb-1">
                                             <div for="code" class="col-md-3 col-form-label">
-                                                SELECT
-                                            </div>
-                                            <div class="col-md-9" v-if="select_customer">
-                                                <Multiselect v-model="select_customer" :options="customerData.map(customer => ({
-                                                    ...customer,
-                                                    name: truncateText(customer.first_name),
-                                                    searchableText: `${customer.code} : ${truncateText(customer.first_name)}`
-                                                }))" :showLabels="false" :close-on-select="true" :searchable="true"
-                                                    placeholder="Select Customer" label="searchableText" track-by="id"
-                                                    class="z__index" max-height="200" @change="onSearchCustomer" />
-                                                <small id="first_name"
-                                                    class="text-danger form-text text-error-msg error"> </small>
-                                            </div>
-                                        </div>
-
-                                        <div class="row mb-1 mt-4">
-                                            <div for="code" class="col-md-3 col-form-label">
                                                 FIRST NAME
                                             </div>
-                                            <div class="col-md-9" v-if="select_customer_data">
+                                            <div class="col-md-9">
                                                 <input type="text" class="form-control form-control-sm"
                                                     name="first_name" id="name" placeholder="First name"
-                                                    v-model="select_customer_data.first_name" required />
-                                                <small id="first_name"
-                                                    class="text-danger form-text text-error-msg error"> </small>
+                                                    v-model="customer.first_name" required />
+                                                <small v-if="validationErrors.first_name" id="first_name"
+                                                    class="text-danger form-text text-error-msg error">{{
+                                                        validationErrors.first_name }}</small>
                                             </div>
                                         </div>
                                         <div class="row mb-1">
                                             <div for="price" class="col-md-3 col-form-label">
                                                 LAST NAME
                                             </div>
-                                            <div class="col-md-9" v-if="select_customer_data">
+                                            <div class="col-md-9">
                                                 <input type="text" class="form-control form-control-sm" name="last_name"
-                                                    id="last_name" placeholder="last name"
-                                                    v-model="select_customer_data.last_name" required />
+                                                    id="last_name" placeholder="last name" v-model="customer.last_name"
+                                                    required />
                                             </div>
                                             <small id="msg_code"
                                                 class="text-danger form-text text-error-msg error"></small>
@@ -292,18 +280,18 @@
                                             <div for="email" class="col-md-3 col-form-label">
                                                 EMAIL
                                             </div>
-                                            <div class="col-md-9" v-if="select_customer_data">
+                                            <div class="col-md-9">
                                                 <input type="email" class="form-control form-control-sm" name="email"
-                                                    id="email" placeholder="email" v-model="select_customer_data.email"
-                                                    required />
-                                                <small id="email" class="text-danger form-text text-error-msg error">
-                                                </small>
+                                                    id="email" placeholder="email" v-model="customer.email" required />
+                                                <small v-if="validationErrors.email" id="email"
+                                                    class="text-danger form-text text-error-msg error">{{
+                                                        validationErrors.email }}</small>
                                             </div>
                                         </div>
                                         <div class="text-right mt-2">
                                             <button type="button"
                                                 class="btn btn-primary btn btn-sm btn-neutral float-end"
-                                                @click.prevent="createOrder()">
+                                                @click.prevent="createcustomer()">
                                                 <i class="fas fa-save"></i>
                                                 CREATE
                                             </button>
@@ -322,145 +310,100 @@
 <script setup>
 import AdminLayout from "@/Layouts/AdminLayout.vue";
 import axios from "axios";
+import Multiselect from "vue-multiselect";
 import { ref, onMounted, watch } from "vue";
 import { router, Link } from "@inertiajs/vue3";
+import productImage from '@/../src/AdminArea/img/product/invalid_image.png';
 import Swal from "sweetalert2";
-import Multiselect from "vue-multiselect";
 
 const page = ref(1);
 const pageCount = ref(25);
 const perPage = ref([25, 50, 100]);
 const pagination = ref({});
-const search_code = ref(null);
-const search_date_from = ref();
-const search_date_to = ref();
-const search_customer_name = ref();
-const select_is_paid = ref([]);
-const select_is_shipped = ref([]);
-const isPaid = ref([
-    { id: 1, name: 'Paid' },
-    { id: 2, name: 'Not Paid' },
-]);
-const isShipped = ref([
-    { id: 1, name: 'Shipped' },
-    { id: 2, name: 'Not Shipped' },
+const customer_code = ref(null);
+const first_name = ref(null);
+const last_name = ref(null);
+const email = ref(null);
+const select_customer_status = ref([]);
+const statusList = ref([
+    { id: 1, name: 'Active' },
+    { id: 2, name: 'Inactive' },
 ]);
 
-const orderData = ref([]);
 const customerData = ref([]);
-const select_customer = ref([]);
-const select_customer_data = ref([]);
+const customer = ref({});
+const validationErrors = ref({});
+const validationMessage = ref(null);
 
-const createOrder = async () => {
-    try {
-        console.log('select_customer_data', select_customer_data);
-        const response = await axios.post(
-            route("admin.order.store", select_customer_data.value.id),
-            select_customer_data.value);
-        $("#newOrderModal").modal("hide");
-        router.visit(route("admin.order.edit", response.data.id));
-    } catch (error) {
-        console.log("Error:", error);
-    }
+const resetValidationErrors = () => {
+    validationErrors.value = {};
+    validationMessage.value = null;
 };
 
-const getCustomers = async () => {
-    console.log('respose');
-    try {
-        const response = await axios.get(route("admin.customer.all"));
-        customerData.value = response.data.data;
-    } catch (error) {
-        console.log("Error", error);
-    }
+const convertValidationNotification = (error) => {
+    resetValidationErrors();
+    if (!(error.response && error.response.data)) return;
+    const { message } = error.response.data;
+
+    errorMessage(message);
 };
 
-const truncateText = (text) => {
-    if (text && typeof text === 'string') {
-        return text.length > 30 ? text.substring(0, 30) + '...' : text;
+const convertValidationError = (err) => {
+    resetValidationErrors();
+    if (!(err.response && err.response.data)) return;
+    const { message, errors } = err.response.data;
+    validationMessage.value = message;
+    if (errors) {
+        for (const error in errors) {
+            validationErrors.value[error] = errors[error][0];
+        }
     }
-    return '';
-};
-
-const edit = (order_id) => {
-    try {
-        router.visit(route("admin.order.edit", order_id));
-    } catch (error) {
-        console.lod("Error", error);
-    }
-}
-
-const removeTFromTimestamp = (timestamp) => {
-    return timestamp.replace(/T\d{2}:\d{2}:\d{2}\.\d+Z/, '');
 };
 
 const reload = async () => {
     try {
         const response = (
-            await axios.get(route("admin.order.all"), {
+            await axios.get(route("admin.customer.all"), {
                 params: {
                     page: page.value,
                     per_page: pageCount.value,
-                    code: search_code.value,
-                    date_from: search_date_from.value,
-                    date_to: search_date_to.value,
-                    customer_name: search_customer_name.value,
-                    is_paid: select_is_paid.value.id,
-                    is_shipped: select_is_shipped.value.id,
+                    status: select_customer_status.value?.id,
+                    code: customer_code.value,
+                    first_name: first_name.value,
+                    last_name: last_name.value,
+                    email: email.value,
                 },
             })
         ).data;
-        orderData.value = response.data;
+        customerData.value = response.data;
         pagination.value = response;
     } catch (error) {
         console.log("Error", error);
     }
 };
 
-const numberFormatter = (number) => {
-    if (number == undefined || number == null || number == Infinity) {
-        return "0.00"; // or some default value
-    }
-    const parsedNumber = Number(number);
-    if (isNaN(parsedNumber)) {
-        return "0.00"; // or some default value
-    }
-    if (typeof parsedNumber !== "number") {
-        return "0.00"; // or some default value
-    }
-    return parsedNumber.toLocaleString("en-US", {
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2,
-        useGrouping: true,
-    });
-};
-
 const clearFilter = () => {
     try {
-        search_code.value = null;
-        search_customer_name.value = null;
-        select_is_paid.value = [];
-        select_is_shipped.value = [];
+        select_customer_status.value = null;
+        customer_code.value = null;
+        first_name.value = null;
+        last_name.value = null;
+        email.value = null;
         reload();
     } catch (error) {
         console.log('Error', error);
     }
 }
 
-watch(select_customer, (newCustomer) => {
-    onSearchCustomer(newCustomer.id)
-});
-
-const onSearchCustomer = async (customer_id) => {
-    try {
-        const response = await axios.get(route("admin.customer.get", customer_id));
-        select_customer_data.value = response.data.customer;
-    } catch (error) {
-        console.log("Error", error);
-    }
-};
+const resetData = () => {
+    validationErrors.value = "";
+    validationMessage.value = "";
+    customer.value.first_name = '';
+    customer.value.last_name = '';
+    customer.value.email = '';
+}
 
 onMounted(() => {
-    getCustomers();
     reload();
 });
 
@@ -469,7 +412,7 @@ watch([page, pageCount], () => {
 });
 
 watch(() => {
-    if (select_is_paid.value) {
+    if (select_customer_status.value) {
         reload();
     } else {
         reload();
@@ -481,9 +424,6 @@ const getSearch = () => {
     reload();
 }
 
-const showNewOrderModal = () => {
-    $("#newOrderModal").modal("show");
-}
 const perPageChange = async () => {
     reload();
 }
@@ -503,7 +443,7 @@ const setPage = async (nextPage) => {
     vertical-align: middle;
 }
 
-.cursor-pointer {
+.cursor-pointer{
     cursor: pointer;
 }
 </style>

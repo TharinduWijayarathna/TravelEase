@@ -45,10 +45,6 @@
                                                         </a>
                                                     </li>
                                                     <li class="nav-item">
-                                                        <Link class="nav-link" :href="route('payments')">
-                                                        <i class="bi bi-wallet fa-fw me-2"></i>Payment details</Link>
-                                                    </li>
-                                                    <li class="nav-item">
                                                         <Link class="nav-link" :href="route('history')">
                                                         <i class="bi bi-clock-history fa-fw me-2"></i>Booking History</Link>
                                                     </li>

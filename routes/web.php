@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\AdminArea\CustomerController as AdminCustomerController;
 use App\Http\Controllers\AdminArea\HomeController as AdminHomeController;
-use App\Http\Controllers\AdminArea\OrderController as AdminOrderController;
+use App\Http\Controllers\AdminArea\BookingController as AdminBookingController;
 use App\Http\Controllers\AdminArea\BusImageController as AdminBusImageController;
 use App\Http\Controllers\AdminArea\BannerController as AdminBannerController;
 use App\Http\Controllers\AdminArea\CategoryController as AdminCategoryController;
@@ -12,14 +12,10 @@ use App\Http\Controllers\AdminArea\CartItemController as AdminCartItemController
 use App\Http\Controllers\AdminArea\PaymentController as AdminPaymentController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\PublicArea\BannerController as PublicBannerController;
-use App\Http\Controllers\PublicArea\CartController as PublicCartController;
-use App\Http\Controllers\PublicArea\CartItemController as PublicCartItemController;
 use App\Http\Controllers\PublicArea\CategoryController as PublicCategoryController;
 use App\Http\Controllers\PublicArea\HomeController as PublicHomeController;
-use App\Http\Controllers\PublicArea\OrderController as PublicOrderController;
 use App\Http\Controllers\PublicArea\BusController as PublicBusController;
 use App\Http\Controllers\PublicArea\ProfileController as PublicProfileController;
-use App\Http\Controllers\PublicArea\WishListController as PublicWishListController;
 use App\Http\Controllers\PublicArea\BookingController as PublicBookingController;
 use App\Http\Controllers\PublicArea\PaymentController as PublicPaymentController;
 use Illuminate\Support\Facades\Route;
@@ -163,6 +159,16 @@ Route::prefix('admin')->group(function () {
 
     Route::prefix('cart-items')->group(function () {
         Route::post('store', [AdminCartItemController::class, 'store'])->name('admin.cart.item.store');
+    });
+
+    Route::prefix('booking')->group(function () {
+        Route::get('/', [AdminBookingController::class, 'index'])->name('admin.booking.index');
+        Route::get('/all', [AdminBookingController::class, 'all'])->name('admin.booking.all');
+        Route::get('/{booking_id}/get', [AdminBookingController::class, 'get'])->name('admin.booking.get');
+        Route::post('/store', [AdminBookingController::class, 'store'])->name('admin.booking.store');
+        Route::post('/{booking_id}/update', [AdminBookingController::class, 'update'])->name('admin.booking.update');
+        Route::delete('/{booking_id}/delete', [AdminBookingController::class, 'delete'])->name('admin.booking.delete');
+        Route::get('/{booking_id}/status', [AdminBookingController::class, 'status'])->name('admin.booking.status.update');
     });
 });
 

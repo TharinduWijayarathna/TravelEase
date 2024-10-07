@@ -10,12 +10,12 @@
                                     <Link :href="route('home')">Home</Link>
                                 </li>
                                 <li class="breadcrumb-item active" aria-current="page">
-                                    Buses
+                                    My Bookings
                                 </li>
                             </ol>
                         </nav>
                         <h1 class="h3 mb-0 mt-3">
-                            Explore Our Buses
+                            My Bookings
                         </h1>
                     </div>
                 </section>
@@ -23,34 +23,7 @@
                 <section class="pt-0">
                     <div class="container">
                         <div class="row">
-                            <aside class="col-xl-3">
-                                <div class="card mb-4">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Filters</h5>
-
-                                        <!-- Route Filter -->
-                                        <div class="mb-3">
-                                            <label for="routeFilter" class="form-label">Bus Route</label>
-                                            <select id="routeFilter" class="form-select">
-                                                <option value="">All Routes</option>
-                                                <!-- <option v-for="route in uniqueRoutes" :key="route" :value="route">{{
-                                                    route }}</option> -->
-                                            </select>
-                                        </div>
-
-                                        <!-- Departure Time Filter -->
-                                        <div class="mb-3">
-                                            <label for="departureTimeFilter" class="form-label">Departure Time</label>
-                                            <input type="time" id="departureTimeFilter" class="form-control">
-                                        </div>
-
-                                        <!-- Filter Button -->
-                                        <button @click="applyFilters" class="btn btn-primary w-100">Apply
-                                            Filters</button>
-                                    </div>
-                                </div>
-                            </aside>
-                            <div class="col-xl-9 ps-xl-6">
+                            <div class="col-xl-12 ps-xl-12">
                                 <!-- Card View for each Bus -->
                                 <div class="row">
                                     <div class="col-12">
@@ -76,8 +49,9 @@
                                                             </div>
                                                             <div class="col-4">
                                                                 <div class="d-flex justify-content-end">
-                                                                    <Link :href="route('booking.index')" class="btn btn-primary">Book a
-                                                                        Ticket</Link>
+                                                                    <Link :href="route('booking.index')"
+                                                                        class="btn btn-primary">Book a
+                                                                    Ticket</Link>
                                                                 </div>
                                                             </div>
                                                         </div>

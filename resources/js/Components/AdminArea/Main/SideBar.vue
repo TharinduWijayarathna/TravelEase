@@ -48,8 +48,8 @@
                         </li>
                         <li class="nav-item">
                             <Link
-                                :class="{ 'active__sidebar': route().current() == 'admin.order.index' || route().current() == 'admin.order.edit' }"
-                                class="nav-link active-preloader" :href="route('admin.order.index')">
+                                :class="{ 'active__sidebar': route().current() == 'admin.booking.index' || route().current() == 'admin.booking.edit' }"
+                                class="nav-link active-preloader" :href="route('admin.booking.index')">
                             <i class="fa-solid fa-scroll"></i>
                             <span class="ml-2 nav-link-text font-weight-600">Bookings</span>
                             </Link>
