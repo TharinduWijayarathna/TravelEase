@@ -59,7 +59,7 @@
                             <img class="avatar-img rounded-circle border" v-if="user.image_url" :src="user.image_url"
                                 alt="" />
                             <img class="avatar-img rounded-circle border" v-else
-                                src="assets/PublicArea/images/avatar/user.jpg" alt="" />
+                                src="/assets/PublicArea/images/avatar/user.jpg" alt="" />
                         </div>
                         <span class="profile-button">Hi,
                             <b style="color: black">

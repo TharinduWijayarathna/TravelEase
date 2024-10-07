@@ -82,7 +82,7 @@ Route::prefix('booking')->group(function () {
     Route::get('/{booking_id}/restore', [AdminBookingController::class, 'restore'])->name('admin.booking.restore');
 });
 
-Route::get('/payment', [PublicPaymentController::class, 'index'])->name('payment.index');
+Route::get('/{booking_id}/pay', [PublicBookingController::class, 'pay'])->name('booking.pay');
 
 /*Admin Area*/
 Route::prefix('admin')->group(function () {

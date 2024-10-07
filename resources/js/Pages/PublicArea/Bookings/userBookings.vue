@@ -54,6 +54,9 @@
                                                     <th class="textClassHead" style="width: 14%;">
                                                         Requests
                                                     </th>
+                                                    <th class="textClassHead text-center">
+                                                        Actions
+                                                    </th>
                                                     <!-- <th class="textClassHead text-center">
                                                 Profile Image
                                             </th> -->
@@ -76,7 +79,7 @@
                                                             <span class="badge badge-danger">Rejected</span>
                                                         </div>
                                                         <div class="" v-else-if="value.status === 'PAYMENT_PENDING'">
-                                                            <span class="badge badge-info">Cancelled</span>
+                                                            <span class="badge badge-info">Payment Pending</span>
                                                         </div>
                                                     </td>
 
@@ -101,24 +104,12 @@
                                                     <td class="textClassBody">
                                                         {{ value.requests }}
                                                     </td>
-                                                    <!-- <td class="textClassBody text-center">
-                                                <img width="160px" v-if="value.image_url" :src="value.image_url"
-                                                    alt="" />
-                                                <img v-else width="80px" src="/assets/PublicArea/images/avatar/user.jpg"
-                                                    alt="" />
-                                            </td> -->
 
-                                                    <!-- <td class="textClassBody text-center">
-                                                <div v-if="value.gender == 1">
-                                                    <span>Male</span>
-                                                </div>
-                                                <div v-else-if="value.gender == 2">
-                                                    <span>Female</span>
-                                                </div>
-                                                <div v-else-if="value.gender == 3">
-                                                    <span>Other</span>
-                                                </div>
-                                            </td> -->
+                                                    <td class="textClassBody text-center">
+                                                        <button class="btn btn-sm btn-primary" @click.prevent="pay(value.id)" :disabled="value.status !== 'PAYMENT_PENDING'">
+                                                            Pay
+                                                        </button>
+                                                    </td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -207,6 +198,26 @@ const reload = async () => {
 
         bookings.value = response.data;
         pagination.value = response;
+    } catch (error) {
+        console.log("Error", error);
+    }
+};
+
+const pay = async (id) => {
+    try {
+       Swal.fire({
+            title: 'Are you sure?',
+            text: "You want to pay for this booking?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, Pay!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                router.visit(route('booking.pay', id));
+            }
+        });
     } catch (error) {
         console.log("Error", error);
     }
