@@ -105,9 +105,7 @@
                                             <th class="textClassHead">
                                                 Bus Name
                                             </th>
-                                            <th class="textClassHead">
-                                                Image
-                                            </th>
+
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -127,22 +125,6 @@
                                                 {{ value.name }}
                                             </td>
 
-                                            <td class="textClassBody" v-if="value.bus_image">
-                                                <div class="">
-                                                    <div class="">
-                                                        <img :src="value.bus_image" alt="no image"
-                                                            class="bus-image-setup" height="100px" />
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td class="textClassBody" v-else>
-                                                <div class="">
-                                                    <div class="">
-                                                        <img :src="busImage" alt="no image"
-                                                            class="bus-image-setup" height="100px" />
-                                                    </div>
-                                                </div>
-                                            </td>
 
 
                                         </tr>
@@ -247,21 +229,6 @@
                                                     class="text-danger form-text text-error-msg error">{{
                                                         validationErrors.category_id }}</small>
                                             </div>
-                                        </div>
-                                        <div class="row mb-1">
-                                            <div for="price" class="col-md-3 col-form-label">
-                                                PRICE
-                                            </div>
-                                            <div class="col-md-9">
-                                                <input type="number" class="form-control form-control-sm" name="price"
-                                                    id="price" placeholder="price" v-model="bus.price"
-                                                    @input="checkMinPrice" required />
-                                                <small v-if="validationErrors.price" id="price"
-                                                    class="text-danger form-text text-error-msg error">{{
-                                                        validationErrors.price }}</small>
-                                            </div>
-                                            <small id="msg_code"
-                                                class="text-danger form-text text-error-msg error"></small>
                                         </div>
                                         <div class="text-right mt-2">
                                             <button type="button"

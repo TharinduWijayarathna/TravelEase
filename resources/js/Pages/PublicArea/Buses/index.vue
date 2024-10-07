@@ -58,7 +58,10 @@
                                             <div class="row g-0">
                                                 <div class="col-md-4">
                                                     <!-- Bus Image (Optional) -->
-                                                    <img :src="bus.bus_image" alt="Bus Image"
+                                                    <img src="https://st4.depositphotos.com/14953852/24787/v/450/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg"
+                                                        alt="Bus Image" v-if="bus.bus_image === 'Na'"
+                                                        class="img-fluid rounded-start" />
+                                                    <img :src="bus.bus_image" alt="Bus Image" v-else
                                                         class="img-fluid rounded-start" />
                                                 </div>
                                                 <div class="col-md-8">
@@ -76,8 +79,9 @@
                                                             </div>
                                                             <div class="col-4">
                                                                 <div class="d-flex justify-content-end">
-                                                                    <Link :href="route('booking.index')" class="btn btn-primary">Book a
-                                                                        Ticket</Link>
+                                                                    <Link :href="route('booking.index', bus.id)"
+                                                                        class="btn btn-primary">Book a
+                                                                    Ticket</Link>
                                                                 </div>
                                                             </div>
                                                         </div>

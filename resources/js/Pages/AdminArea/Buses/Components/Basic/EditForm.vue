@@ -56,6 +56,40 @@
                     </div>
                 </div>
                 <div class="row mb-1">
+                    <div for="name" class="col-md-2 col-form-label">
+                        DEPARTURE TIME
+                    </div>
+                    <div class="col-md-4">
+                        <input type="time" class="form-control form-control-sm" name="departure_time" min="0"
+                            id="departure_time" placeholder="Departure Time" v-model="busData.departure_time" />
+                        <small v-if="validationErrors.departure_time" id="departure_time"
+                            class="text-danger form-text text-error-msg error">{{
+                                validationErrors.departure_time }}</small>
+                    </div>
+                    <div class="">
+                        <i class="fas fa-arrow-right mt-2"></i>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="time" class="form-control form-control-sm" name="arrival_time" min="0"
+                            id="arrival_time" placeholder="Arrival Time" v-model="busData.arrival_time" />
+                        <small v-if="validationErrors.arrival_time" id="arrival_time"
+                            class="text-danger form-text text-error-msg error">{{
+                                validationErrors.arrival_time }}</small>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div for="name" class="col-md-2 col-form-label">
+                        SEATS
+                    </div>
+                    <div class="col-md-4">
+                        <input type="number" class="form-control form-control-sm" name="seats" min="0" id="seats"
+                            placeholder="Seats" v-model="busData.seats" />
+                        <small v-if="validationErrors.seats" id="seats"
+                            class="text-danger form-text text-error-msg error">{{
+                                validationErrors.seats }}</small>
+                    </div>
+                </div>
+                <div class="row mb-1">
                     <div for="name" class="col-md-2 col-form-label" busData>STATUS</div>
                     <div class="col-md-10">
                         <div class="custom-switch">

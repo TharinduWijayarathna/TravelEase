@@ -68,7 +68,7 @@ Route::prefix('customer')->group(function () {
 });
 
 Route::prefix('booking')->group(function () {
-    Route::get('/', [PublicBookingController::class, 'index'])->name('booking.index');
+    Route::get('/{bus_id}', [PublicBookingController::class, 'index'])->name('booking.index');
     Route::get('/{customer_id}/get', [PublicBookingController::class, 'get'])->name('booking.get');
     Route::post('/{customer_id}/store', [PublicBookingController::class, 'store'])->name('booking.store');
     Route::post('/{booking_id}/update', [PublicBookingController::class, 'update'])->name('booking.update');

@@ -38,12 +38,12 @@ class Bus extends Model
 
     public function getCategoryNameAttribute()
     {
-        return $this->Category->name;
+        return $this->Category->name ?? 'N/A';
     }
 
     public function getBusImageAttribute()
     {
-        return $this->PrimaryBusImage->image_url;
+        return $this->PrimaryBusImage->image_url ?? 'Na';
     }
 
     public function PrimaryBusImage()
