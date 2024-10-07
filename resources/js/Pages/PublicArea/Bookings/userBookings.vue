@@ -27,38 +27,101 @@
                                 <!-- Card View for each Bus -->
                                 <div class="row">
                                     <div class="col-12">
-                                        <div v-for="bus in buses" :key="bus.id" class="card mb-4 shadow-sm">
-                                            <div class="row g-0">
-                                                <div class="col-md-4">
-                                                    <!-- Bus Image (Optional) -->
-                                                    <img :src="bus.bus_image" alt="Bus Image"
-                                                        class="img-fluid rounded-start" />
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <div class="card-body">
-                                                        <div class="row">
-                                                            <div class="col-8">
-                                                                <h5 class="card-title">{{ bus.name }}</h5>
-                                                                <p class="card-text" style="font-size: small;">
-                                                                    Route: {{ bus.from }} to {{ bus.to }} <br />
-                                                                    Departure: {{ bus.departure_time }} <br />
-                                                                    Arrival: {{ bus.arrival_time }} <br />
-                                                                    Category: {{ bus.category_name }} <br />
-                                                                    Seats Available: {{ bus.seats }}
-                                                                </p>
-                                                            </div>
-                                                            <div class="col-4">
-                                                                <div class="d-flex justify-content-end">
-                                                                    <Link :href="route('booking.index')"
-                                                                        class="btn btn-primary">Book a
-                                                                    Ticket</Link>
-                                                                </div>
-                                                            </div>
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th class="textClassHead text-center" style="width: 14%;">
+                                                        Status
+                                                    </th>
+                                                    <th class="textClassHead text-left" style="width: 14%;">
+                                                        Customer
+                                                    </th>
+                                                    <th class="textClassHead text-left" style="width: 14%;">
+                                                        Email
+                                                    </th>
+                                                    <th class="textClassHead text-left" style="width: 14%;">
+                                                        Pick Up
+                                                    </th>
+                                                    <th class="textClassHead" style="width: 14%;">
+                                                        Drop Off
+                                                    </th>
+                                                    <th class="textClassHead" style="width: 14%;">
+                                                        Date
+                                                    </th>
+                                                    <th class="textClassHead" style="width: 14%;">
+                                                        Seats
+                                                    </th>
+                                                    <th class="textClassHead" style="width: 14%;">
+                                                        Requests
+                                                    </th>
+                                                    <!-- <th class="textClassHead text-center">
+                                                Profile Image
+                                            </th> -->
+
+                                                    <!-- <th class="textClassHead">Rating</th> -->
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr v-for="value in bookings" :key="value.id"
+                                                    @click.prevent="edit(value.id)">
+                                                    <td class="textClassBody text-center">
+                                                        <div class="" v-if="value.status === 'PENDING'">
+                                                            <span class="badge badge-warning">Pending</span>
                                                         </div>
-                                                    </div>
+                                                        <div class="" v-else-if="value.status === 'APPROVED'">
+                                                            <span class="badge badge-success">Approved</span>
+                                                        </div>
+                                                        <div class="" v-else-if="value.status === 'REJECTED'">
+                                                            <span class="badge badge-danger">Rejected</span>
+                                                        </div>
+                                                        <div class="" v-else-if="value.status === 'PAYMENT_PENDING'">
+                                                            <span class="badge badge-info">Cancelled</span>
+                                                        </div>
+                                                    </td>
+
+                                                    <td class="textClassBody text-left">
+                                                        {{ value.name }}
+                                                    </td>
+                                                    <td class="textClassBody text-left">
+                                                        {{ value.email }}
+                                                    </td>
+                                                    <td class="textClassBody">
+                                                        {{ value.pickup_name }}
+                                                    </td>
+                                                    <td class="textClassBody">
+                                                        {{ value.dropoff_name }}
+                                                    </td>
+                                                    <td class="textClassBody">
+                                                        {{ value.date }}
+                                                    </td>
+                                                    <td class="textClassBody">
+                                                        {{ value.seats }}
+                                                    </td>
+                                                    <td class="textClassBody">
+                                                        {{ value.requests }}
+                                                    </td>
+                                                    <!-- <td class="textClassBody text-center">
+                                                <img width="160px" v-if="value.image_url" :src="value.image_url"
+                                                    alt="" />
+                                                <img v-else width="80px" src="/assets/PublicArea/images/avatar/user.jpg"
+                                                    alt="" />
+                                            </td> -->
+
+                                                    <!-- <td class="textClassBody text-center">
+                                                <div v-if="value.gender == 1">
+                                                    <span>Male</span>
                                                 </div>
-                                            </div>
-                                        </div>
+                                                <div v-else-if="value.gender == 2">
+                                                    <span>Female</span>
+                                                </div>
+                                                <div v-else-if="value.gender == 3">
+                                                    <span>Other</span>
+                                                </div>
+                                            </td> -->
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
 
@@ -129,64 +192,12 @@ const pageCount = ref(25);
 const perPage = ref([25, 50, 100]);
 const pagination = ref({});
 
-const wishList = ref({});
-const checkWishList = ref([]);
-const wishListStatus = ref([]);
-const buses = ref([]);
-const categories = ref({});
-const sortBy = ref("");
-const busName = ref("");
-const user = usePage().props.auth.user;
-const busData = ref({
-    unit_price: '',
-    unit_discount: '',
-
-});
-const filterForm = ref({
-    selected_category: [],
-});
-
-const isInWishlist = async () => {
-    try {
-        var customer_id = user.id;
-        const response = await axios.get(route('wishList.check', { customer_id }));
-        checkWishList.value = response.data;
-        const busIds = buses.value.map(bus => bus.id);
-        const wishListbusIds = checkWishList.value.map(item => item.bus_id);
-        busIds.forEach((busId, index) => {
-            if (wishListbusIds.includes(busId)) {
-                const statusIndex = wishListbusIds.indexOf(busId);
-                const status = checkWishList.value[statusIndex].status;
-                if (status === 0) {
-                    wishListStatus.value[index] = 0;
-                } else {
-                    wishListStatus.value[index] = 1;
-                }
-            } else {
-                wishListStatus.value[index] = 0;
-            }
-        });
-        reload();
-    } catch (error) {
-        console.error('Error:', error);
-    }
-};
-
-const getCategories = async () => {
-    try {
-        const response = (
-            await axios.get(route("category.all"))
-        ).data;
-        categories.value = response.data;
-    } catch (error) {
-        console.log("Error", error);
-    }
-};
+const bookings = ref([]);
 
 const reload = async () => {
     try {
         const response = (
-            await axios.get(route("buses.all"), {
+            await axios.get(route("booking.user.data"), {
                 params: {
                     page: page.value,
                     per_page: pageCount.value,
@@ -194,213 +205,15 @@ const reload = async () => {
             })
         ).data;
 
-        buses.value = response.data;
+        bookings.value = response.data;
         pagination.value = response;
     } catch (error) {
         console.log("Error", error);
     }
 };
 
-const getSelectedbusData = async (bus_id) => {
-    try {
-        const response = await axios.get(route('bus.get', bus_id));
-        busData.value.unit_price = response.data.price;
-        busData.value.unit_discount = response.data.discount_price;
-    } catch (error) {
-        console.log('Error', error);
-    }
-}
-
-const addToCard = async (bus_id) => {
-    try {
-        await getSelectedbusData(bus_id);
-        const customer_id = user.id;
-        busData.value.created_by = user.first_name;
-        const response = await axios
-            .post(route("cart.item.store", { customer_id, bus_id }), busData.value)
-            .then((response) => {
-                Swal.fire({
-                    icon: "success",
-                    title: "Success",
-                    text: "bus added to cart!",
-                    toast: true,
-                    position: "top-end",
-                    showConfirmButton: false,
-                    timer: 1500,
-                    timerProgressBar: true,
-                });
-                emitter.emit(CART_REFRESH);
-                reload();
-            })
-            .catch((error) => {
-                console.log("Error:", error);
-                Swal.fire({
-                    icon: "warning",
-                    title: "Warning",
-                    text: "Oops! Already in cart.",
-                    toast: true,
-                    position: "top-end",
-                    showConfirmButton: false,
-                    timer: 3000,
-                    timerProgressBar: true,
-                });
-            });
-    } catch (error) {
-        console.log("Error:", error);
-    }
-};
-
-const updateAvailability = (value) => {
-    filterForm.value.availability = value;
-};
-
-const filterBuses = async () => {
-    try {
-        const response = (
-            await axios.post(route("bus.filter"), {
-                params: {
-                    page: page.value,
-                    per_page: pageCount.value,
-                    filterForm: filterForm.value,
-                },
-            })
-        ).data;
-        console.log('im filter', response.data.length);
-        buses.value = response.data;
-        if (response.data && response.data.length > 0) {
-
-            Swal.fire({
-                icon: "success",
-                title: "Success",
-                text: "bus filter successfully!",
-                toast: true,
-                position: "top-end",
-                showConfirmButton: false,
-                timer: 1500,
-                timerProgressBar: true,
-            });
-        } else {
-            Swal.fire({
-                icon: "warning",
-                title: "Oops!",
-                text: "No matching buses found.",
-                toast: true,
-                position: "top-end",
-                showConfirmButton: false,
-                timer: 3000,
-                timerProgressBar: true,
-            });
-        }
-    } catch (error) {
-        console.log("Error:", error);
-        Swal.fire({
-            icon: "warning",
-            title: "Oops!",
-            text: "An error occurred. Please try again later.",
-            toast: true,
-            position: "top-end",
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-        });
-    }
-
-};
-
-const clearFilter = () => {
-    // filterForm.value = [];
-    // filterForm.value.availability = "all";
-    router.visit(route('buses.index'));
-};
-
-const sortbuses = () => {
-    console.log(sortBy.value);
-    try {
-        if (sortBy.value == 1) {
-            buses.value = buses.value.sort((a, b) =>
-                a.name.localeCompare(b.name)
-            );
-        } else if (sortBy.value == 2) {
-            buses.value = buses.value.sort((a, b) => a.price - b.price);
-        } else if (sortBy.value == 3) {
-            buses.value = buses.value.sort((a, b) => b.price - a.price);
-        }
-    } catch (error) {
-        console.log("Error", error);
-    }
-};
-
-const searchByName = async () => {
-    try {
-        const response = await axios.post(route("bus.search"), {
-            name: busName.value,
-        });
-        console.log("pr by name", response.data.searched_bus);
-        buses.value = response.data.searched_bus;
-    } catch (error) {
-        console.log("Error", error);
-    }
-};
-
-const addToWishList = async (bus_id) => {
-    try {
-        const customer_id = user.id;
-        const response = await axios.post(route('wishList.add', { customer_id, bus_id }));
-        const Toast = Swal.mixin({
-            toast: true,
-            position: "top-end",
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.onmouseenter = Swal.stopTimer;
-                toast.onmouseleave = Swal.resumeTimer;
-            }
-        });
-        Toast.fire({
-            icon: "success",
-            title: "bus successfully added to your wishlist."
-        });
-        reload();
-        isInWishlist();
-        console.log('white list', response);
-    } catch (error) {
-        console.log('Error', error);
-    }
-}
-
-const removeFromWishList = async (bus_id) => {
-    try {
-        const customer_id = user.id;
-        const response = await axios.post(route('wishList.remove', { customer_id, bus_id }));
-        const Toast = Swal.mixin({
-            toast: true,
-            position: "top-end",
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.onmouseenter = Swal.stopTimer;
-                toast.onmouseleave = Swal.resumeTimer;
-            }
-        });
-        Toast.fire({
-            icon: "success",
-            title: "bus successfully removed from your wishlist",
-        });
-
-        reload();
-        isInWishlist();
-    } catch (error) {
-        console.log('Error', error);
-    }
-}
-
-
 onMounted(() => {
-    getCategories();
     reload();
-    isInWishlist();
 });
 
 const getSearch = () => {
@@ -434,5 +247,31 @@ const setPage = async (nextPage) => {
 
 .page-link-attributes {
     cursor: pointer;
+}
+
+.badge {
+    font-size: 0.8rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.375rem;
+}
+
+.badge-warning {
+    background-color: #ffc107;
+    color: #000;
+}
+
+.badge-success {
+    background-color: #28a745;
+    color: #fff;
+}
+
+.badge-danger {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+.badge-info {
+    background-color: #17a2b8;
+    color: #fff;
 }
 </style>

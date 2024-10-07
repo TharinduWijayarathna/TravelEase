@@ -45,10 +45,6 @@
                                                         </a>
                                                     </li>
                                                     <li class="nav-item">
-                                                        <Link class="nav-link" :href="route('history')">
-                                                        <i class="bi bi-clock-history fa-fw me-2"></i>Booking History</Link>
-                                                    </li>
-                                                    <li class="nav-item">
                                                         <Link class="nav-link" :href="route('customer.delete.index')">
                                                         <i class="bi bi-trash fa-fw me-2"></i>Delete profile</Link>
                                                     </li>
