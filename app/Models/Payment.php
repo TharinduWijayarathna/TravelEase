@@ -22,24 +22,18 @@ class Payment extends Model
     ];
 
     protected $appends = [
-        'customer',
-        'booking',
-        'travel_provider',
+        'customer_name',
+        'travel_provider_name',
     ];
 
-    public function getCustomerAttribute()
+    public function getCustomerNameAttribute()
     {
-        return $this->customer->name ?? '';
+        return $this->getUser($this->customer_id);
     }
 
-    public function getBookingAttribute()
+    public function getTravelProviderNameAttribute()
     {
-        return $this->booking->name ?? '';
-    }
-
-    public function getTravelProviderAttribute()
-    {
-        return $this->travelProvider->name ?? '';
+        return $this->getUser($this->travel_provider_id);
     }
 
     public function customer()
@@ -55,5 +49,11 @@ class Payment extends Model
     public function travelProvider()
     {
         return $this->hasOne(User::class, 'id', 'travel_provider_id');
+    }
+
+    public function getUser($userId)
+    {
+        $user = User::find($userId);
+        return $user ? $user->first_name . ' ' . $user->last_name : '';
     }
 }

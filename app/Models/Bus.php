@@ -29,6 +29,7 @@ class Bus extends Model
         'description',
         'seats',
         'category_id',
+        'travel_provider_id',
     ];
 
     protected $appends = [

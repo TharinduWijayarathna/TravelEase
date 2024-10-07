@@ -8,7 +8,6 @@ use App\Http\Controllers\AdminArea\BannerController as AdminBannerController;
 use App\Http\Controllers\AdminArea\CategoryController as AdminCategoryController;
 use App\Http\Controllers\AdminArea\BusController as AdminBusController;
 use App\Http\Controllers\AdminArea\BusStopController;
-use App\Http\Controllers\AdminArea\CartItemController as AdminCartItemController;
 use App\Http\Controllers\AdminArea\PaymentController as AdminPaymentController;
 use App\Http\Controllers\AdminArea\UsersController as AdminUsersController;
 use App\Http\Controllers\Auth\RegisteredUserController;
@@ -174,10 +173,6 @@ Route::prefix('admin')->group(function () {
         Route::post('/store', [AdminPaymentController::class, 'store'])->name('admin.payment.store');
         Route::post('/{payment_id}/update', [AdminPaymentController::class, 'update'])->name('admin.payment.update');
         Route::delete('/{payment_id}/delete', [AdminPaymentController::class, 'delete'])->name('admin.payment.delete');
-    });
-
-    Route::prefix('cart-items')->group(function () {
-        Route::post('store', [AdminCartItemController::class, 'store'])->name('admin.cart.item.store');
     });
 
     Route::prefix('booking')->group(function () {

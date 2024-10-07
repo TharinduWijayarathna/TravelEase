@@ -37,14 +37,14 @@
                                     <div class="">Payment Method</div>
                                     <div class="inline-block" style="width: 200px;">
                                         <input type="text" class="form-control form-control-sm" v-model="payment_method"
-                                            placeholder="Payment Code" @keyup.enter="getSearch" />
+                                            placeholder="Payment Method" @keyup.enter="getSearch" />
                                     </div>
                                 </div>
                                 <div class="items-center text-muted mx-1">
                                     <div class="">Payment Date</div>
                                     <div class="inline-block" style="width: 200px;">
                                         <input type="date" class="form-control form-control-sm" v-model="payment_date"
-                                            placeholder="First Name" @keyup.enter="getSearch" />
+                                            placeholder="Payment Date" @keyup.enter="getSearch" />
                                     </div>
                                 </div>
                                 <div class="text-muted mx-1">
@@ -74,27 +74,29 @@
                                 </div>
                                 <table class="table">
                                     <thead>
+
                                         <tr>
                                             <th class="textClassHead text-center" style="width: 14%;">
-                                                Status
+                                                Booking ID
                                             </th>
                                             <th class="textClassHead text-left" style="width: 14%;">
-                                                Payment Code
+                                               Customer
                                             </th>
                                             <th class="textClassHead text-left" style="width: 14%;">
-                                                First Name
+                                                Price
                                             </th>
                                             <th class="textClassHead text-left" style="width: 14%;">
-                                                Last Name
+                                                Payment Method
                                             </th>
                                             <th class="textClassHead" style="width: 14%;">
-                                                email
+                                                Payment Status
                                             </th>
-                                            <!-- <th class="textClassHead text-center">
-                                                Profile Image
-                                            </th> -->
+
                                             <th class="textClassHead text-right" style="width: 14%;">
-                                                Contact Number
+                                                Payment Reference
+                                            </th>
+                                            <th class="textClassHead text-right" style="width: 14%;">
+                                                Payment Date
                                             </th>
                                             <!-- <th class="textClassHead">Rating</th> -->
 
@@ -103,46 +105,30 @@
                                     <tbody>
                                         <tr v-for="value in paymentData" :key="value.id"
                                             @click.prevent="edit(value.id)">
-                                            <td class="textClassBody text-center">
-                                                <div class="" v-if="value.status === 1">
-                                                    <span class="badge badge-success">Active</span>
-                                                </div>
-                                                <div class="" v-else>
-                                                    <span class="badge badge-warning">Inactive</span>
-                                                </div>
+
+                                            <td class="textClassBody text-left">
+                                                {{ value.booking_id }}
                                             </td>
                                             <td class="textClassBody text-left">
-                                                {{ value.code }}
+                                                {{ value.customer_name }}
                                             </td>
                                             <td class="textClassBody text-left">
-                                                {{ value.first_name }}
+                                                {{ value.price }}
                                             </td>
                                             <td class="textClassBody text-left">
-                                                {{ value.last_name }}
+                                                {{ value.payment_method }}
                                             </td>
-                                            <td class="textClassBody">
-                                                {{ value.email }}
+
+                                            <td class="textClassBody text-left">
+                                                {{ value.payment_status }}
                                             </td>
-                                            <!-- <td class="textClassBody text-center">
-                                                <img width="160px" v-if="value.image_url" :src="value.image_url"
-                                                    alt="" />
-                                                <img v-else width="80px" src="/assets/PublicArea/images/avatar/user.jpg"
-                                                    alt="" />
-                                            </td> -->
-                                            <td class="textClassBody text-right">
-                                                {{ value.contact_number }}
+                                            <td class="textClassBody text-left">
+                                                {{ value.payment_reference }}
                                             </td>
-                                            <!-- <td class="textClassBody text-center">
-                                                <div v-if="value.gender == 1">
-                                                    <span>Male</span>
-                                                </div>
-                                                <div v-else-if="value.gender == 2">
-                                                    <span>Female</span>
-                                                </div>
-                                                <div v-else-if="value.gender == 3">
-                                                    <span>Other</span>
-                                                </div>
-                                            </td> -->
+                                            <td class="textClassBody text-left">
+                                                {{ value.payment_date }}
+                                            </td>
+
                                         </tr>
                                     </tbody>
                                 </table>
@@ -221,7 +207,7 @@ const paymentData = ref([]);
 const reload = async () => {
     try {
         const response = (
-            await axios.get(route("admin.customer.all"), {
+            await axios.get(route("admin.payment.all"), {
                 params: {
                     page: page.value,
                     per_page: pageCount.value,

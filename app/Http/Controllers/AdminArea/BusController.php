@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers\AdminArea;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Bus\CreateBusRequest;
 use App\Http\Requests\Bus\UpdateBusRequest;
 use App\Models\Bus;
 use domain\Facades\BusFacade\BusFacade;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Spatie\QueryBuilder\QueryBuilder;
 use Spatie\QueryBuilder\AllowedFilter;
 
-class BusController extends ParentController
+class BusController extends Controller
 {
     /**
      * Index
@@ -21,7 +23,6 @@ class BusController extends ParentController
     public function index()
     {
         return Inertia::render('AdminArea/Buses/index');
-
     }
 
     /**
@@ -47,29 +48,33 @@ class BusController extends ParentController
     {
         $query = Bus::query();
 
-        if(request('code')){
+        if (Auth::user()->role == 3) {
+            $query->where('travel_provider_id', Auth::id());
+        }
+
+        if (request('code')) {
             $code = request('code');
             $query->where('code', 'like', "%{$code}%");
         }
 
-        if(request('bus_name')){
+        if (request('bus_name')) {
             $bus_name = request('bus_name');
             $query->where('name', 'like', "%{$bus_name}%");
         }
 
-        if(request('category_name')){
+        if (request('category_name')) {
             $category_name = request('category_name');
-            $query->whereHas('Category', function ($q) use ($category_name){
+            $query->whereHas('Category', function ($q) use ($category_name) {
                 $q->where('name', 'like', "%{$category_name}%");
             });
         }
 
-        if(request('status')){
+        if (request('status')) {
 
             $status = request('status');
-            if($status == "1"){
+            if ($status == "1") {
                 $query->where('status', 1);
-            }else{
+            } else {
                 $query->where('status', 0);
             }
         }
@@ -77,7 +82,7 @@ class BusController extends ParentController
         $payload = QueryBuilder::for($query)
             ->allowedSorts(['id', 'name'])
             ->allowedFilters(
-                AllowedFilter::callback('search', function ($query, $value){
+                AllowedFilter::callback('search', function ($query, $value) {
                     $query->orWhere('id', 'like', "%{$value}%");
                     $query->orWhere('code', 'like', "%{$value}%");
                     $query->orWhere('name', 'like', "%{$value}%");
@@ -127,7 +132,7 @@ class BusController extends ParentController
      */
     public function update(UpdateBusRequest $request, $bus_id,)
     {
-        return BusFacade::update($request->all(),$bus_id);
+        return BusFacade::update($request->all(), $bus_id);
     }
 
     /**
@@ -142,5 +147,4 @@ class BusController extends ParentController
     {
         return BusFacade::delete($bus_id);
     }
-
 }

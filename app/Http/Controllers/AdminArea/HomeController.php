@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
-class HomeController extends ParentController
+class HomeController extends Controller
 {
     /**
      * Index

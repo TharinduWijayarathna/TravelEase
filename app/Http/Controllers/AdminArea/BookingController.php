@@ -5,6 +5,7 @@ namespace App\Http\Controllers\AdminArea;
 use App\Http\Controllers\Controller;
 use App\Models\Booking;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Lahirulhr\PayHere\PayHere;
 use Spatie\QueryBuilder\AllowedFilter;
@@ -19,11 +20,17 @@ class BookingController extends Controller
 
     public function all()
     {
-        $query = Booking::query();
+        $query = Booking::with('bus');
 
         if (request('code')) {
             $code = request('code');
             $query->where('code', 'like', "%{$code}%");
+        }
+
+        if (Auth::user()->role == 3) {
+            $query->whereHas('bus', function ($query) {
+                $query->where('travel_provider_id', Auth::id());
+            });
         }
 
         if (request('status')) {
