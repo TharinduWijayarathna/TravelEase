@@ -11,7 +11,7 @@ class BookingController extends Controller
 {
     public function index($id)
     {
-        $data['bus'] = Bus::with('Category', 'BusImage')->find($id);
+        $data['bus'] = Bus::find($id);
         return Inertia::render('PublicArea/Bookings/index')->with($data);
     }
 

@@ -33,19 +33,14 @@
                             </div>
                             <div class="mb-3">
                                 <label for="busRoute" class="form-label">Bus Route</label>
-                                <select id="busRoute" class="form-control" v-model="form.busRoute" required>
-                                    <option disabled value="">Select a route</option>
-                                    <option v-for="route in busRoutes" :key="route" :value="route">
-                                        {{ route }}
-                                    </option>
-                                </select>
+                                <input type="text" disabled :value="route" class="form-control" />
                             </div>
                             <div class="mb-3">
                                 <label for="pickup" class="form-label">Pickup Location</label>
                                 <select id="pickup" class="form-control" v-model="form.pickup" required>
                                     <option disabled value="">Select a pickup location</option>
-                                    <option v-for="location in pickupLocations" :key="location" :value="location">
-                                        {{ location }}
+                                    <option v-for="stop in bus_stops" :key="id" :value="id">
+                                        {{ stop.name }}
                                     </option>
                                 </select>
                             </div>
@@ -53,20 +48,12 @@
                                 <label for="dropoff" class="form-label">Drop-off Location</label>
                                 <select id="dropoff" class="form-control" v-model="form.dropoff" required>
                                     <option disabled value="">Select a drop-off location</option>
-                                    <option v-for="location in dropoffLocations" :key="location" :value="location">
-                                        {{ location }}
+                                    <option v-for="stop in bus_stops" :key="id" :value="id">
+                                        {{ stop.name }}
                                     </option>
                                 </select>
                             </div>
-                            <div class="mb-3">
-                                <label for="busType" class="form-label">Bus Type</label>
-                                <select id="busType" class="form-control" v-model="form.busType" required>
-                                    <option disabled value="">Select a bus type</option>
-                                    <option v-for="type in busTypes" :key="type" :value="type">
-                                        {{ type }}
-                                    </option>
-                                </select>
-                            </div>
+
                             <div class="mb-3">
                                 <label for="date" class="form-label">Date</label>
                                 <input type="date" id="date" class="form-control" v-model="form.date" required />
@@ -79,15 +66,7 @@
                                 <label for="requests" class="form-label">Special Requests</label>
                                 <textarea id="requests" class="form-control" v-model="form.requests"></textarea>
                             </div>
-                            <div class="mb-3">
-                                <label for="payment" class="form-label">Payment Option</label>
-                                <select id="payment" class="form-control" v-model="form.payment" required>
-                                    <option disabled value="">Select payment method</option>
-                                    <option value="credit-card">Credit Card</option>
-                                    <option value="paypal">PayPal</option>
-                                    <option value="bank-transfer">Bank Transfer</option>
-                                </select>
-                            </div>
+
                             <button type="submit" class="btn btn-primary">Book Now</button>
                         </form>
                     </div>
@@ -99,13 +78,20 @@
 
 <script setup>
 import AppLayout from "@/Layouts/AppLayout.vue";
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
+
+const props = defineProps({
+    bus: Object
+});
+
+const route = props.bus.from + " - " + props.bus.to;
 
 // Bus routes, locations, and types
 const busRoutes = ["Route 1: City A - City B", "Route 2: City C - City D"];
 const pickupLocations = ["Station A", "Station B", "Station C"];
 const dropoffLocations = ["Station X", "Station Y", "Station Z"];
 const busTypes = ["AC", "Non-AC", "Luxury"];
+const bus_stops = ref([]);
 
 // Form data setup
 const form = ref({
@@ -126,4 +112,19 @@ const handleSubmit = () => {
     console.log("Booking details:", form.value);
     // Add form submission logic here (e.g., API call)
 };
+
+const getBusStops = async () => {
+    try {
+        const response = (
+            await axios.get(route("admin.bus.stop.all", props.bus.id))
+        ).data;
+        bus_stops.value = response.data;
+    } catch (error) {
+        console.log("Error", error);
+    }
+};
+
+onMounted(() => {
+    getBusStops();
+});
 </script>
