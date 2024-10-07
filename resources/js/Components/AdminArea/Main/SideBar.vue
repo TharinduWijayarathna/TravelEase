@@ -56,14 +56,14 @@
                         </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link active-preloader" data-toggle="collapse"
-                                :class="{ 'active': route().current() == 'admin.banner.index' || route().current() == 'admin.category.index' }"
+                                :class="{ 'active': route().current() == 'admin.banner.index' || route().current() == 'admin.category.index' || route().current() == 'admin.user.index' }"
                                 data-target="#userManagementCollapse" aria-expanded="false"
                                 aria-controls="userManagementCollapse">
                                 <i class="fa-solid fa-gear"></i>
                                 <span class="ml-2 nav-link-text font-weight-600">Settings</span>
                             </a>
                             <ul class="collapse list-unstyled"
-                                :class="{ 'show': $page.url.startsWith('/admin/banner') || $page.url.startsWith('/admin/category') }"
+                                :class="{ 'show': $page.url.startsWith('/admin/banner') || $page.url.startsWith('/admin/category')  || $page.url.startsWith('/admin/user') }"
                                 id="userManagementCollapse">
                                 <li>
                                     <Link class="nav-link ml-4"
@@ -82,7 +82,7 @@
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link class="nav-link ml-4">
+                                    <Link class="nav-link ml-4" :class="{ 'active__sidebar': route().current() == 'admin.user.index' }" :href="route('admin.user.index')">
                                     <i class="fa-solid fa-user"></i>
                                     <span class="nav-link-text font-weight-400">User</span>
                                     </Link>
