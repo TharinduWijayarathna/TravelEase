@@ -30,7 +30,7 @@
                             <span class="ml-2 nav-link-text font-weight-600">Buses</span>
                             </Link>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item" v-if="user.role == 1">
                             <Link
                                 :class="{ 'active__sidebar': route().current() == 'admin.customer.index' || route().current() == 'admin.customer.edit' }"
                                 class="nav-link active-preloader" :href="route('admin.customer.index')">
@@ -38,7 +38,7 @@
                             <span class="ml-2 nav-link-text font-weight-600">Customers</span>
                             </Link>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item" v-if="user.role == 1">
                             <Link
                                 :class="{ 'active__sidebar': route().current() == 'admin.payment.index' }"
                                 class="nav-link active-preloader" :href="route('admin.payment.index')">
@@ -54,7 +54,7 @@
                             <span class="ml-2 nav-link-text font-weight-600">Bookings</span>
                             </Link>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item" v-if="user.role == 1">
                             <a href="#" class="nav-link active-preloader" data-toggle="collapse"
                                 :class="{ 'active': route().current() == 'admin.banner.index' || route().current() == 'admin.category.index' || route().current() == 'admin.user.index' }"
                                 data-target="#userManagementCollapse" aria-expanded="false"
@@ -84,7 +84,7 @@
                                 <li>
                                     <Link class="nav-link ml-4" :class="{ 'active__sidebar': route().current() == 'admin.user.index' }" :href="route('admin.user.index')">
                                     <i class="fa-solid fa-user"></i>
-                                    <span class="nav-link-text font-weight-400">User</span>
+                                    <span class="nav-link-text font-weight-400">Travel Providers</span>
                                     </Link>
                                 </li>
                             </ul>
@@ -98,12 +98,14 @@
 
 
 <script setup>
-import { Link } from '@inertiajs/vue3'
+import { Link, usePage } from '@inertiajs/vue3'
 import isArray from 'lodash/isArray';
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faDesktop, faFolderOpen, faImage, faCubes, faCar, faPen, faCableCar, faBuildingShield, faCarAlt, faNewspaper, faHotel, faCity, faUser, faInfinity, faArrowsRotate, faLocationDot, faLayerGroup, faTasks, faFolder, faPenToSquare, faBook, faBuildingUser, faBoxesStacked, faPeopleCarryBox, faUsers, faHandsHoldingCircle, faFileInvoiceDollar, faRecordVinyl, faBuilding, faWarehouse, faScrewdriverWrench, faGear, faBriefcase, faPersonWalkingDashedLineArrowRight } from '@fortawesome/free-solid-svg-icons'
+import { onMounted } from 'vue';
 
+const user = usePage().props.auth.user;
 
 library.add(faDesktop)
 library.add(faHotel)
@@ -139,8 +141,6 @@ library.add(faInfinity)
 library.add(faBuildingUser)
 library.add(faPenToSquare)
 library.add(faPersonWalkingDashedLineArrowRight)
-
-
 </script>
 
 <style lang="scss" scoped>

@@ -136,11 +136,11 @@
                                                     <i class="text-right fa__2x ml-2 fa-solid fa-eye text-muted"></i>
                                                 </a>
 
-                                                <a href="javascript:void(0)" @click.prevent=" editCategory(value.id)"
+                                                <!-- <a href="javascript:void(0)" @click.prevent=" editCategory(value.id)"
                                                     data-toggle="modal" data-target="#updateModal"
                                                     class="p-2 float-end">
                                                     <i class="text-right fa__2x ml-2 fas fas fa-pencil text-muted"></i>
-                                                </a>
+                                                </a> -->
                                                 <a href="javascript:void(0)" @click.prevent="deleteCategory(value.id)"
                                                     class="p-2 float-end">
                                                     <i class="fa-solid fa-trash text-danger text-right fa__2x ml-2"></i>

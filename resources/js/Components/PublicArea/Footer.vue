@@ -42,18 +42,10 @@ Footer START -->
                 </div>
                 <div class="modal-body">
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                        Quisquam, voluptate, voluptatem, voluptatum, voluptates
-                        quae quia quidem quibusdam autem. Quisquam, voluptate,
-                        voluptatem, voluptatum, voluptates quae quia quidem
-                        quibusdam autem.
+                        Travel Ease is committed to protecting your privacy. This Privacy Policy explains our data processing practices and your options regarding the ways in which your personal data is used. If you have any requests concerning your personal information or any queries with regard to our processing, please contact us at
                     </p>
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                        Quisquam, voluptate, voluptatem, voluptatum, voluptates
-                        quae quia quidem quibusdam autem. Quisquam, voluptate,
-                        voluptatem, voluptatum, voluptates quae quia quidem
-                        quibusdam autem.
+                        Travel Ease collects the details provided by you on registration together with information we learn about you from your use of our service and your visits to our web site and other sites accessible from them. We also collect information about the transactions you undertake including details of payment cards used.
                     </p>
                 </div>
                 <div class="modal-footer">
@@ -77,18 +69,7 @@ Footer START -->
                 </div>
                 <div class="modal-body">
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                        Quisquam, voluptate, voluptatem, voluptatum, voluptates
-                        quae quia quidem quibusdam autem. Quisquam, voluptate,
-                        voluptatem, voluptatum, voluptates quae quia quidem
-                        quibusdam autem.
-                    </p>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                        Quisquam, voluptate, voluptatem, voluptatum, voluptates
-                        quae quia quidem quibusdam autem. Quisquam, voluptate,
-                        voluptatem, voluptatum, voluptates quae quia quidem
-                        quibusdam autem.
+                    Travel Ease has been designed to provide a platform for users to book and manage their travel plans. The platform is designed to provide a seamless experience for users to book flights, hotels, and car rentals. The platform is designed to provide a seamless experience for users to book flights, hotels, and car rentals. The platform is designed to provide a seamless experience for users to book flights, hotels, and car rentals. The platform is designed to provide a seamless experience for users to book flights, hotels, and car rentals. The platform is designed to provide a seamless experience for users to book flights, hotels, and car rentals. The platform is designed to provide a seamless experience for users to book flights, hotels, and car rentals. The platform is designed to provide a seamless experience for users to book flights, hotels, and car rentals. The platform is designed to provide a seamless experience for users to book flights, hotels, and car rentals.
                     </p>
                 </div>
                 <div class="modal-footer">

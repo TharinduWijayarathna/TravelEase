@@ -30,15 +30,11 @@
                                     <h6 class="mb-4">Office Address</h6>
 
                                     <div class="d-flex align-items-center mb-2">
-                                        <div class="avatar avatar-xxs me-2">
-                                            <img class="avatar-img rounded-circle"
-                                                src="assets/PublicArea/images/flags/us.svg" alt="avatar" />
-                                        </div>
-                                        <span class="heading-color fw-semibold mb-0">US office:</span>
+
+                                        <span class="heading-color fw-semibold mb-0">Main office:</span>
                                     </div>
                                     <address class="mb-0">
-                                        1421 Coburn Hollow Road Metamora, Near
-                                        Center Point, IL 61548.
+                                        TravelEase, Sri Lanka
                                     </address>
                                 </div>
                             </div>
@@ -55,7 +51,7 @@
                                         hours.
                                     </p>
                                     <a href="#"
-                                        class="heading-color text-primary-hover text-decoration-underline mb-0">example@gmail.com</a>
+                                        class="heading-color text-primary-hover text-decoration-underline mb-0">travelease@gmail.com</a>
                                 </div>
                             </div>
 
@@ -70,8 +66,8 @@
                                         goal - get in touch!
                                     </p>
                                     <a href="#"
-                                        class="heading-color text-primary-hover text-decoration-underline mb-0">(251)
-                                        854-6308</a>
+                                        class="heading-color text-primary-hover text-decoration-underline mb-0">(76)
+                                        578-1398</a>
                                 </div>
                             </div>
                         </div>

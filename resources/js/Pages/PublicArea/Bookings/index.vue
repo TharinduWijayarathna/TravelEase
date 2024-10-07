@@ -119,7 +119,7 @@ const handleSubmit = () => {
                 icon: 'success',
                 confirmButtonText: 'OK'
             }).then(() => {
-                router.push(route('booking.success', response.data.id));
+                router.visit(route('booking.user.index'));
             });
         })
         .catch(error => {

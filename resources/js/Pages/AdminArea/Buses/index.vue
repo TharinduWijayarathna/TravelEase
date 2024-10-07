@@ -59,14 +59,14 @@
                                             placeholder="Bus Name" />
                                     </div>
                                 </div>
-                                <div class="items-center text-muted mx-1">
+                                <!-- <div class="items-center text-muted mx-1">
                                     <div class="">Category Name</div>
                                     <div class="inline-block ">
                                         <input type="text" class="form-control form-control-sm" name="category_name"
                                             id="category_name" v-model="search_category_name" @keyup="getSearch"
                                             placeholder="Category Name" />
                                     </div>
-                                </div>
+                                </div> -->
 
                                 <div class="text-muted mx-1">
                                     <div class="mt-2">

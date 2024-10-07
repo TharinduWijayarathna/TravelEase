@@ -34,9 +34,9 @@
                                     <div class="row">
                                         <div class="col-8">
                                             <div class="numbers">
-                                                <p class="mb-0 text-sm text-uppercase font-weight-bold"> PENDING
-                                                    ENQUIRIES </p>
-                                                <h5 class="font-weight-bolder">26</h5>
+                                                <p class="mb-0 text-sm text-uppercase font-weight-bold"> SYSTEM USERS
+                                                     </p>
+                                                <h5 class="font-weight-bolder">{{ props.user_count }}</h5>
                                             </div>
                                         </div>
                                         <div class="col-4 text-right">
@@ -56,9 +56,9 @@
                                     <div class="row">
                                         <div class="col-8">
                                             <div class="numbers">
-                                                <p class="mb-0 text-sm text-uppercase font-weight-bold"> PENDING
-                                                    ENQUIRIES </p>
-                                                <h5 class="font-weight-bolder">26</h5>
+                                                <p class="mb-0 text-sm text-uppercase font-weight-bold"> TOTAL BUSES
+                                                     </p>
+                                                <h5 class="font-weight-bolder">{{ props.bus_count }}</h5>
                                             </div>
                                         </div>
                                         <div class="col-4 text-right">
@@ -78,9 +78,9 @@
                                     <div class="row">
                                         <div class="col-8">
                                             <div class="numbers">
-                                                <p class="mb-0 text-sm text-uppercase font-weight-bold"> PENDING
-                                                    ENQUIRIES </p>
-                                                <h5 class="font-weight-bolder">26</h5>
+                                                <p class="mb-0 text-sm text-uppercase font-weight-bold"> TOTAL BOOKINGS
+                                                     </p>
+                                                <h5 class="font-weight-bolder">{{ props.booking_count }}</h5>
                                             </div>
                                         </div>
                                         <div class="col-4 text-right">
@@ -131,7 +131,11 @@ import VueApexCharts from "vue3-apexcharts";
 
 import { ValidationMixin } from "@/plugins/mixins";
 
-const { props } = usePage();
+const props = defineProps({
+    user_count: Number,
+    bus_count: Number,
+    booking_count: Number,
+});
 
 library.add(faHouse);
 library.add(faFileInvoice);

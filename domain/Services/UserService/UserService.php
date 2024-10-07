@@ -53,7 +53,7 @@ class UserService
 
     /**
      * Store
-     * create new user 
+     * create new user
      *
      * @param array $data
      *
@@ -78,7 +78,7 @@ class UserService
         }else{
             $data['password'] = bcrypt($data['password']);
         }
-        $data['role'] = 1;
+        $data['role'] = 3;
         $user = $this->user->create($data);
         return $user;
     }
@@ -88,13 +88,13 @@ class UserService
      * update specific user
      *
      * @param int $user_id
-     * @param array $data 
+     * @param array $data
      *
      * @return void
      */
     public function update(int $user_id, array $data)
     {
-        $user = $this->user->where('id', $user_id)->where('role', 2)->first();
+        $user = $this->user->where('id', $user_id)->where('role', 3)->first();
 
         if (!$user) {
             return null;

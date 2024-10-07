@@ -2,7 +2,6 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\User;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,10 +16,10 @@ class AdminValidate
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(!Auth::check()){
+        if (!Auth::check()) {
             return redirect()->route('login');
-        }else{
-            if(Auth::user()->role != User::ROLE['ADMIN']){
+        } else {
+            if (Auth::user()->role != 1 && Auth::user()->role != 3) {
                 return redirect()->route('home');
             }
         }

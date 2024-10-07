@@ -171,12 +171,11 @@
 
 <script setup>
 import AppLayout from "@/Layouts/AppLayout.vue";
-import { onMounted, onBeforeUnmount, ref } from "vue";
-import { Link, usePage, router } from "@inertiajs/vue3";
+import { onMounted, ref } from "vue";
+import { Link } from "@inertiajs/vue3";
 import axios from "axios";
 import Swal from "sweetalert2";
-import invalidImage from '@/../src/AdminArea/img/product/invalid_image.png';
-import { emitter, CART_REFRESH } from "@/event-bus.js";
+
 
 const page = ref(1);
 const pageCount = ref(25);
