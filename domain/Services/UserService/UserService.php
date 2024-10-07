@@ -75,6 +75,8 @@ class UserService
 
         if (!isset($data['password'])) {
             $data['password'] = '';
+        }else{
+            $data['password'] = bcrypt($data['password']);
         }
         $data['role'] = 1;
         $user = $this->user->create($data);
@@ -129,6 +131,10 @@ class UserService
 
             if (isset($data['address'])) {
                 $user->address = $data['address'];
+            }
+
+            if (isset($data['password'])) {
+                $user->password = bcrypt($data['password']);
             }
 
             $user->save();

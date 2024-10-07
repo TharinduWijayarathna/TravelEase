@@ -268,6 +268,17 @@
                                                         validationErrors.email }}</small>
                                             </div>
                                         </div>
+                                        <!-- password -->
+                                        <div class="row mb-1">
+                                            <div for="password" class="col-md-3 col-form-label">
+                                                PASSWORD
+                                            </div>
+                                            <div class="col-md-9">
+                                                <input type="password" class="form-control form-control-sm"
+                                                    name="password" id="password" placeholder="password"
+                                                    v-model="User.password" required />
+                                            </div>
+                                        </div>
                                         <div class="text-right mt-2">
                                             <button type="button"
                                                 class="btn btn-primary btn btn-sm btn-neutral float-end"
@@ -339,6 +350,17 @@
                                                 <small v-if="validationErrors.email" id="email"
                                                     class="text-danger form-text text-error-msg error">{{
                                                         validationErrors.email }}</small>
+                                            </div>
+                                        </div>
+                                        <!-- password -->
+                                        <div class="row mb-1">
+                                            <div for="password" class="col-md-3 col-form-label">
+                                                PASSWORD
+                                            </div>
+                                            <div class="col-md-9">
+                                                <input type="password" class="form-control form-control-sm"
+                                                    name="password" id="password" placeholder="password"
+                                                    v-model="editUser.password" required />
                                             </div>
                                         </div>
                                         <div class="text-right mt-2">
