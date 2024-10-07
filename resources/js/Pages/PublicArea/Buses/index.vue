@@ -30,23 +30,35 @@
 
                                         <!-- Route Filter -->
                                         <div class="mb-3">
-                                            <label for="routeFilter" class="form-label">Bus Route</label>
-                                            <select id="routeFilter" class="form-select">
-                                                <option value="">All Routes</option>
-                                                <!-- <option v-for="route in uniqueRoutes" :key="route" :value="route">{{
-                                                    route }}</option> -->
-                                            </select>
+                                            <label for="routeFilter" class="form-label">Route From</label>
+                                            <input type="text" v-model="filterForm.route_from" id="routeFilter" class="form-control">
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="routeFilter" class="form-label">Route To</label>
+                                            <input type="text" v-model="filterForm.route_to" id="routeFilter" class="form-control">
                                         </div>
 
                                         <!-- Departure Time Filter -->
                                         <div class="mb-3">
                                             <label for="departureTimeFilter" class="form-label">Departure Time</label>
-                                            <input type="time" id="departureTimeFilter" class="form-control">
+                                            <input type="time" id="departureTimeFilter" class="form-control" v-model="filterForm.departure_time">
+                                        </div>
+
+                                        <!-- Arrival Time Filter -->
+                                        <div class="mb-3">
+                                            <label for="arrivalTimeFilter" class="form-label">Arrival Time</label>
+                                            <input type="time" id="arrivalTimeFilter" class="form-control" v-model="filterForm.arrival_time">
                                         </div>
 
                                         <!-- Filter Button -->
                                         <button @click="applyFilters" class="btn btn-primary w-100">Apply
                                             Filters</button>
+
+                                        <!-- Reset Button -->
+                                        <button @click="clearFilters" class="btn btn-secondary w-100 mt-2">Reset
+                                            Filters</button>
+
                                     </div>
                                 </div>
                             </aside>
@@ -159,58 +171,27 @@ const pageCount = ref(25);
 const perPage = ref([25, 50, 100]);
 const pagination = ref({});
 
-const wishList = ref({});
-const checkWishList = ref([]);
-const wishListStatus = ref([]);
 const buses = ref([]);
-const categories = ref({});
-const sortBy = ref("");
-const busName = ref("");
-const user = usePage().props.auth.user;
-const busData = ref({
-    unit_price: '',
-    unit_discount: '',
 
-});
 const filterForm = ref({
-    selected_category: [],
+    route_from: "",
+    route_to: "",
+    departure_time: "",
+    arrival_time: "",
 });
 
-const isInWishlist = async () => {
-    try {
-        var customer_id = user.id;
-        const response = await axios.get(route('wishList.check', { customer_id }));
-        checkWishList.value = response.data;
-        const busIds = buses.value.map(bus => bus.id);
-        const wishListbusIds = checkWishList.value.map(item => item.bus_id);
-        busIds.forEach((busId, index) => {
-            if (wishListbusIds.includes(busId)) {
-                const statusIndex = wishListbusIds.indexOf(busId);
-                const status = checkWishList.value[statusIndex].status;
-                if (status === 0) {
-                    wishListStatus.value[index] = 0;
-                } else {
-                    wishListStatus.value[index] = 1;
-                }
-            } else {
-                wishListStatus.value[index] = 0;
-            }
-        });
-        reload();
-    } catch (error) {
-        console.error('Error:', error);
-    }
+const applyFilters = async () => {
+    page.value = 1;
+    reload();
 };
 
-const getCategories = async () => {
-    try {
-        const response = (
-            await axios.get(route("category.all"))
-        ).data;
-        categories.value = response.data;
-    } catch (error) {
-        console.log("Error", error);
-    }
+const clearFilters = async () => {
+    filterForm.value.route_from = "";
+    filterForm.value.route_to = "";
+    filterForm.value.departure_time = "";
+    filterForm.value.arrival_time = "";
+    page.value = 1;
+    reload();
 };
 
 const reload = async () => {
@@ -220,6 +201,10 @@ const reload = async () => {
                 params: {
                     page: page.value,
                     per_page: pageCount.value,
+                    route_from: filterForm.value.route_from,
+                    route_to: filterForm.value.route_to,
+                    departure_time: filterForm.value.departure_time,
+                    arrival_time: filterForm.value.arrival_time,
                 },
             })
         ).data;
@@ -231,206 +216,8 @@ const reload = async () => {
     }
 };
 
-const getSelectedbusData = async (bus_id) => {
-    try {
-        const response = await axios.get(route('bus.get', bus_id));
-        busData.value.unit_price = response.data.price;
-        busData.value.unit_discount = response.data.discount_price;
-    } catch (error) {
-        console.log('Error', error);
-    }
-}
-
-const addToCard = async (bus_id) => {
-    try {
-        await getSelectedbusData(bus_id);
-        const customer_id = user.id;
-        busData.value.created_by = user.first_name;
-        const response = await axios
-            .post(route("cart.item.store", { customer_id, bus_id }), busData.value)
-            .then((response) => {
-                Swal.fire({
-                    icon: "success",
-                    title: "Success",
-                    text: "bus added to cart!",
-                    toast: true,
-                    position: "top-end",
-                    showConfirmButton: false,
-                    timer: 1500,
-                    timerProgressBar: true,
-                });
-                emitter.emit(CART_REFRESH);
-                reload();
-            })
-            .catch((error) => {
-                console.log("Error:", error);
-                Swal.fire({
-                    icon: "warning",
-                    title: "Warning",
-                    text: "Oops! Already in cart.",
-                    toast: true,
-                    position: "top-end",
-                    showConfirmButton: false,
-                    timer: 3000,
-                    timerProgressBar: true,
-                });
-            });
-    } catch (error) {
-        console.log("Error:", error);
-    }
-};
-
-const updateAvailability = (value) => {
-    filterForm.value.availability = value;
-};
-
-const filterBuses = async () => {
-    try {
-        const response = (
-            await axios.post(route("bus.filter"), {
-                params: {
-                    page: page.value,
-                    per_page: pageCount.value,
-                    filterForm: filterForm.value,
-                },
-            })
-        ).data;
-        console.log('im filter', response.data.length);
-        buses.value = response.data;
-        if (response.data && response.data.length > 0) {
-
-            Swal.fire({
-                icon: "success",
-                title: "Success",
-                text: "bus filter successfully!",
-                toast: true,
-                position: "top-end",
-                showConfirmButton: false,
-                timer: 1500,
-                timerProgressBar: true,
-            });
-        } else {
-            Swal.fire({
-                icon: "warning",
-                title: "Oops!",
-                text: "No matching buses found.",
-                toast: true,
-                position: "top-end",
-                showConfirmButton: false,
-                timer: 3000,
-                timerProgressBar: true,
-            });
-        }
-    } catch (error) {
-        console.log("Error:", error);
-        Swal.fire({
-            icon: "warning",
-            title: "Oops!",
-            text: "An error occurred. Please try again later.",
-            toast: true,
-            position: "top-end",
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-        });
-    }
-
-};
-
-const clearFilter = () => {
-    // filterForm.value = [];
-    // filterForm.value.availability = "all";
-    router.visit(route('buses.index'));
-};
-
-const sortbuses = () => {
-    console.log(sortBy.value);
-    try {
-        if (sortBy.value == 1) {
-            buses.value = buses.value.sort((a, b) =>
-                a.name.localeCompare(b.name)
-            );
-        } else if (sortBy.value == 2) {
-            buses.value = buses.value.sort((a, b) => a.price - b.price);
-        } else if (sortBy.value == 3) {
-            buses.value = buses.value.sort((a, b) => b.price - a.price);
-        }
-    } catch (error) {
-        console.log("Error", error);
-    }
-};
-
-const searchByName = async () => {
-    try {
-        const response = await axios.post(route("bus.search"), {
-            name: busName.value,
-        });
-        console.log("pr by name", response.data.searched_bus);
-        buses.value = response.data.searched_bus;
-    } catch (error) {
-        console.log("Error", error);
-    }
-};
-
-const addToWishList = async (bus_id) => {
-    try {
-        const customer_id = user.id;
-        const response = await axios.post(route('wishList.add', { customer_id, bus_id }));
-        const Toast = Swal.mixin({
-            toast: true,
-            position: "top-end",
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.onmouseenter = Swal.stopTimer;
-                toast.onmouseleave = Swal.resumeTimer;
-            }
-        });
-        Toast.fire({
-            icon: "success",
-            title: "bus successfully added to your wishlist."
-        });
-        reload();
-        isInWishlist();
-        console.log('white list', response);
-    } catch (error) {
-        console.log('Error', error);
-    }
-}
-
-const removeFromWishList = async (bus_id) => {
-    try {
-        const customer_id = user.id;
-        const response = await axios.post(route('wishList.remove', { customer_id, bus_id }));
-        const Toast = Swal.mixin({
-            toast: true,
-            position: "top-end",
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.onmouseenter = Swal.stopTimer;
-                toast.onmouseleave = Swal.resumeTimer;
-            }
-        });
-        Toast.fire({
-            icon: "success",
-            title: "bus successfully removed from your wishlist",
-        });
-
-        reload();
-        isInWishlist();
-    } catch (error) {
-        console.log('Error', error);
-    }
-}
-
-
 onMounted(() => {
-    getCategories();
     reload();
-    isInWishlist();
 });
 
 const getSearch = () => {
