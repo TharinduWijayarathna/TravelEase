@@ -43,6 +43,22 @@ class BusController extends Controller
 
         $query = Bus::query();
 
+        if(request('route_from')){
+            $query->where('from', request('route_from'));
+        }
+
+        if(request('route_to')){
+            $query->where('to', request('route_to'));
+        }
+
+        if(request('departure_time')){
+            $query->where('departure_time', request('departure_time'));
+        }
+
+        if(request('arrival_time')){
+            $query->where('arrival_time', request('arrival_time'));
+        }
+
         $payload = QueryBuilder::for($query)
             ->allowedSorts(['id', 'name'])
             ->allowedFilters(
