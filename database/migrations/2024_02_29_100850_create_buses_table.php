@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('to')->nullable();
             $table->time('departure_time')->nullable();
             $table->time('arrival_time')->nullable();
+            $table->bigInteger('seats')->nullable();
             $table->foreignId('category_id')->nullable();
             $table->softDeletes();
             $table->timestamps();
