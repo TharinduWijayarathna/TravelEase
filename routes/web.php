@@ -10,6 +10,7 @@ use App\Http\Controllers\AdminArea\BusController as AdminBusController;
 use App\Http\Controllers\AdminArea\BusStopController;
 use App\Http\Controllers\AdminArea\CartItemController as AdminCartItemController;
 use App\Http\Controllers\AdminArea\PaymentController as AdminPaymentController;
+use App\Http\Controllers\AdminArea\UsersController as AdminUsersController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\PublicArea\BannerController as PublicBannerController;
 use App\Http\Controllers\PublicArea\CartController as PublicCartController;
@@ -139,6 +140,16 @@ Route::prefix('admin')->group(function () {
         Route::post('/{category_id}/delete', [AdminCategoryController::class, 'delete'])->name('admin.category.delete');
         Route::post('/filter', [AdminCategoryController::class, 'filter'])->name('admin.category.filter');
         Route::get('/{category_id}/status', [AdminCategoryController::class, 'status'])->name('admin.category.status.update');
+    });
+    // Admin-users
+    Route::prefix('user')->group(function () {
+        Route::get('/', [AdminUsersController::class, 'index'])->name('admin.user.index');
+        Route::get('/all', [AdminUsersController::class, 'all'])->name('admin.user.all');
+        Route::get('/{user_id}/get', [AdminUsersController::class, 'get'])->name('admin.user.get');
+        Route::post('/store', [AdminUsersController::class, 'store'])->name('admin.user.store');
+        Route::post('/{user_id}/update', [AdminUsersController::class, 'update'])->name('admin.user.update');
+        Route::delete('/{user_id}/delete', [AdminUsersController::class, 'delete'])->name('admin.user.delete');
+        Route::post('/filter', [AdminUsersController::class, 'filter'])->name('admin.user.filter');
     });
 
     // Admin-bus
