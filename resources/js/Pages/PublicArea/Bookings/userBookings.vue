@@ -215,7 +215,7 @@ const pay = async (id) => {
             confirmButtonText: 'Yes, Pay!'
         }).then((result) => {
             if (result.isConfirmed) {
-                router.visit(route('booking.pay', id));
+                window.location.href = route('booking.pay', id);
             }
         });
     } catch (error) {

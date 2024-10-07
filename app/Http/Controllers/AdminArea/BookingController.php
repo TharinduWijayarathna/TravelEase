@@ -133,4 +133,11 @@ class BookingController extends Controller
         $booking->status = 'PENDING';
         return $booking->save();
     }
+
+    public function addPayment(Request $request, $id)
+    {
+        $booking = Booking::find($id);
+        $booking->payment = $request->payment;
+        return $booking->save();
+    }
 }

@@ -20,6 +20,7 @@ class Booking extends Model
         'dropoff',
         'date',
         'seats',
+        'payment',
         'requests',
         'status',
     ];

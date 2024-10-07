@@ -26,13 +26,14 @@ class BookingController extends Controller
 
     public function store(Request $request)
     {
-      return Booking::create($request->all());
+        return Booking::create($request->all());
     }
 
     public function pay($id)
     {
         $booking = Booking::find($id);
-        $item_name = $booking->bus->name . "Booking"; // Use the dot operator for concatenation
+        $item_name = $booking->bus->name . " Booking";
+
         $data = [
             'first_name' => $booking->user->first_name,
             'last_name' => $booking->user->last_name,
@@ -44,15 +45,13 @@ class BookingController extends Controller
             'order_id' => $booking->id,
             'items' => $item_name,
             'currency' => 'LKR',
-            'amount' => 4960.00,
+            'amount' => $booking->payment,
         ];
-
-        // creating checkout page & ridirect the user
 
         return PayHere::checkOut()
             ->data($data)
-            ->successUrl('localhost:8000/booking/user/history')
-            ->failUrl('localhost:8000/booking/user/history')
+            ->successUrl(route('payment.success', ['id' => $booking->id]))
+            ->failUrl(route('payment.fail', ['id' => $booking->id]))
             ->renderView();
     }
 }

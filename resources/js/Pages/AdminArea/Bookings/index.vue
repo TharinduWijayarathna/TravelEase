@@ -89,6 +89,9 @@
                                                 Seats
                                             </th>
                                             <th class="textClassHead" style="width: 14%;">
+                                                Payment Amount
+                                            </th>
+                                            <th class="textClassHead" style="width: 14%;">
                                                 Requests
                                             </th>
                                             <th class="textClassHead text-center">
@@ -136,17 +139,27 @@
                                                 {{ value.seats }}
                                             </td>
                                             <td class="textClassBody">
+                                                {{ value.payment }}
+                                            </td>
+                                            <td class="textClassBody">
                                                 {{ value.requests }}
                                             </td>
-                                           <td class="textClassBody text-center">
-                                                <button class="btn btn-sm btn-outline-info" @click.prevent="changeStatus(value.id)">
+                                            <td class="textClassBody text-center">
+                                                <button class="btn btn-sm btn-outline-info"
+                                                    @click.prevent="changeStatus(value.id)">
                                                     <i class="fa fa-arrow-alt-circle-right"></i>
                                                 </button>
-                                                <button class="btn btn-sm btn-outline-danger" @click.prevent="rejectBooking(value.id)">
+                                                <button class="btn btn-sm btn-outline-danger"
+                                                    @click.prevent="rejectBooking(value.id)">
                                                     <i class="fa fa-times"></i>
                                                 </button>
-                                                <button class="btn btn-sm btn-outline-success" @click.prevent="restoreBooking(value.id)">
+                                                <button class="btn btn-sm btn-outline-success"
+                                                    @click.prevent="restoreBooking(value.id)">
                                                     <i class="fa fa-undo"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-outline-dark"
+                                                    @click.prevent="addPayment(value.id)">
+                                                    <i class="fa fa-cash-register"></i>
                                                 </button>
                                             </td>
                                         </tr>
@@ -275,6 +288,52 @@
                     </div>
                 </div>
             </div>
+
+            <div class="modal fade" id="addPaymentModal" data-bs-backdrop="static" tabindex="-1" role="dialog"
+                aria-labelledby="addPaymentModal" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-mb" role="document">
+                    <div class="modal-content p-2">
+                        <div class="modal-header">
+                            <h5 class="modal-title font-weight-bolder breadcrumb-text text-gradient"
+                                id="add_brandLabel">
+                                Add Payment
+                            </h5>
+                            <button type="button" class="close btn" data-dismiss="modal" aria-label="Close"
+                                @click.prevent="resetData()">
+                                <span aria-hidden="true">
+                                    <i class="fa fa-times"></i>
+                                </span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="card-plain p-2">
+                                <div class="card-body">
+                                    <form role="form text-left" enctype="multipart/form-data">
+                                        <div class="row mb-1">
+                                            <div for="code" class="col-md-3 col-form-label">
+                                                AMOUNT
+                                            </div>
+                                            <div class="col-md-9">
+                                                <input type="text" class="form-control form-control-sm"
+                                                    name="payment_amount" id="payment_amount" placeholder="Amount"
+                                                    v-model="payment" required />
+                                            </div>
+                                        </div>
+                                        <div class="text-right mt-2">
+                                            <button type="button"
+                                                class="btn btn-primary btn btn-sm btn-neutral float-end"
+                                                @click.prevent="CreatePayment()">
+                                                <i class="fas fa-save"></i>
+                                                ADD
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </template>
     </AdminLayout>
 </template>
@@ -303,6 +362,8 @@ const statusList = ref([
     { id: 3, name: 'Rejected' },
     { id: 4, name: 'Payment Pending' }
 ]);
+const payment = ref(null);
+const booking_id = ref(null);
 
 const customerData = ref([]);
 const customer = ref({});
@@ -403,6 +464,27 @@ const restoreBooking = async (id) => {
         successMessage();
     } catch (error) {
         errorMessage();
+        console.log("Error", error);
+    }
+};
+
+const addPayment = async (id) => {
+    payment.value = '';
+    booking_id.value = id;
+    $('#addPaymentModal').modal('show');
+    customer.value = customerData.value.find((customer) => customer.id === id);
+}
+
+const CreatePayment = async () => {
+    try {
+        const response = await axios.post(route("admin.booking.addPayment", booking_id.value), {
+            payment: payment.value
+        });
+        $('#addPaymentModal').modal('hide');
+        reload();
+        successMessage();
+    } catch (error) {
+        convertValidationError(error);
         console.log("Error", error);
     }
 };

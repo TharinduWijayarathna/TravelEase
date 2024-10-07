@@ -83,6 +83,9 @@ Route::prefix('booking')->group(function () {
 });
 
 Route::get('/{booking_id}/pay', [PublicBookingController::class, 'pay'])->name('booking.pay');
+Route::get('/payment/success/{id}', [PublicPaymentController::class, 'paymentSuccess'])->name('payment.success');
+Route::get('/payment/fail/{id}', [PublicPaymentController::class, 'paymentFail'])->name('payment.fail');
+
 
 /*Admin Area*/
 Route::prefix('admin')->group(function () {
@@ -185,6 +188,7 @@ Route::prefix('admin')->group(function () {
         Route::post('/{booking_id}/update', [AdminBookingController::class, 'update'])->name('admin.booking.update');
         Route::delete('/{booking_id}/delete', [AdminBookingController::class, 'delete'])->name('admin.booking.delete');
         Route::get('/{booking_id}/status', [AdminBookingController::class, 'status'])->name('admin.booking.status.update');
+        Route::post('/{booking_id}/add-payment', [AdminBookingController::class, 'addPayment'])->name('admin.booking.addPayment');
     });
 });
 
