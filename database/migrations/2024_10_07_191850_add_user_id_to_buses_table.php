@@ -11,9 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('carts', function (Blueprint $table) {
-            $table->dropForeign(['customer_id']);
-            $table->dropColumn(['customer_id']);
+        Schema::table('buses', function (Blueprint $table) {
+            $table->bigInteger('travel_provider_id')->nullable();
         });
     }
 
@@ -22,8 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('carts', function (Blueprint $table) {
-            // 
+        Schema::table('buses', function (Blueprint $table) {
+            //
         });
     }
 };

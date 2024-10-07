@@ -24,24 +24,7 @@
                                         <div class="card-img-overlay z-index-2 p-7">
                                             <div class="d-flex flex-column justify-content-end h-100">
                                                 <!-- Quote -->
-                                                <h4 class="fw-light">
-                                                    "With unwavering
-                                                    determination, they navigate
-                                                    the complexities of the
-                                                    industry, forging strategic
-                                                    partnerships and driving
-                                                    transformative change."
-                                                </h4>
-                                                <!-- Info -->
-                                                <div class="d-flex justify-content-between mt-5">
-                                                    <div>
-                                                        <h5 class="mb-0">
-                                                            Emma Watson
-                                                        </h5>
-                                                        <span>Founder,
-                                                            catalog</span>
-                                                    </div>
-                                                </div>
+
                                             </div>
                                         </div>
                                     </div>
@@ -132,8 +115,7 @@
                     <div class="col-sm-10 col-lg-5 d-flex m-auto vh-100">
                         <div class="row w-100 m-auto">
                             <div class="col-sm-10 my-5 m-auto">
-                                <a href="index.html"><img src="/assets/PublicArea/images/logo.svg"
-                                        class="h-50px mb-4" alt="logo" /></a>
+
                                 <h2 class="mb-4">Welcome back</h2>
                                 <p class="mb-4">
                                     Welcome back, please enter your detail

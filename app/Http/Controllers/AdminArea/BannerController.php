@@ -16,7 +16,7 @@ use Inertia\Inertia;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 
-class BannerController extends ParentController
+class BannerController extends Controller
 {
     /**
      * index
@@ -32,7 +32,7 @@ class BannerController extends ParentController
     /**
      * Store
      * store banner data
-     * 
+     *
      * @param CreateBannerImageRequest $request
      *
      * @return void
@@ -45,9 +45,9 @@ class BannerController extends ParentController
     /**
      * Update
      * update exist banner details using banner_id
-     * 
-     * @param UpdateBannerImageRequest $request 
-     * @param $banner_id 
+     *
+     * @param UpdateBannerImageRequest $request
+     * @param $banner_id
      *
      * @return void
      */
@@ -61,7 +61,7 @@ class BannerController extends ParentController
      * retrieve all the banner data
      *
      * @return void
-     */ 
+     */
     public function all()
     {
         $query = Banner::orderBy('id', 'desc');
@@ -98,7 +98,7 @@ class BannerController extends ParentController
      * Delete
      * delete specific data using banner_id, image_id & file_path
      *
-     * @param $banner_id 
+     * @param $banner_id
      * @param Request $request
      *
      * @return void

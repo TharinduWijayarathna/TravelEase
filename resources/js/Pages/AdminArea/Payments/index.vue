@@ -20,10 +20,7 @@
                             </nav>
                         </div>
                         <div class="col-lg-4 text-right py-4">
-                            <button type="button" class="btn btn-primary btn btn-sm btn-neutral" data-toggle="modal"
-                                @click.prevent="resetData()" data-target="#newcustomerModal">
-                                <i class="fa-solid fa-circle-plus"></i> ADD NEW
-                            </button>
+
                         </div>
                     </div>
                 </div>
@@ -36,51 +33,20 @@
                     <div class="card shadow">
                         <div class="py-3 filters-margin mx-3 text-sm card-body">
                             <div class="flex">
-
                                 <div class="items-center text-muted mx-1">
-                                    <div class="">Status</div>
+                                    <div class="">Payment Method</div>
                                     <div class="inline-block" style="width: 200px;">
-                                        <Multiselect v-model="select_customer_status" :options="statusList"
-                                            :showLabels="false" :close-on-select="true" :clear-on-select="false"
-                                            :searchable="true" placeholder="Select Status" label="name" track-by="id" />
+                                        <input type="text" class="form-control form-control-sm" v-model="payment_method"
+                                            placeholder="Payment Method" @keyup.enter="getSearch" />
                                     </div>
                                 </div>
-
                                 <div class="items-center text-muted mx-1">
-                                    <div class="">Payment Code</div>
-                                    <div class="inline-block ">
-                                        <input type="text" class="form-control form-control-sm" name="customer_code"
-                                            id="customer_code" v-model="customer_code" @keyup="getSearch"
-                                            placeholder="customer Code" />
+                                    <div class="">Payment Date</div>
+                                    <div class="inline-block" style="width: 200px;">
+                                        <input type="date" class="form-control form-control-sm" v-model="payment_date"
+                                            placeholder="Payment Date" @keyup.enter="getSearch" />
                                     </div>
                                 </div>
-
-                                <div class="items-center text-muted mx-1">
-                                    <div class="">First Name</div>
-                                    <div class="inline-block ">
-                                        <input type="text" class="form-control form-control-sm" name="first_name"
-                                            id="first_name" v-model="first_name" @keyup="getSearch"
-                                            placeholder="First Name" />
-                                    </div>
-                                </div>
-
-                                <div class="items-center text-muted mx-1">
-                                    <div class="">Last Name</div>
-                                    <div class="inline-block ">
-                                        <input type="text" class="form-control form-control-sm" name="last_name"
-                                            id="last_name" v-model="last_name" @keyup="getSearch"
-                                            placeholder="Last Name" />
-                                    </div>
-                                </div>
-
-                                <div class="items-center text-muted mx-1">
-                                    <div class="">Email</div>
-                                    <div class="inline-block ">
-                                        <input type="text" class="form-control form-control-sm" name="category_name"
-                                            id="category_name" v-model="email" @keyup="getSearch" placeholder="Email" />
-                                    </div>
-                                </div>
-
                                 <div class="text-muted mx-1">
                                     <div class="mt-2">
                                         <button @click.prevent="clearFilter()"
@@ -108,75 +74,61 @@
                                 </div>
                                 <table class="table">
                                     <thead>
+
                                         <tr>
                                             <th class="textClassHead text-center" style="width: 14%;">
-                                                Status
+                                                Booking ID
                                             </th>
                                             <th class="textClassHead text-left" style="width: 14%;">
-                                                Payment Code
+                                               Customer
                                             </th>
                                             <th class="textClassHead text-left" style="width: 14%;">
-                                                First Name
+                                                Price
                                             </th>
                                             <th class="textClassHead text-left" style="width: 14%;">
-                                                Last Name
+                                                Payment Method
                                             </th>
                                             <th class="textClassHead" style="width: 14%;">
-                                                email
+                                                Payment Status
                                             </th>
-                                            <!-- <th class="textClassHead text-center">
-                                                Profile Image
-                                            </th> -->
+
                                             <th class="textClassHead text-right" style="width: 14%;">
-                                                Contact Number
+                                                Payment Reference
+                                            </th>
+                                            <th class="textClassHead text-right" style="width: 14%;">
+                                                Payment Date
                                             </th>
                                             <!-- <th class="textClassHead">Rating</th> -->
 
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr v-for="value in customerData" :key="value.id"
+                                        <tr v-for="value in paymentData" :key="value.id"
                                             @click.prevent="edit(value.id)">
-                                            <td class="textClassBody text-center">
-                                                <div class="" v-if="value.status === 1">
-                                                    <span class="badge badge-success">Active</span>
-                                                </div>
-                                                <div class="" v-else>
-                                                    <span class="badge badge-warning">Inactive</span>
-                                                </div>
+
+                                            <td class="textClassBody text-left">
+                                                {{ value.booking_id }}
                                             </td>
                                             <td class="textClassBody text-left">
-                                                {{ value.code }}
+                                                {{ value.customer_name }}
                                             </td>
                                             <td class="textClassBody text-left">
-                                                {{ value.first_name }}
+                                                {{ value.price }}
                                             </td>
                                             <td class="textClassBody text-left">
-                                                {{ value.last_name }}
+                                                {{ value.payment_method }}
                                             </td>
-                                            <td class="textClassBody">
-                                                {{ value.email }}
+
+                                            <td class="textClassBody text-left">
+                                                {{ value.payment_status }}
                                             </td>
-                                            <!-- <td class="textClassBody text-center">
-                                                <img width="160px" v-if="value.image_url" :src="value.image_url"
-                                                    alt="" />
-                                                <img v-else width="80px" src="/assets/PublicArea/images/avatar/user.jpg"
-                                                    alt="" />
-                                            </td> -->
-                                            <td class="textClassBody text-right">
-                                                {{ value.contact_number }}
+                                            <td class="textClassBody text-left">
+                                                {{ value.payment_reference }}
                                             </td>
-                                            <!-- <td class="textClassBody text-center">
-                                                <div v-if="value.gender == 1">
-                                                    <span>Male</span>
-                                                </div>
-                                                <div v-else-if="value.gender == 2">
-                                                    <span>Female</span>
-                                                </div>
-                                                <div v-else-if="value.gender == 3">
-                                                    <span>Other</span>
-                                                </div>
-                                            </td> -->
+                                            <td class="textClassBody text-left">
+                                                {{ value.payment_date }}
+                                            </td>
+
                                         </tr>
                                     </tbody>
                                 </table>
@@ -230,80 +182,6 @@
             </div>
         </template>
 
-        <template #modals>
-            <div class="modal fade" id="newcustomerModal" data-bs-backdrop="static" tabindex="-1" role="dialog"
-                aria-labelledby="newVendorModal" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered modal-mb" role="document">
-                    <div class="modal-content p-2">
-                        <div class="modal-header">
-                            <h5 class="modal-title font-weight-bolder breadcrumb-text text-gradient"
-                                id="add_brandLabel">
-                                New customer
-                            </h5>
-                            <button type="button" class="close btn" data-dismiss="modal" aria-label="Close"
-                                @click.prevent="resetData()">
-                                <span aria-hidden="true">
-                                    <i class="fa fa-times"></i>
-                                </span>
-                            </button>
-                        </div>
-                        <div class="modal-body p-0">
-                            <div class="card-plain">
-                                <div class="card-body">
-                                    <form role="form text-left" enctype="multipart/form-data">
-                                        <div class="row mb-1">
-                                            <div for="code" class="col-md-3 col-form-label">
-                                                FIRST NAME
-                                            </div>
-                                            <div class="col-md-9">
-                                                <input type="text" class="form-control form-control-sm"
-                                                    name="first_name" id="name" placeholder="First name"
-                                                    v-model="customer.first_name" required />
-                                                <small v-if="validationErrors.first_name" id="first_name"
-                                                    class="text-danger form-text text-error-msg error">{{
-                                                        validationErrors.first_name }}</small>
-                                            </div>
-                                        </div>
-                                        <div class="row mb-1">
-                                            <div for="price" class="col-md-3 col-form-label">
-                                                LAST NAME
-                                            </div>
-                                            <div class="col-md-9">
-                                                <input type="text" class="form-control form-control-sm" name="last_name"
-                                                    id="last_name" placeholder="last name" v-model="customer.last_name"
-                                                    required />
-                                            </div>
-                                            <small id="msg_code"
-                                                class="text-danger form-text text-error-msg error"></small>
-                                        </div>
-                                        <div class="row mb-1">
-                                            <div for="email" class="col-md-3 col-form-label">
-                                                EMAIL
-                                            </div>
-                                            <div class="col-md-9">
-                                                <input type="email" class="form-control form-control-sm" name="email"
-                                                    id="email" placeholder="email" v-model="customer.email" required />
-                                                <small v-if="validationErrors.email" id="email"
-                                                    class="text-danger form-text text-error-msg error">{{
-                                                        validationErrors.email }}</small>
-                                            </div>
-                                        </div>
-                                        <div class="text-right mt-2">
-                                            <button type="button"
-                                                class="btn btn-primary btn btn-sm btn-neutral float-end"
-                                                @click.prevent="createcustomer()">
-                                                <i class="fas fa-save"></i>
-                                                CREATE
-                                            </button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </template>
     </AdminLayout>
 </template>
 
@@ -320,62 +198,25 @@ const page = ref(1);
 const pageCount = ref(25);
 const perPage = ref([25, 50, 100]);
 const pagination = ref({});
-const customer_code = ref(null);
-const first_name = ref(null);
-const last_name = ref(null);
-const email = ref(null);
-const select_customer_status = ref([]);
-const statusList = ref([
-    { id: 1, name: 'Active' },
-    { id: 2, name: 'Inactive' },
-]);
 
-const customerData = ref([]);
-const customer = ref({});
-const validationErrors = ref({});
-const validationMessage = ref(null);
+const payment_method = ref(null);
+const payment_date = ref(null);
+const paymentData = ref([]);
 
-const resetValidationErrors = () => {
-    validationErrors.value = {};
-    validationMessage.value = null;
-};
-
-const convertValidationNotification = (error) => {
-    resetValidationErrors();
-    if (!(error.response && error.response.data)) return;
-    const { message } = error.response.data;
-
-    errorMessage(message);
-};
-
-const convertValidationError = (err) => {
-    resetValidationErrors();
-    if (!(err.response && err.response.data)) return;
-    const { message, errors } = err.response.data;
-    validationMessage.value = message;
-    if (errors) {
-        for (const error in errors) {
-            validationErrors.value[error] = errors[error][0];
-        }
-    }
-};
 
 const reload = async () => {
     try {
         const response = (
-            await axios.get(route("admin.customer.all"), {
+            await axios.get(route("admin.payment.all"), {
                 params: {
                     page: page.value,
                     per_page: pageCount.value,
-                    status: select_customer_status.value?.id,
-                    code: customer_code.value,
-                    first_name: first_name.value,
-                    last_name: last_name.value,
-                    email: email.value,
+                    payment_method: payment_method.value,
+                    payment_date: payment_date.value,
                 },
             })
         ).data;
-        customerData.value = response.data;
+        paymentData.value = response.data;
         pagination.value = response;
     } catch (error) {
         console.log("Error", error);
@@ -384,23 +225,12 @@ const reload = async () => {
 
 const clearFilter = () => {
     try {
-        select_customer_status.value = null;
-        customer_code.value = null;
-        first_name.value = null;
-        last_name.value = null;
-        email.value = null;
+        payment_method.value = null;
+        payment_date.value = null;
         reload();
     } catch (error) {
         console.log('Error', error);
     }
-}
-
-const resetData = () => {
-    validationErrors.value = "";
-    validationMessage.value = "";
-    customer.value.first_name = '';
-    customer.value.last_name = '';
-    customer.value.email = '';
 }
 
 onMounted(() => {
@@ -410,14 +240,6 @@ onMounted(() => {
 watch([page, pageCount], () => {
     reload();
 });
-
-watch(() => {
-    if (select_customer_status.value) {
-        reload();
-    } else {
-        reload();
-    }
-})
 
 const getSearch = () => {
     page.value = 1;

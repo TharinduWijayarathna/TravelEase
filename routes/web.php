@@ -2,25 +2,20 @@
 
 use App\Http\Controllers\AdminArea\CustomerController as AdminCustomerController;
 use App\Http\Controllers\AdminArea\HomeController as AdminHomeController;
-use App\Http\Controllers\AdminArea\OrderController as AdminOrderController;
+use App\Http\Controllers\AdminArea\BookingController as AdminBookingController;
 use App\Http\Controllers\AdminArea\BusImageController as AdminBusImageController;
 use App\Http\Controllers\AdminArea\BannerController as AdminBannerController;
 use App\Http\Controllers\AdminArea\CategoryController as AdminCategoryController;
 use App\Http\Controllers\AdminArea\BusController as AdminBusController;
 use App\Http\Controllers\AdminArea\BusStopController;
-use App\Http\Controllers\AdminArea\CartItemController as AdminCartItemController;
 use App\Http\Controllers\AdminArea\PaymentController as AdminPaymentController;
 use App\Http\Controllers\AdminArea\UsersController as AdminUsersController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\PublicArea\BannerController as PublicBannerController;
-use App\Http\Controllers\PublicArea\CartController as PublicCartController;
-use App\Http\Controllers\PublicArea\CartItemController as PublicCartItemController;
 use App\Http\Controllers\PublicArea\CategoryController as PublicCategoryController;
 use App\Http\Controllers\PublicArea\HomeController as PublicHomeController;
-use App\Http\Controllers\PublicArea\OrderController as PublicOrderController;
 use App\Http\Controllers\PublicArea\BusController as PublicBusController;
 use App\Http\Controllers\PublicArea\ProfileController as PublicProfileController;
-use App\Http\Controllers\PublicArea\WishListController as PublicWishListController;
 use App\Http\Controllers\PublicArea\BookingController as PublicBookingController;
 use App\Http\Controllers\PublicArea\PaymentController as PublicPaymentController;
 use Illuminate\Support\Facades\Route;
@@ -49,15 +44,6 @@ Route::prefix('banners')->group(function () {
     Route::get('/get', [PublicBannerController::class, 'get'])->name('banner.get');
 });
 
-Route::prefix('wishlist')->group(function () {
-    Route::get('/', [PublicWishListController::class, 'index'])->name('wishList.index');
-    Route::post('/{customer_id}/{product_id}/add', [PublicWishListController::class, 'add'])->name('wishList.add');
-    Route::post('/{customer_id}/{product_id}/remove', [PublicWishListController::class, 'remove'])->name('wishList.remove');
-    Route::get('/{customer_id}/all', [PublicWishListController::class, 'all'])->name('wishList.all');
-    Route::delete('/{wishList_id}/delete', [PublicWishListController::class, 'delete'])->name('wishList.delete');
-    Route::get('/{customer_id}/check', [PublicWishListController::class, 'check'])->name('wishList.check');
-});
-
 Route::prefix('categories')->group(function () {
     Route::get('/', [PublicCategoryController::class, 'index'])->name('categories');
     Route::get('/all', [PublicCategoryController::class, 'all'])->name('category.all');
@@ -81,38 +67,24 @@ Route::prefix('customer')->group(function () {
     Route::get('/delete', [PublicProfileController::class, 'deleteIndex'])->name('customer.delete.index');
 });
 
-Route::prefix('cart')->group(function () {
-    Route::get('/', [PublicCartController::class, 'cart'])->name('cart.index');
-    Route::get('/{customer_id}/get', [PublicCartController::class, 'get'])->name('cart.get');
-    // Route::delete('/{cart_id}/delete', [PublicCartController::class, 'delete'])->name('cart.delete');
-    Route::post('/{cart_id}/update', [PublicCartController::class, 'update'])->name('cart.update');
-    Route::post('/{cart_id}/check-out', [PublicCartController::class, 'checkOut'])->name('cart.checkOut');
-});
-
-Route::prefix('cart-items')->group(function () {
-    Route::post('/{customer_id}/{product_id}/store', [PublicCartItemController::class, 'store'])->name('cart.item.store');
-    Route::get('/{customer_id}/get', [PublicCartItemController::class, 'get'])->name('cart.item.get');
-    Route::get('/{product_id}/{customer_id}/find', [PublicCartItemController::class, 'find'])->name('cart.item.find');
-    Route::post('/{cart_item_id}/quantity/update', [PublicCartItemController::class, 'updateQuantity'])->name('cart.item.quantity.update');
-    Route::delete('/{cart_item_id}/all/delete', [PublicCartItemController::class, 'deleteAll'])->name('cart.item.delete.all');
-    Route::delete('/{cart_item_id}/delete', [PublicCartItemController::class, 'deleteItem'])->name('cart.item.delete');
-    Route::get('/{cart_item_id}/count', [PublicCartItemController::class, 'count'])->name('cart.item.count');
-});
-
-Route::prefix('order')->group(function () {
-    Route::get('/{customer_id}/store', [PublicOrderController::class, 'store'])->name('order.store');
-});
-
 Route::prefix('booking')->group(function () {
-    Route::get('/', [PublicBookingController::class, 'index'])->name('booking.index');
+    Route::get('/{bus_id}', [PublicBookingController::class, 'index'])->name('booking.index');
     Route::get('/{customer_id}/get', [PublicBookingController::class, 'get'])->name('booking.get');
-    Route::post('/{customer_id}/store', [PublicBookingController::class, 'store'])->name('booking.store');
+    Route::post('/store', [PublicBookingController::class, 'store'])->name('booking.store');
     Route::post('/{booking_id}/update', [PublicBookingController::class, 'update'])->name('booking.update');
     Route::delete('/{booking_id}/delete', [PublicBookingController::class, 'delete'])->name('booking.delete');
     Route::get('/{booking_id}/status', [PublicBookingController::class, 'status'])->name('booking.status.update');
+    Route::get('/user/history', [PublicBookingController::class, 'userPage'])->name('booking.user.index');
+    Route::get('/user/history/data', [AdminBookingController::class, 'allUserBookings'])->name('booking.user.data');
+    Route::get('/{booking_id}/status', [AdminBookingController::class, 'status'])->name('admin.booking.changeStatus');
+    Route::get('/{booking_id}/reject', [AdminBookingController::class, 'reject'])->name('admin.booking.reject');
+    Route::get('/{booking_id}/restore', [AdminBookingController::class, 'restore'])->name('admin.booking.restore');
 });
 
-Route::get('/payment', [PublicPaymentController::class, 'index'])->name('payment.index');
+Route::get('/{booking_id}/pay', [PublicBookingController::class, 'pay'])->name('booking.pay');
+Route::get('/payment/success/{id}', [PublicPaymentController::class, 'paymentSuccess'])->name('payment.success');
+Route::get('/payment/fail/{id}', [PublicPaymentController::class, 'paymentFail'])->name('payment.fail');
+
 
 /*Admin Area*/
 Route::prefix('admin')->group(function () {
@@ -186,6 +158,7 @@ Route::prefix('admin')->group(function () {
     Route::prefix('bus-stop')->group(function () {
         Route::get('/', [BusStopController::class, 'index'])->name('admin.bus.stop.index');
         Route::get('/{bus_id}/all', [BusStopController::class, 'all'])->name('admin.bus.stop.all');
+        Route::get('/{bus_id}/list', [BusStopController::class, 'list'])->name('admin.bus.stop.list');
         Route::get('/{bus_stop_id}/get', [BusStopController::class, 'get'])->name('admin.bus.stop.get');
         Route::post('/store', [BusStopController::class, 'store'])->name('admin.bus.stop.store');
         Route::post('/{bus_stop_id}/update', [BusStopController::class, 'update'])->name('admin.bus.stop.update');
@@ -202,23 +175,15 @@ Route::prefix('admin')->group(function () {
         Route::delete('/{payment_id}/delete', [AdminPaymentController::class, 'delete'])->name('admin.payment.delete');
     });
 
-    // Admin-order
-    Route::prefix('order')->group(function () {
-        Route::get('/', [AdminOrderController::class, 'index'])->name('admin.order.index');
-        Route::get('/all', [AdminOrderController::class, 'all'])->name('admin.order.all');
-        Route::get('/{order_id}/edit', [AdminOrderController::class, 'edit'])->name('admin.order.edit');
-        Route::post('/{order_id}/update', [AdminOrderController::class, 'update'])->name('admin.order.update');
-        Route::get('/{order_id}/get', [AdminOrderController::class, 'get'])->name('admin.order.get');
-        Route::get('/{customer_id}/find', [AdminOrderController::class, 'find'])->name('admin.order.find');
-        Route::get('/{order_id}/cart/item/get', [AdminOrderController::class, 'getCartItem'])->name('admin.order.cartItem.get');
-        Route::get('/{order_id}/paid/update', [AdminOrderController::class, 'paidUpdate'])->name('admin.order.paid.update');
-        Route::get('/{order_id}/shipped/update', [AdminOrderController::class, 'shippedUpdate'])->name('admin.order.shipped.update');
-        Route::delete('/{order_id}/delete', [AdminOrderController::class, 'delete'])->name('admin.order.delete');
-        Route::post('/{customer_id}/store', [AdminOrderController::class, 'store'])->name('admin.order.store');
-    });
-
-    Route::prefix('cart-items')->group(function () {
-        Route::post('store', [AdminCartItemController::class, 'store'])->name('admin.cart.item.store');
+    Route::prefix('booking')->group(function () {
+        Route::get('/', [AdminBookingController::class, 'index'])->name('admin.booking.index');
+        Route::get('/all', [AdminBookingController::class, 'all'])->name('admin.booking.all');
+        Route::get('/{booking_id}/get', [AdminBookingController::class, 'get'])->name('admin.booking.get');
+        Route::post('/store', [AdminBookingController::class, 'store'])->name('admin.booking.store');
+        Route::post('/{booking_id}/update', [AdminBookingController::class, 'update'])->name('admin.booking.update');
+        Route::delete('/{booking_id}/delete', [AdminBookingController::class, 'delete'])->name('admin.booking.delete');
+        Route::get('/{booking_id}/status', [AdminBookingController::class, 'status'])->name('admin.booking.status.update');
+        Route::post('/{booking_id}/add-payment', [AdminBookingController::class, 'addPayment'])->name('admin.booking.addPayment');
     });
 });
 

@@ -6,73 +6,9 @@
                 <section class="pt-sm-7">
                     <div class="container pt-3 pt-xl-5">
                         <div class="row">
-                            <div class="col-lg-4 col-xl-3">
-                                <div class="offcanvas-lg offcanvas-start h-100" tabindex="-1" id="offcanvasSidebar">
-                                    <div class="offcanvas-header bg-light">
-                                        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">My profile</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
-                                            data-bs-target="#offcanvasSidebar" aria-label="Close"></button>
-                                    </div>
-                                    <!-- Offcanvas body -->
-                                    <div class="offcanvas-body p-0">
-                                        <div class="card border p-3 w-100">
-                                            <div class="card-header text-center border-bottom">
-                                                <div class="avatar avatar-xl position-relative mb-2">
-                                                    <img class="avatar-img rounded-circle border border-2 border-white"
-                                                        v-if="user.image_url" :src="user.image_url" alt="" />
-                                                    <img v-else
-                                                        class="avatar-img rounded-circle border border-2 border-white"
-                                                        src="assets/PublicArea/images/avatar/user.jpg" alt="" />
-                                                </div>
-
-                                                <h6 class="mb-0">
-                                                    {{ $page.props.auth.user.first_name }}
-                                                    {{ $page.props.auth.user.last_name }}
-                                                </h6>
-                                                <a href="#" class="text-reset text-primary-hover small">
-                                                    {{ $page.props.auth.user.email }}
-                                                </a>
-                                            </div>
-
-                                            <!-- Card body START -->
-                                            <div class="card-body p-0 mt-4">
-                                                <ul class="nav nav-pills-primary-border-start flex-column">
-                                                    <li class="nav-item">
-                                                        <a class="nav-link" :href="route('customer.index')">
-                                                            <i class="bi bi-person fa-fw me-2"></i>
-                                                            My profile
-                                                        </a>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                        <Link class="nav-link" :href="route('payments')">
-                                                        <i class="bi bi-wallet fa-fw me-2"></i>Payment details</Link>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                        <Link class="nav-link " :href="route('history')">
-                                                        <i class="bi bi-clock-history fa-fw me-2"></i>Booking History
-                                                        </Link>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                        <Link class="nav-link active"
-                                                            :href="route('customer.delete.index')">
-                                                        <i class="bi bi-trash fa-fw me-2"></i>Delete profile</Link>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                        <Link href="/logout" as="button" method="post"
-                                                            class="nav-link text-danger" @click.prevent="signOut()">
-                                                        <i class="fas fa-sign-out-alt fa-fw me-2"></i>Sign Out
-                                                        </Link>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <!-- Card body END -->
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
 
                             <!-- Main content -->
-                            <div class="col-lg-8 col-xl-9 ps-lg-4 ps-xl-6">
+                            <div class="col-lg-12 col-xl-12 ps-lg-12 ps-xl-12">
                                 <div class="d-flex justify-content-between align-items-center mb-5 mb-sm-6">
                                     <!-- Title -->
                                     <h1 class="h3 mb-0">Delete profile</h1>
@@ -141,6 +77,7 @@
                                         </div>
                                     </div>
                                 </Modal>
+
                             </div>
                         </div>
                     </div>

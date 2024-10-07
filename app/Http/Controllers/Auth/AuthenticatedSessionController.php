@@ -37,7 +37,9 @@ class AuthenticatedSessionController extends Controller
 
         if(Auth::user()->role == 1){
             return redirect()->intended(RouteServiceProvider::ADMIN);
-        }else{
+        }else if(Auth::user()->role == 3){
+            return redirect()->intended(RouteServiceProvider::TRAVEL_PROVIDER);
+        } else{
             return redirect()->intended(RouteServiceProvider::HOME);
         }
     }

@@ -14,26 +14,26 @@ use Inertia\Inertia;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 
-class CategoryController extends ParentController
+class CategoryController extends Controller
 {
     /**
      * Index
-     * load admin category section 
+     * load admin category section
      *
      * @return void
      */
     public function index()
     {
         return Inertia::render('AdminArea/Settings/Category/index');
-        
+
     }
 
-    
+
     /**
      * Store
      * store category data
-     * 
-     * @param CreateCategoryRequest $request 
+     *
+     * @param CreateCategoryRequest $request
      *
      * @return void
      */
@@ -48,14 +48,14 @@ class CategoryController extends ParentController
         }
         return CategoryFacade::store($request->all());
     }
-    
-      
+
+
     /**
      * Update
      * update exist category data using category_id
-     * 
-     * @param UpdateCategoryRequest $request 
-     * @param $category_id 
+     *
+     * @param UpdateCategoryRequest $request
+     * @param $category_id
      *
      * @return void
      */
@@ -91,7 +91,7 @@ class CategoryController extends ParentController
         }
 
         if(request('status')){
-           
+
             $status = request('status');
             if($status == "1"){
                 $query->where('status', 1);
@@ -113,13 +113,13 @@ class CategoryController extends ParentController
             ->paginate(request('per_page', config('basic.pagination_per_page')));
         return $payload;
     }
- 
+
     /**
      * Delete
      * delete specific data using category_id, image_id & file_path
      *
-     * @param $category_id 
-     * @param Request $request 
+     * @param $category_id
+     * @param Request $request
      *
      * @return void
      */
@@ -137,25 +137,25 @@ class CategoryController extends ParentController
      * @return void
      */
     public function get($category_id)
-    {   
+    {
         $response['category'] = CategoryFacade::get($category_id);
         return $response;
     }
-    
+
     /**
      * Filter
-     * filter categories using name and status 
+     * filter categories using name and status
      *
      * @param Request $request
      *
      * @return void
      */
-    public function filter(Request $request) 
+    public function filter(Request $request)
     {
         $response['category'] = CategoryFacade::adminFilter($request->all());
         return $response;
     }
-    
+
     /**
      * Status
      * change category status using category_id
@@ -164,9 +164,9 @@ class CategoryController extends ParentController
      *
      * @return void
      */
-    public function status($category_id) 
+    public function status($category_id)
     {
         return CategoryFacade::status($category_id);
     }
-    
+
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\AdminArea;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\DefaultDataResource;
 use App\Models\BusStop;
 use domain\Facades\BusStopFacade\BusStopFacade;
 use Illuminate\Http\Request;
@@ -22,8 +23,6 @@ class BusStopController extends  Controller
 
         $query = BusStop::where('bus_id', $id)->orderBy('id', 'desc');
 
-
-
         $payload = QueryBuilder::for($query)
             ->allowedSorts(['id', 'name'])
             ->paginate(request('per_page', config('basic.pagination_per_page')));
@@ -31,10 +30,23 @@ class BusStopController extends  Controller
     }
 
     /**
+     * list
+     * fetch all bus_stop details
+     *
+     * @return void
+     */
+    public function list($id)
+    {
+        $response = BusStopFacade::list($id);
+        return DefaultDataResource::collection($response);
+    }
+
+
+    /**
      * Get
      * get specific bus_stop data
      *
-     * @param $bus_stop_id 
+     * @param $bus_stop_id
      *
      * @return void
      */
@@ -46,7 +58,7 @@ class BusStopController extends  Controller
 
     /**
      * Store
-     * create new bus_stop 
+     * create new bus_stop
      *
      * @param Request $request
      *
@@ -59,7 +71,7 @@ class BusStopController extends  Controller
         ]);
         return BusStopFacade::store($request->all());
     }
-    
+
     /**
      * Update
      * update specific bus_stop data
@@ -71,14 +83,14 @@ class BusStopController extends  Controller
      */
     public function update($bus_stop_id, Request $request)
     {
-        return BusStopFacade::update( $request->all() , $bus_stop_id);
+        return BusStopFacade::update($request->all(), $bus_stop_id);
     }
-    
+
     /**
      * Delete
      * delete specific bus_stop
      *
-     * @param $bus_stop_id 
+     * @param $bus_stop_id
      *
      * @return void
      */

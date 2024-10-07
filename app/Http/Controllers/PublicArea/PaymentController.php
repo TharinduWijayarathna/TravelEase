@@ -3,35 +3,39 @@
 namespace App\Http\Controllers\PublicArea;
 
 use App\Http\Controllers\Controller;
+use App\Models\Booking;
+use App\Models\Payment;
 use Illuminate\Http\Request;
 use Lahirulhr\PayHere\PayHere;
 
 class PaymentController extends Controller
 {
-    public function index()
+    public function paymentSuccess($id)
     {
-        // in your controller
+        $booking = Booking::find($id);
+        if ($booking) {
+            $booking->status = 'APPROVED';
+            $booking->save();
 
-        $data = [
-            'first_name' => 'Lahiru',
-            'last_name' => 'Tharaka',
-            'email' => 'lahirulhr@gmail.com',
-            'phone' => '+94761234567',
-            'address' => 'Main Rd',
-            'city' => 'Anuradhapura',
-            'country' => 'Sri lanka',
-            'order_id' => '45552525005',
-            'items' => 'Smart band MI 4 - BLACK',
-            'currency' => 'LKR',
-            'amount' => 4960.00,
-        ];
+            Payment::create([
+                'customer_id' => $booking->user_id,
+                'booking_id' => $booking->id,
+                'travel_provider_id' => $booking->bus_id,
+                'price' => $booking->payment,
+                'payment_method' => 'PayHere',
+                'payment_status' => 'PAID',
+                'payment_reference' => $booking->user->first_name . ' ' . $booking->user->last_name,
+                'payment_date' => now(),
+            ]);
 
-        // creating checkout page & ridirect the user
+            return redirect()->route('booking.user.index')->with('success', 'Payment successfully processed and booking approved.');
+        }
 
-        return PayHere::checkOut()
-            ->data($data)
-            ->successUrl('www.visanduma.com/success')
-            ->failUrl('www.visanduma.com/fail')
-            ->renderView();
+        return redirect()->route('booking.user.index')->with('error', 'Booking not found.');
+    }
+
+    public function paymentFail($id)
+    {
+        return redirect()->route('booking.user.index')->with('error', 'Payment failed. Please try again.');
     }
 }

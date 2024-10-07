@@ -16,7 +16,7 @@ class UsersController extends Controller
 {
     /**
      * Index
-     * load User index page 
+     * load User index page
      *
      * @return void
      */
@@ -34,11 +34,11 @@ class UsersController extends Controller
     public function all()
     {
 
-        $query = User::where('role', 1)->orderBy('id', 'desc');
+        $query = User::where('role', 3)->orderBy('id', 'desc');
 
 
         if(request('status')){
-           
+
             $status = request('status');
             if($status == 1){
                 $query->where('status', 1);
@@ -102,7 +102,7 @@ class UsersController extends Controller
      * Get
      * get specific User data
      *
-     * @param $User_id 
+     * @param $User_id
      *
      * @return void
      */
@@ -114,7 +114,7 @@ class UsersController extends Controller
 
     /**
      * Store
-     * create new User 
+     * create new User
      *
      * @param Request $request
      *
@@ -124,7 +124,7 @@ class UsersController extends Controller
     {
         return UserFacade::store($request->all());
     }
-    
+
     /**
      * Update
      * update specific User data
@@ -138,12 +138,12 @@ class UsersController extends Controller
     {
         return UserFacade::update($User_id, $request->all());
     }
-    
+
     /**
      * Delete
      * delete specific User
      *
-     * @param $User_id 
+     * @param $User_id
      *
      * @return void
      */

@@ -35,14 +35,9 @@
 
                         <!-- Offcanvas cart menu -->
                         <li class="nav-item" v-if="user">
-                            <Link class="nav-link" :href="route('cart.index')" role="button">
+                            <Link class="nav-link" :href="route('booking.user.index')" role="button">
                             My Bookings
                             </Link>
-                            <span
-                                class="position-absolute top-0 start-100 translate-middle badge smaller rounded-circle bg-primary mt-xl-2 ms-n1"
-                                v-if="cartCount">{{ cartCount }}
-                                <span class="visually-hidden">unread messages</span>
-                            </span>
                         </li>
 
                         <li class="nav-item" v-else>
@@ -64,7 +59,7 @@
                             <img class="avatar-img rounded-circle border" v-if="user.image_url" :src="user.image_url"
                                 alt="" />
                             <img class="avatar-img rounded-circle border" v-else
-                                src="assets/PublicArea/images/avatar/user.jpg" alt="" />
+                                src="/assets/PublicArea/images/avatar/user.jpg" alt="" />
                         </div>
                         <span class="profile-button">Hi,
                             <b style="color: black">
@@ -103,31 +98,10 @@ import { Link, usePage } from "@inertiajs/vue3";
 import { onMounted, ref, watch } from "vue";
 import { emitter, CART_REFRESH } from "@/event-bus.js";
 
-const cartCount = ref(0);
-
 const profile_image = ref(null);
 
 const user = usePage().props.auth.user;
 
-const getCartCount = async () => {
-    if (user && user.id) {
-        try {
-            const response = await axios.get(route('cart.item.count', user.id));
-            if (response.data) {
-                cartCount.value = response.data;
-            } else {
-                cartCount.value = 0;
-            }
-        } catch (error) {
-            console.log("Error:", error);
-        }
-    }
-};
-
-onMounted(() => {
-    getCartCount();
-    emitter.on(CART_REFRESH, getCartCount)
-});
 </script>
 
 <style scoped>

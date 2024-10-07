@@ -49,8 +49,8 @@ class BusService
         }
 
         $data['code'] = $code;
+        $data['travel_provider_id'] = auth()->user()->id;
 
-        
         return $this->Bus->create($data);
     }
 
@@ -86,7 +86,7 @@ class BusService
     }
 
     /**
-     * Get 
+     * Get
      * retrieve specifica data using Bus_id
      *
      * @param $Bus_id
@@ -102,14 +102,14 @@ class BusService
      * Update
      * update existing Bus details using Bus_id
      *
-     * @param $Bus_id 
-     * @param $data 
+     * @param $Bus_id
+     * @param $data
      *
      * @return void
      */
     public function update(array $data, int $Bus_id)
     {
-        
+
         $Bus = $this->Bus->find($Bus_id);
         return $Bus->update($data);
     }
@@ -129,9 +129,9 @@ class BusService
 
     /**
      * Filter
-     * filter and return specific Buss for public end 
+     * filter and return specific Buss for public end
      *
-     * @param array $data 
+     * @param array $data
      *
      * @return void
      */
@@ -185,7 +185,7 @@ class BusService
 
         return $filteredBus;
     }
-    
+
     /**
      * AdminFilter
      * filter Bus using Bus_name, category_name and status

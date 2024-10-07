@@ -21,6 +21,8 @@ class RouteServiceProvider extends ServiceProvider
 
     public const ADMIN = '/admin';
 
+    public const TRAVEL_PROVIDER = '/admin';
+
     /**
      * Define your route model bindings, pattern filters, and other route configuration.
      */

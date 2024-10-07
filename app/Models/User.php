@@ -23,6 +23,7 @@ class User extends Authenticatable
     const ROLE = [
         'ADMIN' => 1,
         'CUSTOMER' => 2,
+        'TRAVEL_PROVIDER' => 3,
     ];
 
     const STATUS = [
@@ -43,7 +44,7 @@ class User extends Authenticatable
     protected $fillable = [
         'status',
         'code',
-        
+
         'first_name',
         'last_name',
         'email',
@@ -64,7 +65,7 @@ class User extends Authenticatable
     {
         return $this->Image ? $this->Image->name : '';
     }
-    
+
 
     /**
      * The attributes that should be hidden for serialization.

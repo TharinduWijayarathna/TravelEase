@@ -5,7 +5,7 @@
                 <div class="container-fluid">
                     <div class="header-body row">
                         <div class="col-lg-8 align-items-center py-4">
-                            <h6 class="h2 text-maroon d-inline-block mb-0">User Managements</h6>
+                            <h6 class="h2 text-maroon d-inline-block mb-0">Travel Provider Management</h6>
                             <nav aria-label="breadcrumb" class="d-none d-md-block ">
                                 <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                                     <li class="breadcrumb-item">
@@ -115,7 +115,7 @@
                                             <th class="textClassHead text-left" style="width: 14%;">
                                                 User Code
                                             </th>
-                                            
+
                                             <th class="textClassHead text-left" style="width: 14%;">
                                                 First Name
                                             </th>
@@ -124,11 +124,11 @@
                                             </th>
                                             <th class="textClassHead" style="width: 14%;">
                                                 email
-                                            </th>   
+                                            </th>
                                             <th class="textClassHead" style="width: 14%;">
                                                 Action
-                                            </th>                                     
-                                            
+                                            </th>
+
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -144,7 +144,7 @@
                                             <td class="textClassBody text-left"  @click.prevent="editUserModal(value)">
                                                 {{ value.code }}
                                             </td>
-                                          
+
                                             <td class="textClassBody text-left"  @click.prevent="editUserModal(value)">
                                                 {{ value.first_name }}
                                             </td>
