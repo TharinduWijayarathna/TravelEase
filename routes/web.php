@@ -77,6 +77,9 @@ Route::prefix('booking')->group(function () {
     Route::get('/{booking_id}/status', [PublicBookingController::class, 'status'])->name('booking.status.update');
     Route::get('/user/history', [PublicBookingController::class, 'userPage'])->name('booking.user.index');
     Route::get('/user/history/data', [AdminBookingController::class, 'allUserBookings'])->name('booking.user.data');
+    Route::get('/{booking_id}/status', [AdminBookingController::class, 'status'])->name('admin.booking.changeStatus');
+    Route::get('/{booking_id}/reject', [AdminBookingController::class, 'reject'])->name('admin.booking.reject');
+    Route::get('/{booking_id}/restore', [AdminBookingController::class, 'restore'])->name('admin.booking.restore');
 });
 
 Route::get('/payment', [PublicPaymentController::class, 'index'])->name('payment.index');

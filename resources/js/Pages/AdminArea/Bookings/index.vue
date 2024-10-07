@@ -42,8 +42,7 @@
 
                                 <div class="text-muted mx-1">
                                     <div class="mt-2">
-                                        <button @click.prevent="clearFilter()"
-                                            class="btn btn-ash float-end mt-2 pt-2">
+                                        <button @click.prevent="clearFilter()" class="btn btn-ash float-end mt-2 pt-2">
                                             <i class="fa fa-refresh" aria-hidden="true" />
                                         </button>
                                     </div>
@@ -92,9 +91,9 @@
                                             <th class="textClassHead" style="width: 14%;">
                                                 Requests
                                             </th>
-                                            <!-- <th class="textClassHead text-center">
-                                                Profile Image
-                                            </th> -->
+                                            <th class="textClassHead text-center">
+                                                Action
+                                            </th>
 
                                             <!-- <th class="textClassHead">Rating</th> -->
 
@@ -104,11 +103,17 @@
                                         <tr v-for="value in customerData" :key="value.id"
                                             @click.prevent="edit(value.id)">
                                             <td class="textClassBody text-center">
-                                                <div class="" v-if="value.status === 1">
-                                                    <span class="badge badge-success">Active</span>
+                                                <div class="" v-if="value.status === 'PENDING'">
+                                                    <span class="badge badge-warning">Pending</span>
                                                 </div>
-                                                <div class="" v-else>
-                                                    <span class="badge badge-warning">Inactive</span>
+                                                <div class="" v-else-if="value.status === 'APPROVED'">
+                                                    <span class="badge badge-success">Approved</span>
+                                                </div>
+                                                <div class="" v-else-if="value.status === 'REJECTED'">
+                                                    <span class="badge badge-danger">Rejected</span>
+                                                </div>
+                                                <div class="" v-else-if="value.status === 'PAYMENT_PENDING'">
+                                                    <span class="badge badge-info">Payment Pending</span>
                                                 </div>
                                             </td>
 
@@ -133,24 +138,17 @@
                                             <td class="textClassBody">
                                                 {{ value.requests }}
                                             </td>
-                                            <!-- <td class="textClassBody text-center">
-                                                <img width="160px" v-if="value.image_url" :src="value.image_url"
-                                                    alt="" />
-                                                <img v-else width="80px" src="/assets/PublicArea/images/avatar/user.jpg"
-                                                    alt="" />
-                                            </td> -->
-
-                                            <!-- <td class="textClassBody text-center">
-                                                <div v-if="value.gender == 1">
-                                                    <span>Male</span>
-                                                </div>
-                                                <div v-else-if="value.gender == 2">
-                                                    <span>Female</span>
-                                                </div>
-                                                <div v-else-if="value.gender == 3">
-                                                    <span>Other</span>
-                                                </div>
-                                            </td> -->
+                                           <td class="textClassBody text-center">
+                                                <button class="btn btn-sm btn-outline-info" @click.prevent="changeStatus(value.id)">
+                                                    <i class="fa fa-arrow-alt-circle-right"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-outline-danger" @click.prevent="rejectBooking(value.id)">
+                                                    <i class="fa fa-times"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-outline-success" @click.prevent="restoreBooking(value.id)">
+                                                    <i class="fa fa-undo"></i>
+                                                </button>
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -300,8 +298,10 @@ const last_name = ref(null);
 const email = ref(null);
 const select_customer_status = ref([]);
 const statusList = ref([
-    { id: 1, name: 'Active' },
-    { id: 2, name: 'Inactive' },
+    { id: 1, name: 'Pending' },
+    { id: 2, name: 'Approved' },
+    { id: 3, name: 'Rejected' },
+    { id: 4, name: 'Payment Pending' }
 ]);
 
 const customerData = ref([]);
@@ -374,6 +374,39 @@ const resetData = () => {
     customer.value.email = '';
 }
 
+const changeStatus = async (id) => {
+    try {
+        const response = await axios.get(route("admin.booking.changeStatus", id));
+        reload();
+        successMessage();
+    } catch (error) {
+        errorMessage();
+        console.log("Error", error);
+    }
+};
+
+const rejectBooking = async (id) => {
+    try {
+        const response = await axios.get(route("admin.booking.reject", id));
+        reload();
+        successMessage();
+    } catch (error) {
+        errorMessage();
+        console.log("Error", error);
+    }
+};
+
+const restoreBooking = async (id) => {
+    try {
+        const response = await axios.get(route("admin.booking.restore", id));
+        reload();
+        successMessage();
+    } catch (error) {
+        errorMessage();
+        console.log("Error", error);
+    }
+};
+
 onMounted(() => {
     reload();
 });
@@ -414,7 +447,7 @@ const setPage = async (nextPage) => {
     vertical-align: middle;
 }
 
-.cursor-pointer{
+.cursor-pointer {
     cursor: pointer;
 }
 </style>
