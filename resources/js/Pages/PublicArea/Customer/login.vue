@@ -132,7 +132,7 @@
                     <div class="col-sm-10 col-lg-5 d-flex m-auto vh-100">
                         <div class="row w-100 m-auto">
                             <div class="col-sm-10 my-5 m-auto">
-                                <a href="index.html"><img src="/assets/PublicArea/images/logo-icon.svg"
+                                <a href="index.html"><img src="/assets/PublicArea/images/logo.svg"
                                         class="h-50px mb-4" alt="logo" /></a>
                                 <h2 class="mb-4">Welcome back</h2>
                                 <p class="mb-4">
@@ -234,7 +234,7 @@ const submit = () => {
     //     onFinish: () => form.reset("password"),
     // });
     form.post(route("login"), {
-        onFinish: () =>{ 
+        onFinish: () =>{
             form.reset("password");
             window.location.reload();
         },

@@ -27,6 +27,7 @@ class Bus extends Model
         'departure_time',
         'arrival_time',
         'description',
+        'seats',
         'category_id',
     ];
 
