@@ -98,9 +98,6 @@
                                             <th class="textClassHead">
                                                 Category Name
                                             </th>
-                                            <th class="textClassHead">
-                                                Image
-                                            </th>
                                             <th class="textClassHead text-center">
                                                 Action
                                             </th>
@@ -121,13 +118,6 @@
                                             </td>
                                             <td class="textClassBody">
                                                 {{ value.name }}
-                                            </td>
-                                            <td class="textClassBody" v-if="value.image_url">
-                                                <img :src="value.image_url" alt="no image" class="category-image-setup"
-                                                    height="100px" />
-                                            </td>
-                                            <td class="textClassBody" v-else>
-                                                <img :src="categoryImage" alt="no image" class="category-image-setup" />
                                             </td>
                                             <td class="textClassBody text-center">
 
@@ -243,21 +233,7 @@
                                                         validationErrors.name }}</small>
                                             </div>
                                         </div>
-                                        <div class="row mb-2">
-                                            <div for="name" class="col-md-3 col-form-label">
-                                                IMAGE
-                                            </div>
-                                            <div class="col-md-9">
-                                                <input type="file" class="form-control form-control" name="image"
-                                                    id="image" @input="(e) => (category_image = e.target.files[0])"
-                                                    required />
-                                                <small v-if="validationErrors.image" id="image"
-                                                    class="text-danger form-text text-error-msg error">{{
-                                                        validationErrors.image }}</small>
-                                            </div>
-                                            <small id="msg_name"
-                                                class="text-danger form-text text-error-msg error"></small>
-                                        </div>
+
                                         <div class="row mb-1">
                                             <div class="col-md-3 col-form-label">
                                                 STATUS
@@ -342,22 +318,7 @@
                                             <small id="msg_code"
                                                 class="text-danger form-text text-error-msg error"></small>
                                         </div>
-                                        <div class="row mb-2">
-                                            <div for="name" class="col-md-3 col-form-label">
-                                                IMAGE
-                                            </div>
-                                            <div class="col-md-9">
-                                                <input type="file" class="form-control form-control" name="update_image"
-                                                    id="update_image"
-                                                    @input="(e) => (update_category_image = e.target.files[0])"
-                                                    required />
-                                                <small v-if="validationErrors.image" id="image"
-                                                    class="text-danger form-text text-error-msg error">{{
-                                                        validationErrors.image }}</small>
-                                            </div>
-                                            <small id="msg_name"
-                                                class="text-danger form-text text-error-msg error"></small>
-                                        </div>
+
                                         <div class="row mb-1">
                                             <div class="col-md-3 col-form-label">
                                                 STATUS
@@ -734,10 +695,10 @@ const setPage = async (nextPage) => {
 }
 
 .category-image-setup{
-    width: 100px; 
-    height: 100px; 
-    object-fit: cover; 
-    object-position: center; 
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    object-position: center;
     border-radius: 10px;
 }
 </style>
