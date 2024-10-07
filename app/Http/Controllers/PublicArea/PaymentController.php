@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\PublicArea;
 
 use App\Http\Controllers\Controller;
+use App\Mail\PaymentSuccessMail;
 use App\Models\Booking;
 use App\Models\Payment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Lahirulhr\PayHere\PayHere;
 
 class PaymentController extends Controller
@@ -27,6 +29,8 @@ class PaymentController extends Controller
                 'payment_reference' => $booking->user->first_name . ' ' . $booking->user->last_name,
                 'payment_date' => now(),
             ]);
+
+            Mail::to($booking->email)->send(new PaymentSuccessMail($booking));
 
             return redirect()->route('booking.user.index')->with('success', 'Payment successfully processed and booking approved.');
         }

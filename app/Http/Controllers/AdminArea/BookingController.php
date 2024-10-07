@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\AdminArea;
 
 use App\Http\Controllers\Controller;
+use App\Mail\BookingPaymentPendingMail;
 use App\Models\Booking;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Inertia\Inertia;
 use Lahirulhr\PayHere\PayHere;
 use Spatie\QueryBuilder\AllowedFilter;
@@ -120,6 +122,7 @@ class BookingController extends Controller
         $booking = Booking::find($id);
         if ($booking->status == 'PENDING') {
             $booking->status = 'PAYMENT_PENDING';
+            Mail::to($booking->email)->send(new BookingPaymentPendingMail($booking));
         } else if ($booking->status == 'PAYMENT_PENDING') {
             $booking->status = 'APPROVED';
         }
